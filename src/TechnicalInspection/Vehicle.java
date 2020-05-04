@@ -18,6 +18,17 @@ public class Vehicle {
     public Vehicle() {
     }
 
+    public Vehicle(String vehicleOwner, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection, ArrayList<Malfunction> malfunctions) {
+        this.vehicleOwner = vehicleOwner;
+        this.brand = brand;
+        this.type = type;
+        this.serialNumber = serialNumber;
+        this.productionYear = productionYear;
+        this.releaseDate = releaseDate;
+        this.previousInspection = previousInspection;
+        this.malfunctions = malfunctions;
+    }
+
     public Vehicle(String vehicleOwner, String category, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection, ArrayList<Malfunction> malfunctions) {
         this.vehicleOwner = vehicleOwner;
         this.category = category;

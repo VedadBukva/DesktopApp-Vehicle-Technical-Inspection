@@ -1,9 +1,24 @@
 package DatabaseWork;
 
+import Exceptions.NoInternetException;
+import TechnicalInspection.Malfunction;
+import TechnicalInspection.Vehicle;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import Enum.VehicleType;
 
 public class InspectionDAO {
     private static InspectionDAO instance;
@@ -16,7 +31,9 @@ public class InspectionDAO {
         return instance;
     }
 
-    public Connection getConnection() { return conn; }
+    public Connection getConnection() {
+        return conn;
+    }
 
     public static void removeInstance() {
         if (instance == null) return;
@@ -55,5 +72,70 @@ public class InspectionDAO {
     }
 
     private void regenerateDatabase() {
+    }
+
+    public ArrayList<Vehicle> vehicles() {
+        ArrayList<Vehicle> result = new ArrayList<>();
+        URL url = null;
+
+        try {
+            url = new URL("http://localhost:8080/api/vehicle");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+                String date = jo.getString("date_of_use");
+                LocalDate releaseDate = LocalDate.parse(date);
+                String previousInspectionDate = jo.getString("previous_inspection");
+                LocalDate previousInspection = LocalDate.parse(previousInspectionDate);
+                int id = jo.getInt("id");
+                ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
+                VehicleType type = VehicleType.getVehicleType(jo.getString("type"));
+                Vehicle vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), type,
+                        jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previousInspection, malfunctions);
+                result.add(vehicle);
+            }
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return result;
+    }
+
+    private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
+        ArrayList<Malfunction> result = new ArrayList<>();
+        URL url = null;
+
+        try {
+            url = new URL("http://localhost:8080/api/failure");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+                int idCheck = jo.getInt("vehicle");
+                if (idCheck == id) {
+                    Malfunction malfunction = new Malfunction(jo.getString("name"));
+                    result.add(malfunction);
+                }
+            }
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return result;
     }
 }
