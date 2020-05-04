@@ -1,4 +1,4 @@
-package autokuca;
+package TechnicalInspection;
 
 public class Equipment {
     private String equipmentName;

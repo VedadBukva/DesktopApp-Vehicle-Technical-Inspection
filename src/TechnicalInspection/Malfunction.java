@@ -1,4 +1,4 @@
-package autokuca;
+package TechnicalInspection;
 
 import java.time.LocalDate;
 
