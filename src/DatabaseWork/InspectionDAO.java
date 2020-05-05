@@ -17,7 +17,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
+
 import Enum.VehicleType;
 
 public class InspectionDAO {
@@ -52,12 +55,12 @@ public class InspectionDAO {
     private InspectionDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:8080/api", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/dbinspection", "root", "root");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        try {
+       /* try {
             listAllVehiclesQuery = conn.prepareStatement("");
         } catch (SQLException e) {
             regenerateDatabase();
@@ -66,7 +69,7 @@ public class InspectionDAO {
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-        }
+        }*/
 
 
     }
@@ -77,7 +80,6 @@ public class InspectionDAO {
     public ArrayList<Vehicle> vehicles() {
         ArrayList<Vehicle> result = new ArrayList<>();
         URL url = null;
-
         try {
             url = new URL("http://localhost:8080/api/vehicle");
         } catch (MalformedURLException e) {
@@ -93,9 +95,12 @@ public class InspectionDAO {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jo = jsonArray.getJSONObject(i);
                 String date = jo.getString("date_of_use");
-                LocalDate releaseDate = LocalDate.parse(date);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                LocalDate releaseDate = LocalDate.parse(date, formatter);
+
                 String previousInspectionDate = jo.getString("previous_inspection");
-                LocalDate previousInspection = LocalDate.parse(previousInspectionDate);
+                LocalDate previousInspection = LocalDate.parse(previousInspectionDate, formatter);
                 int id = jo.getInt("id");
                 ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
                 VehicleType type = VehicleType.getVehicleType(jo.getString("type"));
