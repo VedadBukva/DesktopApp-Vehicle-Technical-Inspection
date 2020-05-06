@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import Enum.VehicleType;
 public class Main extends Application {
     private InspectionDAO dao;
     @Override
@@ -20,7 +21,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();*/
         dao = InspectionDAO.getInstance();
-        ArrayList<Vehicle> vehicles = dao.vehicles();
+        /*ArrayList<Vehicle> vehicles = dao.vehicles();
         for (int i = 0; i < vehicles.size(); i++) {
             System.out.printf("Vehicle owner " + vehicles.get(i).getVehicleOwner() + "\n");
             System.out.printf("Brand " + vehicles.get(i).getBrand()+ "\n");
@@ -32,7 +33,10 @@ public class Main extends Application {
             for (int j = 0; j < vehicles.get(i).getMalfunctions().size(); j++) {
                 System.out.printf("Malfunction " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getMalfunctionName() + "\n");
             }
-        }
+        }*/
+        Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
+        dao.addVehicle(vehicle);
+        System.out.println("Gotovo dodavanje");
     }
 
 

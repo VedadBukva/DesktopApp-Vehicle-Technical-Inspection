@@ -6,20 +6,17 @@ import TechnicalInspection.Vehicle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Scanner;
 
 import Enum.VehicleType;
 
@@ -56,23 +53,15 @@ public class InspectionDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/dbinspection", "root", "root");
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
 
         try {
             listAllVehiclesQuery = conn.prepareStatement("SELECT name, accurrence_date, repair_date FROM failure WHERE id = ?");
         } catch (SQLException e) {
-            regenerateDatabase();
-            try {
-                listAllVehiclesQuery = conn.prepareStatement("SELECT name, accurrence_date, repair_date FROM failure WHERE id = ?");
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
+           e.printStackTrace();
         }
-    }
-
-    private void regenerateDatabase() {
     }
 
     public ArrayList<Vehicle> vehicles() {
@@ -110,6 +99,46 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return result;
+    }
+
+    public void addVehicle(Vehicle vehicle) {
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject vehicleObj = new JSONObject();
+        vehicleObj.put("id", vehicle.getId());
+        vehicleObj.put("owner_name", vehicle.getVehicleOwner());
+        vehicleObj.put("brand", vehicle.getBrand());
+        vehicleObj.put("type", vehicle.getType());
+        vehicleObj.put("serial_number", vehicle.getSerialNumber());
+        vehicleObj.put("production_year", vehicle.getProductionYear());
+        vehicleObj.put("date_of_use", vehicle.getReleaseDate());
+        vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
+        HttpURLConnection con = null;
+        try {
+            byte[] data = vehicleObj.toString().getBytes();
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.write(data);
+            out.flush();
+            out.close();
+
+            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            entry.close();
+        } catch (IOException e) {
+            new NoInternetException();
+        }
     }
 
     private ArrayList<Malfunction> getVehicleMalfunctions(int id) {

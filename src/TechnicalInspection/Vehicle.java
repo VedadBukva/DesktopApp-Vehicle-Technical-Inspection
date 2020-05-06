@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Vehicle {
+    private Integer id;
     private String vehicleOwner;
     private String brand;
     private VehicleType type;
@@ -26,6 +27,16 @@ public class Vehicle {
         this.releaseDate = releaseDate;
         this.previousInspection = previousInspection;
         this.malfunctions = malfunctions;
+    }
+
+    public Vehicle(String vehicleOwner, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection) {
+        this.vehicleOwner = vehicleOwner;
+        this.brand = brand;
+        this.type = type;
+        this.serialNumber = serialNumber;
+        this.productionYear = productionYear;
+        this.releaseDate = releaseDate;
+        this.previousInspection = previousInspection;
     }
 
     public String getVehicleOwner() {
@@ -91,4 +102,13 @@ public class Vehicle {
     public void setMalfunctions(ArrayList<Malfunction> malfunctions) {
         this.malfunctions = malfunctions;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 }
