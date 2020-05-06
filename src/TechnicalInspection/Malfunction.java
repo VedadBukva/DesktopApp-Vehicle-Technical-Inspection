@@ -10,10 +10,6 @@ public class Malfunction {
     public Malfunction() {
     }
 
-    public Malfunction(String malfunctionName) { // TODO: Change database data in failure table
-        this.malfunctionName = malfunctionName;
-    }
-
     public Malfunction(String malfunctionName, LocalDate emergenceDate, LocalDate repairDate) {
         this.malfunctionName = malfunctionName;
         this.emergenceDate = emergenceDate;

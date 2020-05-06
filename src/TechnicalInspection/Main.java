@@ -32,11 +32,20 @@ public class Main extends Application {
             System.out.printf("Previous inspection " + vehicles.get(i).getPreviousInspection()+ "\n");
             for (int j = 0; j < vehicles.get(i).getMalfunctions().size(); j++) {
                 System.out.printf("Malfunction " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getMalfunctionName() + "\n");
+                System.out.printf("Malfunction date " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getEmergenceDate() + "\n");
+                System.out.printf("Malfunction repair " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getRepairDate() + "\n");
             }
-        }*/
+        }
         Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
         dao.addVehicle(vehicle);
-        System.out.println("Gotovo dodavanje");
+        System.out.println("Gotovo dodavanje");*/
+        /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
+        for (int i = 0; i < malfunctions.size(); i++) {
+            System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");
+            System.out.printf("Malfunction date " +  malfunctions.get(i).getEmergenceDate() + "\n");
+            System.out.printf("Malfunction repair " + malfunctions.get(i).getRepairDate() + "\n");
+
+        }*/
     }
 
 

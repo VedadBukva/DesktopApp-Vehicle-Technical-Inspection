@@ -23,8 +23,8 @@ import Enum.VehicleType;
 public class InspectionDAO {
     private static InspectionDAO instance;
     private Connection conn;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
 
-    private PreparedStatement listAllVehiclesQuery;
 
     public static InspectionDAO getInstance() {
         if (instance == null) instance = new InspectionDAO();
@@ -56,12 +56,6 @@ public class InspectionDAO {
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
-
-        try {
-            listAllVehiclesQuery = conn.prepareStatement("SELECT name, accurrence_date, repair_date FROM failure WHERE id = ?");
-        } catch (SQLException e) {
-           e.printStackTrace();
-        }
     }
 
     public ArrayList<Vehicle> vehicles() {
@@ -82,10 +76,7 @@ public class InspectionDAO {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jo = jsonArray.getJSONObject(i);
                 String date = jo.getString("date_of_use");
-
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
                 LocalDate releaseDate = LocalDate.parse(date, formatter);
-
                 String previousInspectionDate = jo.getString("previous_inspection");
                 LocalDate previousInspection = LocalDate.parse(previousInspectionDate, formatter);
                 int id = jo.getInt("id");
@@ -110,7 +101,6 @@ public class InspectionDAO {
         }
 
         JSONObject vehicleObj = new JSONObject();
-        vehicleObj.put("id", vehicle.getId());
         vehicleObj.put("owner_name", vehicle.getVehicleOwner());
         vehicleObj.put("brand", vehicle.getBrand());
         vehicleObj.put("type", vehicle.getType());
@@ -161,9 +151,51 @@ public class InspectionDAO {
                 JSONObject jo = jsonArray.getJSONObject(i);
                 int idCheck = jo.getInt("vehicle");
                 if (idCheck == id) {
-                    Malfunction malfunction = new Malfunction(jo.getString("name"));
+                    String date = jo.getString("accurrence_date");
+                    LocalDate emergenceDate = LocalDate.parse(date, formatter);
+                    LocalDate repairDate;
+                    if (!jo.isNull("repair_date")) {
+                        String date2 = jo.getString("repair_date");
+                        repairDate = LocalDate.parse(date2, formatter);
+                    } else repairDate = null;
+                    Malfunction malfunction = new Malfunction(jo.getString("name"), emergenceDate, repairDate);
                     result.add(malfunction);
                 }
+            }
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return result;
+    }
+
+    public ArrayList<Malfunction> malfunctions() {
+        ArrayList<Malfunction> result = new ArrayList<>();
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/failure");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+                String date = jo.getString("accurrence_date");
+                LocalDate emergenceDate = LocalDate.parse(date, formatter);
+
+                LocalDate repairDate;
+                if (!jo.isNull("repair_date")) {
+                    String rDate = jo.getString("repair_date");
+                    repairDate = LocalDate.parse(rDate, formatter);
+                } else repairDate = null;
+
+                Malfunction malfunction = new Malfunction(jo.getString("name"), emergenceDate, repairDate);
+                result.add(malfunction);
             }
         } catch (IOException e) {
             new NoInternetException();

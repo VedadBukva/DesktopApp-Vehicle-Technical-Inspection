@@ -8,12 +8,12 @@ public enum VehicleType {
 
     public static VehicleType getVehicleType(String type) {
         switch (type) {
-            case "teretno": return TRUCK;
-            case "putnicko": return PASSENGER_VEHICLE;
-            case "prikljucno": return TRAILER_VEHICLE;
-            case "truck": return TRUCK;
-            case "passenger": return PASSENGER_VEHICLE;
-            case "trailer": return TRAILER_VEHICLE;
+            case "TERETNO": return TRUCK;
+            case "PUTNICKO": return PASSENGER_VEHICLE;
+            case "PRIKLJUCNO": return TRAILER_VEHICLE;
+            case "TRUCK": return TRUCK;
+            case "PASSENGER_VEHICLE": return PASSENGER_VEHICLE;
+            case "TRAILER_VEHICLE": return TRAILER_VEHICLE;
         }
         return null;
     }
