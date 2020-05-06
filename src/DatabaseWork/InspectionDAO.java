@@ -108,27 +108,7 @@ public class InspectionDAO {
         vehicleObj.put("production_year", vehicle.getProductionYear());
         vehicleObj.put("date_of_use", vehicle.getReleaseDate());
         vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
-        HttpURLConnection con = null;
-        try {
-            byte[] data = vehicleObj.toString().getBytes();
-            con = (HttpURLConnection) url.openConnection();
-            con.setRequestMethod("POST");
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setDoOutput(true);
-            DataOutputStream out = new DataOutputStream(con.getOutputStream());
-            out.write(data);
-            out.flush();
-            out.close();
-
-            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            entry.close();
-        } catch (IOException e) {
-            new NoInternetException();
-        }
+        addViaHttp(vehicleObj, url);
     }
 
     private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
@@ -201,5 +181,43 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return result;
+    }
+
+    public void addMalfunction(Malfunction malfunction) {
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/failure");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonMalfunction = new JSONObject();
+        jsonMalfunction.put("name", malfunction.getMalfunctionName());
+        jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
+        jsonMalfunction.put("repair_date", malfunction.getRepairDate());
+        addViaHttp(jsonMalfunction, url);
+    }
+
+    public void addViaHttp (JSONObject jsonObject, URL url) {
+        HttpURLConnection con = null;
+        try {
+            byte[] data = jsonObject.toString().getBytes();
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("POST");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.write(data);
+            out.flush();
+            out.close();
+
+            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            entry.close();
+        } catch (IOException e) {
+            new NoInternetException();
+        }
     }
 }
