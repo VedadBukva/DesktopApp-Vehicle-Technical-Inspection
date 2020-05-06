@@ -60,18 +60,16 @@ public class InspectionDAO {
             e.printStackTrace();
         }
 
-       /* try {
-            listAllVehiclesQuery = conn.prepareStatement("");
+        try {
+            listAllVehiclesQuery = conn.prepareStatement("SELECT name, accurrence_date, repair_date FROM failure WHERE id = ?");
         } catch (SQLException e) {
             regenerateDatabase();
             try {
-                listAllVehiclesQuery = conn.prepareStatement("");
+                listAllVehiclesQuery = conn.prepareStatement("SELECT name, accurrence_date, repair_date FROM failure WHERE id = ?");
             } catch (SQLException e1) {
                 e1.printStackTrace();
             }
-        }*/
-
-
+        }
     }
 
     private void regenerateDatabase() {

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class Vehicle {
     private String vehicleOwner;
-    private String category;
     private String brand;
     private VehicleType type;
     private String serialNumber;
@@ -29,32 +28,12 @@ public class Vehicle {
         this.malfunctions = malfunctions;
     }
 
-    public Vehicle(String vehicleOwner, String category, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection, ArrayList<Malfunction> malfunctions) {
-        this.vehicleOwner = vehicleOwner;
-        this.category = category;
-        this.brand = brand;
-        this.type = type;
-        this.serialNumber = serialNumber;
-        this.productionYear = productionYear;
-        this.releaseDate = releaseDate;
-        this.previousInspection = previousInspection;
-        this.malfunctions = malfunctions;
-    }
-
     public String getVehicleOwner() {
         return vehicleOwner;
     }
 
     public void setVehicleOwner(String vehicleOwner) {
         this.vehicleOwner = vehicleOwner;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getBrand() {
