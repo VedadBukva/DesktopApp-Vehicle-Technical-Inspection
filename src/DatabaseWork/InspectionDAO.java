@@ -1,10 +1,7 @@
 package DatabaseWork;
 
 import Exceptions.NoInternetException;
-import TechnicalInspection.Equipment;
-import TechnicalInspection.Malfunction;
-import TechnicalInspection.User;
-import TechnicalInspection.Vehicle;
+import TechnicalInspection.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -219,6 +216,30 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return users;
+    }
+
+    public ArrayList<TechnicalInspection> inspections() {
+        ArrayList<TechnicalInspection> inspections = new ArrayList<>();
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/review");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+
+            }
+            return inspections;
+        } catch (IOException e) {
+            new NoInternetException();
+        }
     }
 
         // POST request methods

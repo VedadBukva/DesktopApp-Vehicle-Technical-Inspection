@@ -3,6 +3,7 @@ package TechnicalInspection;
 import Enum.*;
 
 public class TechnicalInspection {
+    private int id;
     private InspectionType inspectionType;
     private User responsibleEmployee;
     private Vehicle vehicle;
@@ -11,11 +12,20 @@ public class TechnicalInspection {
     public TechnicalInspection() {
     }
 
-    public TechnicalInspection(InspectionType inspectionType, User responsibleEmployee, Vehicle vehicle, WarrantState warrantState) {
+    public TechnicalInspection(int id, InspectionType inspectionType, User responsibleEmployee, Vehicle vehicle, WarrantState warrantState) {
+        this.id = id;
         this.inspectionType = inspectionType;
         this.responsibleEmployee = responsibleEmployee;
         this.vehicle = vehicle;
         this.warrantState = warrantState;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public InspectionType getInspectionType() {
