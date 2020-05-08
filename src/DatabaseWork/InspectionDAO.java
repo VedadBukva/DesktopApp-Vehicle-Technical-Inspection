@@ -59,6 +59,7 @@ public class InspectionDAO {
         }
     }
 
+    // GET request methods
     public ArrayList<Vehicle> vehicles() {
         ArrayList<Vehicle> result = new ArrayList<>();
         URL url = null;
@@ -86,68 +87,6 @@ public class InspectionDAO {
                 Vehicle vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), type,
                         jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previousInspection, malfunctions);
                 result.add(vehicle);
-            }
-        } catch (IOException e) {
-            new NoInternetException();
-        }
-        return result;
-    }
-
-    public void addVehicle(Vehicle vehicle) {
-        URL url = null;
-        try {
-            url = new URL("http://localhost:8080/api/vehicle");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject vehicleObj = new JSONObject();
-        vehicleObj.put("id", vehicle.getId());
-        vehicleObj.put("owner_name", vehicle.getVehicleOwner());
-        vehicleObj.put("brand", vehicle.getBrand());
-        vehicleObj.put("type", vehicle.getType());
-        vehicleObj.put("serial_number", vehicle.getSerialNumber());
-        vehicleObj.put("production_year", vehicle.getProductionYear());
-        vehicleObj.put("date_of_use", vehicle.getReleaseDate());
-        vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
-        int id = addViaHttp(vehicleObj, url);
-        vehicle.setId(id);
-    }
-
-    public boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
-        return true;
-    }
-
-    private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
-        ArrayList<Malfunction> result = new ArrayList<>();
-        URL url = null;
-
-        try {
-            url = new URL("http://localhost:8080/api/failure");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                int idCheck = jo.getInt("vehicle");
-                if (idCheck == id) {
-                    String date = jo.getString("accurrence_date");
-                    LocalDate emergenceDate = LocalDate.parse(date, formatter);
-                    LocalDate repairDate;
-                    if (!jo.isNull("repair_date")) {
-                        String date2 = jo.getString("repair_date");
-                        repairDate = LocalDate.parse(date2, formatter);
-                    } else repairDate = null;
-                    Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
-                    result.add(malfunction);
-                }
             }
         } catch (IOException e) {
             new NoInternetException();
@@ -190,7 +129,93 @@ public class InspectionDAO {
         return result;
     }
 
-    public void addMalfunction(Malfunction malfunction) {
+    private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
+        ArrayList<Malfunction> result = new ArrayList<>();
+        URL url = null;
+
+        try {
+            url = new URL("http://localhost:8080/api/failure");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+                int idCheck = jo.getInt("vehicle");
+                if (idCheck == id) {
+                    String date = jo.getString("accurrence_date");
+                    LocalDate emergenceDate = LocalDate.parse(date, formatter);
+                    LocalDate repairDate;
+                    if (!jo.isNull("repair_date")) {
+                        String date2 = jo.getString("repair_date");
+                        repairDate = LocalDate.parse(date2, formatter);
+                    } else repairDate = null;
+                    Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
+                    result.add(malfunction);
+                }
+            }
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return result;
+    }
+
+    public ArrayList<Equipment> equipment() {
+        ArrayList<Equipment> equipment = new ArrayList<>();
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/part");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jo = jsonArray.getJSONObject(i);
+                Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
+                equipment.add(eq);
+            }
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return equipment;
+    }
+
+
+    // POST request methods
+    public void addVehicle(Vehicle vehicle) { // TODO: Add check method
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        JSONObject vehicleObj = new JSONObject();
+        vehicleObj.put("id", vehicle.getId());
+        vehicleObj.put("owner_name", vehicle.getVehicleOwner());
+        vehicleObj.put("brand", vehicle.getBrand());
+        vehicleObj.put("type", vehicle.getType());
+        vehicleObj.put("serial_number", vehicle.getSerialNumber());
+        vehicleObj.put("production_year", vehicle.getProductionYear());
+        vehicleObj.put("date_of_use", vehicle.getReleaseDate());
+        vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
+        int id = addViaHttp(vehicleObj, url);
+        vehicle.setId(id);
+    }
+
+    public void addMalfunction(Malfunction malfunction) { // TODO: Add check method
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/failure");
@@ -203,14 +228,6 @@ public class InspectionDAO {
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
         addViaHttp(jsonMalfunction, url);
-    }
-
-    public boolean checkMalfunctionExists(Vehicle vehicle) {  // TODO: implement method
-        return true;
-    }
-
-    public ArrayList<Equipment> equipment() {
-        return null;
     }
 
     public int addViaHttp (JSONObject jsonObject, URL url) {
@@ -239,4 +256,22 @@ public class InspectionDAO {
         }
         return jsonObject1.getInt("id");
     }
+
+
+    // PUT request methods
+
+
+    // DELETE request methods
+
+
+    // Check if exists in database
+
+    public boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
+        return true;
+    }
+
+    public boolean checkMalfunctionExists(Vehicle vehicle) {  // TODO: implement method
+        return true;
+    }
+
 }

@@ -38,7 +38,7 @@ public class Main extends Application {
         }
 
         System.out.println("Gotovo dodavanje");*/
-        ArrayList<Malfunction> malfunctions = dao.malfunctions();
+        /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");
             System.out.printf("Malfunction date " +  malfunctions.get(i).getEmergenceDate() + "\n");
@@ -48,7 +48,14 @@ public class Main extends Application {
         Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
         dao.addVehicle(vehicle);
         Malfunction malfunction = new Malfunction("dizne", vehicle.getId(), LocalDate.now(), LocalDate.now());
-        dao.addMalfunction(malfunction);
+        dao.addMalfunction(malfunction);*/
+        ArrayList<Equipment> equipment = dao.equipment();
+        for (int i = 0; i < equipment.size(); i++) {
+            System.out.println();
+            System.out.printf("Equipment ID " + equipment.get(i).getId() + "\n");
+            System.out.printf("Equipment name " +  equipment.get(i).getEquipmentName() + "\n");
+            System.out.printf("Equipment availability " + equipment.get(i).getAvailability() + "\n");
+        }
     }
 
 
