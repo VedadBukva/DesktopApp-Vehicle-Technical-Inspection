@@ -97,6 +97,34 @@ public class InspectionDAO {
         return result;
     }
 
+    public Vehicle getVehicle(int id) {
+        URL url = null;
+        Vehicle vehicle = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONObject jo = new JSONObject(json);
+            VehicleType vT = VehicleType.getVehicleType(jo.getString("type"));
+            String date = jo.getString("date_of_use");
+            LocalDate releaseDate = LocalDate.parse(date, formatter);
+            String date1 = jo.getString("previous_inspection");
+            LocalDate previous = LocalDate.parse(date1, formatter);
+            ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
+            vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), vT, jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previous, malfunctions);
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return vehicle;
+    }
+
     public ArrayList<Malfunction> malfunctions() {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
@@ -117,7 +145,7 @@ public class InspectionDAO {
         return result;
     }
 
-    private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
+    public ArrayList<Malfunction> getVehicleMalfunctions(int id) {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
         for (int i = 0; i < jsonArray.length(); i++) {
@@ -175,7 +203,7 @@ public class InspectionDAO {
         return inspections;
     }
 
-        // POST request methods
+    // POST request methods
     public void addVehicle(Vehicle vehicle) { // TODO: Add check method
         URL url = null;
         try {
@@ -212,7 +240,7 @@ public class InspectionDAO {
         addViaHttp(jsonMalfunction, url);
     }
 
-    public int addViaHttp (JSONObject jsonObject, URL url) {
+    private int addViaHttp (JSONObject jsonObject, URL url) {
         HttpURLConnection con = null;
         JSONObject jsonObject1 = null;
         try {

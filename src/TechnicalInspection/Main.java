@@ -56,7 +56,7 @@ public class Main extends Application {
             System.out.printf("Equipment name " +  equipment.get(i).getEquipmentName() + "\n");
             System.out.printf("Equipment availability " + equipment.get(i).getAvailability() + "\n");
         }*/
-        ArrayList<User> users = dao.users();
+        /*ArrayList<User> users = dao.users();
         for (int i = 0; i < users.size(); i++) {
             System.out.println();
             System.out.printf("User ID " + users.get(i).getId() + "\n");
@@ -79,6 +79,19 @@ public class Main extends Application {
             System.out.println("Inspection kind " + inspections.get(i).getWarrantState());
             System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
             System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
+        }*/
+        Vehicle vehicle = dao.getVehicle(2);
+        System.out.printf("Vehicle owner " + vehicle.getVehicleOwner() + "\n");
+        System.out.printf("Brand " + vehicle.getBrand()+ "\n");
+        System.out.printf("Type " + vehicle.getType()+ "\n");
+        System.out.printf("Serial number  " + vehicle.getSerialNumber()+ "\n");
+        System.out.printf("Production year " + vehicle.getProductionYear()+ "\n");
+        System.out.printf("Release date " + vehicle.getReleaseDate()+ "\n");
+        System.out.printf("Previous inspection " + vehicle.getPreviousInspection()+ "\n");
+        for (int j = 0; j < vehicle.getMalfunctions().size(); j++) {
+            System.out.printf("Malfunction " + (j + 1) + vehicle.getMalfunctions().get(j).getMalfunctionName() + "\n");
+            System.out.printf("Malfunction date " + (j + 1) + vehicle.getMalfunctions().get(j).getEmergenceDate() + "\n");
+            System.out.printf("Malfunction repair " + (j + 1) + vehicle.getMalfunctions().get(j).getRepairDate() + "\n");
         }
     }
 
