@@ -185,7 +185,8 @@ public class InspectionDAO {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
-            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
+            RoleType role = RoleType.getRoleType(jo.getString("position"));
+            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), role);
             users.add(user);
         }
         return users;
@@ -208,7 +209,9 @@ public class InspectionDAO {
             JSONObject jo = new JSONObject(json);
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
-            user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
+            RoleType role = RoleType.getRoleType(jo.getString("position"));
+
+            user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), role);
         } catch (IOException e) {
             new NoInternetException();
         }
@@ -287,7 +290,23 @@ public class InspectionDAO {
         jsonUser.put("phone_number", user.getPhoneNumber());
         jsonUser.put("user_name", user.getUserName());
         jsonUser.put("password", user.getPassword());
-        addViaHttp(jsonUser, url);
+        int id = addViaHttp(jsonUser, url);
+        user.setId(id);
+    }
+
+    public void addEquipment(Equipment equipment) {
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/part");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonEq = new JSONObject();
+        jsonEq.put("id", equipment.getId());
+        jsonEq.put("name", equipment.getName());
+        jsonEq.put("availability", equipment.getAvailability());
+        int id = addViaHttp(jsonEq, url);
+        equipment.setId(id);
     }
 
     private int addViaHttp (JSONObject jsonObject, URL url) {

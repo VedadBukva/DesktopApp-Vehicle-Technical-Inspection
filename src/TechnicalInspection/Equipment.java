@@ -2,7 +2,7 @@ package TechnicalInspection;
 
 public class Equipment {
     private int id;
-    private String equipmentName;
+    private String name;
     private Boolean availability;
 
     public Equipment() {
@@ -10,7 +10,12 @@ public class Equipment {
 
     public Equipment(int id, String equipmentName, Boolean availability) {
         this.id = id;
-        this.equipmentName = equipmentName;
+        this.name = equipmentName;
+        this.availability = availability;
+    }
+
+    public Equipment(String equipmentName, Boolean availability) {
+        this.name = equipmentName;
         this.availability = availability;
     }
 
@@ -22,12 +27,12 @@ public class Equipment {
         this.id = id;
     }
 
-    public String getEquipmentName() {
-        return equipmentName;
+    public String getName() {
+        return name;
     }
 
-    public void setEquipmentName(String equipmentName) {
-        this.equipmentName = equipmentName;
+    public void setName(String equipmentName) {
+        this.name = equipmentName;
     }
 
     public Boolean getAvailability() {

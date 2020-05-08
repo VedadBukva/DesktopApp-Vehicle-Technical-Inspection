@@ -10,7 +10,8 @@ import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import Enum.VehicleType;
+import Enum.*;
+
 public class Main extends Application {
     private InspectionDAO dao;
     @Override
@@ -80,8 +81,11 @@ public class Main extends Application {
             System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
             System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
         }*/
-        User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "neki", "menadzer");
+        /*User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "neki", RoleType.ADMIN);
         dao.addUser(user);
+        System.out.println("Gotovo");*/
+        Equipment equipment = new Equipment("Volan", true);
+        dao.addEquipment(equipment);
         System.out.println("Gotovo");
     }
 
