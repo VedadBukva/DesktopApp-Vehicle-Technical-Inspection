@@ -1,6 +1,7 @@
 package DatabaseWork;
 
 import Exceptions.NoInternetException;
+import TechnicalInspection.Equipment;
 import TechnicalInspection.Malfunction;
 import TechnicalInspection.Vehicle;
 import org.json.JSONArray;
@@ -101,6 +102,7 @@ public class InspectionDAO {
         }
 
         JSONObject vehicleObj = new JSONObject();
+        vehicleObj.put("id", vehicle.getId());
         vehicleObj.put("owner_name", vehicle.getVehicleOwner());
         vehicleObj.put("brand", vehicle.getBrand());
         vehicleObj.put("type", vehicle.getType());
@@ -108,7 +110,12 @@ public class InspectionDAO {
         vehicleObj.put("production_year", vehicle.getProductionYear());
         vehicleObj.put("date_of_use", vehicle.getReleaseDate());
         vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
-        addViaHttp(vehicleObj, url);
+        int id = addViaHttp(vehicleObj, url);
+        vehicle.setId(id);
+    }
+
+    public boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
+        return true;
     }
 
     private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
@@ -138,7 +145,7 @@ public class InspectionDAO {
                         String date2 = jo.getString("repair_date");
                         repairDate = LocalDate.parse(date2, formatter);
                     } else repairDate = null;
-                    Malfunction malfunction = new Malfunction(jo.getString("name"), emergenceDate, repairDate);
+                    Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
                     result.add(malfunction);
                 }
             }
@@ -174,7 +181,7 @@ public class InspectionDAO {
                     repairDate = LocalDate.parse(rDate, formatter);
                 } else repairDate = null;
 
-                Malfunction malfunction = new Malfunction(jo.getString("name"), emergenceDate, repairDate);
+                Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
                 result.add(malfunction);
             }
         } catch (IOException e) {
@@ -192,13 +199,23 @@ public class InspectionDAO {
         }
         JSONObject jsonMalfunction = new JSONObject();
         jsonMalfunction.put("name", malfunction.getMalfunctionName());
+        jsonMalfunction.put("vehicle", malfunction.getVehicleId());
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
         addViaHttp(jsonMalfunction, url);
     }
 
-    public void addViaHttp (JSONObject jsonObject, URL url) {
+    public boolean checkMalfunctionExists(Vehicle vehicle) {  // TODO: implement method
+        return true;
+    }
+
+    public ArrayList<Equipment> equipment() {
+        return null;
+    }
+
+    public int addViaHttp (JSONObject jsonObject, URL url) {
         HttpURLConnection con = null;
+        JSONObject jsonObject1 = null;
         try {
             byte[] data = jsonObject.toString().getBytes();
             con = (HttpURLConnection) url.openConnection();
@@ -215,9 +232,11 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            jsonObject1 = new JSONObject(json);
             entry.close();
         } catch (IOException e) {
             new NoInternetException();
         }
+        return jsonObject1.getInt("id");
     }
 }

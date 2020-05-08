@@ -6,14 +6,24 @@ public class Malfunction {
     private String malfunctionName;
     private LocalDate emergenceDate;
     private LocalDate repairDate;
+    private int vehicleId;
 
     public Malfunction() {
     }
 
-    public Malfunction(String malfunctionName, LocalDate emergenceDate, LocalDate repairDate) {
+    public Malfunction(String malfunctionName, int id, LocalDate emergenceDate, LocalDate repairDate) {
         this.malfunctionName = malfunctionName;
+        this.vehicleId = id;
         this.emergenceDate = emergenceDate;
         this.repairDate = repairDate;
+    }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
+
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
     }
 
     public String getMalfunctionName() {
