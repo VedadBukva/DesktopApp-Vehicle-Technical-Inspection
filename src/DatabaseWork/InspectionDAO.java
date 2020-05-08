@@ -3,6 +3,7 @@ package DatabaseWork;
 import Exceptions.NoInternetException;
 import TechnicalInspection.Equipment;
 import TechnicalInspection.Malfunction;
+import TechnicalInspection.User;
 import TechnicalInspection.Vehicle;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -192,8 +193,29 @@ public class InspectionDAO {
         return equipment;
     }
 
+    public ArrayList<User> users() {
+        ArrayList<User> equipment = new ArrayList<>();
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/user");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONArray jsonArray = new JSONArray(json);
+            for (int i = 0; i < jsonArray.length(); i++) {
 
-    // POST request methods
+            }
+    } catch (IOException e) {
+            new NoInternetException();
+        }
+
+        // POST request methods
     public void addVehicle(Vehicle vehicle) { // TODO: Add check method
         URL url = null;
         try {

@@ -3,6 +3,7 @@ package TechnicalInspection;
 import java.time.LocalDate;
 
 public class User {
+    private int id;
     private String name;
     private String surname;
     private String jmbg;
@@ -29,7 +30,31 @@ public class User {
         this.role = role;
     }
 
+    public User(int id, String name, String surname, String jmbg, LocalDate birthDate, String address, String postalNumber, String mail, String phoneNumber, String userName, String password, String role) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.jmbg = jmbg;
+        this.birthDate = birthDate;
+        this.address = address;
+        this.postalNumber = postalNumber;
+        this.mail = mail;
+        this.phoneNumber = phoneNumber;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
+
+
     public User() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
