@@ -49,12 +49,27 @@ public class Main extends Application {
         dao.addVehicle(vehicle);
         Malfunction malfunction = new Malfunction("dizne", vehicle.getId(), LocalDate.now(), LocalDate.now());
         dao.addMalfunction(malfunction);*/
-        ArrayList<Equipment> equipment = dao.equipment();
+        /*ArrayList<Equipment> equipment = dao.equipment();
         for (int i = 0; i < equipment.size(); i++) {
             System.out.println();
             System.out.printf("Equipment ID " + equipment.get(i).getId() + "\n");
             System.out.printf("Equipment name " +  equipment.get(i).getEquipmentName() + "\n");
             System.out.printf("Equipment availability " + equipment.get(i).getAvailability() + "\n");
+        }*/
+        ArrayList<User> users = dao.users();
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println();
+            System.out.printf("User ID " + users.get(i).getId() + "\n");
+            System.out.printf("User name " +  users.get(i).getName() + "\n");
+            System.out.printf("User surname " + users.get(i).getSurname() + "\n");
+            System.out.printf("User address " + users.get(i).getAddress() + "\n");
+            System.out.printf("User JMBG " + users.get(i).getJmbg() + "\n");
+            System.out.printf("User mail " + users.get(i).getMail() + "\n");
+            System.out.printf("User user name " + users.get(i).getUserName() + "\n");
+            System.out.printf("User password " + users.get(i).getPassword() + "\n");
+            System.out.printf("User postal number " + users.get(i).getPostalNumber() + "\n");
+            System.out.printf("User birth date " + users.get(i).getBirthDate() + "\n");
+            System.out.printf("User role " + users.get(i).getRole() + "\n");
         }
     }
 

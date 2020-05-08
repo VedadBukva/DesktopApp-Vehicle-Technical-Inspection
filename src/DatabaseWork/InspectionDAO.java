@@ -194,7 +194,7 @@ public class InspectionDAO {
     }
 
     public ArrayList<User> users() {
-        ArrayList<User> equipment = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/user");
@@ -209,11 +209,17 @@ public class InspectionDAO {
             }
             JSONArray jsonArray = new JSONArray(json);
             for (int i = 0; i < jsonArray.length(); i++) {
-
+                JSONObject jo = jsonArray.getJSONObject(i);
+                String date = jo.getString("birth_date");
+                LocalDate birthDate = LocalDate.parse(date, formatter);
+                User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
+                users.add(user);
             }
-    } catch (IOException e) {
+        } catch (IOException e) {
             new NoInternetException();
         }
+        return users;
+    }
 
         // POST request methods
     public void addVehicle(Vehicle vehicle) { // TODO: Add check method
