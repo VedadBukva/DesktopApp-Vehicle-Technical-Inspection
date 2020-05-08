@@ -80,19 +80,18 @@ public class Main extends Application {
             System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
             System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
         }*/
-        Vehicle vehicle = dao.getVehicle(2);
-        System.out.printf("Vehicle owner " + vehicle.getVehicleOwner() + "\n");
-        System.out.printf("Brand " + vehicle.getBrand()+ "\n");
-        System.out.printf("Type " + vehicle.getType()+ "\n");
-        System.out.printf("Serial number  " + vehicle.getSerialNumber()+ "\n");
-        System.out.printf("Production year " + vehicle.getProductionYear()+ "\n");
-        System.out.printf("Release date " + vehicle.getReleaseDate()+ "\n");
-        System.out.printf("Previous inspection " + vehicle.getPreviousInspection()+ "\n");
-        for (int j = 0; j < vehicle.getMalfunctions().size(); j++) {
-            System.out.printf("Malfunction " + (j + 1) + vehicle.getMalfunctions().get(j).getMalfunctionName() + "\n");
-            System.out.printf("Malfunction date " + (j + 1) + vehicle.getMalfunctions().get(j).getEmergenceDate() + "\n");
-            System.out.printf("Malfunction repair " + (j + 1) + vehicle.getMalfunctions().get(j).getRepairDate() + "\n");
-        }
+        User user = dao.getUser(1);
+        System.out.printf("User ID " + user.getId() + "\n");
+        System.out.printf("User name " +  user.getName() + "\n");
+        System.out.printf("User surname " + user.getSurname() + "\n");
+        System.out.printf("User address " + user.getAddress() + "\n");
+        System.out.printf("User JMBG " + user.getJmbg() + "\n");
+        System.out.printf("User mail " + user.getMail() + "\n");
+        System.out.printf("User user name " + user.getUserName() + "\n");
+        System.out.printf("User password " + user.getPassword() + "\n");
+        System.out.printf("User postal number " + user.getPostalNumber() + "\n");
+        System.out.printf("User birth date " + user.getBirthDate() + "\n");
+        System.out.printf("User role " + user.getRole() + "\n");
     }
 
 

@@ -123,7 +123,7 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return vehicle;
-    }
+    } //TODO: check if vehicle exists
 
     public ArrayList<Malfunction> malfunctions() {
         ArrayList<Malfunction> result = new ArrayList<>();
@@ -188,6 +188,30 @@ public class InspectionDAO {
             users.add(user);
         }
         return users;
+    }
+
+    public User getUser(int id) {
+        URL url = null;
+        User user = null;
+        try {
+            url = new URL("http://localhost:8080/api/user/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            JSONObject jo = new JSONObject(json);
+            String date = jo.getString("birth_date");
+            LocalDate birthDate = LocalDate.parse(date, formatter);
+            user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+        return user;
     }
 
     public ArrayList<TechnicalInspection> inspections() {
