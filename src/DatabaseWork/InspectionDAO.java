@@ -57,6 +57,7 @@ public class InspectionDAO {
     }
 
     // GET request methods
+
     private JSONArray connectToURL(String path) {
         URL url = null;
         JSONArray jsonArray = null;
@@ -212,7 +213,7 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return user;
-    }
+    } // TODO: check if exists
 
     public ArrayList<TechnicalInspection> inspections() {
         ArrayList<TechnicalInspection> inspections = new ArrayList<>();
@@ -227,7 +228,9 @@ public class InspectionDAO {
         return inspections;
     }
 
+
     // POST request methods
+
     public void addVehicle(Vehicle vehicle) { // TODO: Add check method
         URL url = null;
         try {
@@ -262,6 +265,29 @@ public class InspectionDAO {
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
         addViaHttp(jsonMalfunction, url);
+    }
+
+    public void addUser(User user) {
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/user");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonUser = new JSONObject();
+        jsonUser.put("id", user.getId());
+        jsonUser.put("first_name", user.getName());
+        jsonUser.put("last_name", user.getSurname());
+        jsonUser.put("position", user.getRole());
+        jsonUser.put("jmbg", user.getJmbg());
+        jsonUser.put("birth_date", user.getBirthDate());
+        jsonUser.put("adress", user.getAddress());
+        jsonUser.put("zip_code", user.getPostalNumber());
+        jsonUser.put("mail", user.getMail());
+        jsonUser.put("phone_number", user.getPhoneNumber());
+        jsonUser.put("user_name", user.getUserName());
+        jsonUser.put("password", user.getPassword());
+        addViaHttp(jsonUser, url);
     }
 
     private int addViaHttp (JSONObject jsonObject, URL url) {
@@ -300,12 +326,14 @@ public class InspectionDAO {
 
     // Check if exists in database
 
-    public boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
+    private boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
         return true;
     }
 
-    public boolean checkMalfunctionExists(Vehicle vehicle) {  // TODO: implement method
+    private boolean checkUserExists (User user) {
+
         return true;
     }
+
 
 }

@@ -80,18 +80,9 @@ public class Main extends Application {
             System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
             System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
         }*/
-        User user = dao.getUser(1);
-        System.out.printf("User ID " + user.getId() + "\n");
-        System.out.printf("User name " +  user.getName() + "\n");
-        System.out.printf("User surname " + user.getSurname() + "\n");
-        System.out.printf("User address " + user.getAddress() + "\n");
-        System.out.printf("User JMBG " + user.getJmbg() + "\n");
-        System.out.printf("User mail " + user.getMail() + "\n");
-        System.out.printf("User user name " + user.getUserName() + "\n");
-        System.out.printf("User password " + user.getPassword() + "\n");
-        System.out.printf("User postal number " + user.getPostalNumber() + "\n");
-        System.out.printf("User birth date " + user.getBirthDate() + "\n");
-        System.out.printf("User role " + user.getRole() + "\n");
+        User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "neki", "menadzer");
+        dao.addUser(user);
+        System.out.println("Gotovo");
     }
 
 
