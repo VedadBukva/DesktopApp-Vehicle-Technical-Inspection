@@ -5,18 +5,18 @@ import Enum.*;
 public class TechnicalInspection {
     private int id;
     private InspectionType inspectionType;
-    private User responsibleEmployee;
-    private Vehicle vehicle;
+    private int employeeID;
+    private int vehicleID;
     private WarrantState warrantState;
 
     public TechnicalInspection() {
     }
 
-    public TechnicalInspection(int id, InspectionType inspectionType, User responsibleEmployee, Vehicle vehicle, WarrantState warrantState) {
+    public TechnicalInspection(int id, InspectionType inspectionType, int employeeID, int vehicle, WarrantState warrantState) {
         this.id = id;
         this.inspectionType = inspectionType;
-        this.responsibleEmployee = responsibleEmployee;
-        this.vehicle = vehicle;
+        this.employeeID = employeeID;
+        this.vehicleID = vehicle;
         this.warrantState = warrantState;
     }
 
@@ -36,20 +36,20 @@ public class TechnicalInspection {
         this.inspectionType = inspectionType;
     }
 
-    public User getResponsibleEmployee() {
-        return responsibleEmployee;
+    public int getEmployeeID() {
+        return employeeID;
     }
 
-    public void setResponsibleEmployee(User responsibleEmployee) {
-        this.responsibleEmployee = responsibleEmployee;
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public int getVehicleID() {
+        return vehicleID;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicleID(int vehicleID) {
+        this.vehicleID = vehicleID;
     }
 
     public WarrantState getWarrantState() {

@@ -15,9 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Scanner;
 
-import Enum.VehicleType;
+import Enum.*;
 
 public class InspectionDAO {
     private static InspectionDAO instance;
@@ -168,6 +167,10 @@ public class InspectionDAO {
         JSONArray jsonArray = connectToURL("review");
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
+            InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
+            WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
+            TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, jo.getInt("responsible_person"), jo.getInt("vehicle"), warrantState);
+            inspections.add(technicalInspection);
         }
         return inspections;
     }

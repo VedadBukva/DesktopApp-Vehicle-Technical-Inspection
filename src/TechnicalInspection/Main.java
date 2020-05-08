@@ -71,6 +71,15 @@ public class Main extends Application {
             System.out.printf("User birth date " + users.get(i).getBirthDate() + "\n");
             System.out.printf("User role " + users.get(i).getRole() + "\n");
         }
+        System.out.println();
+        ArrayList<TechnicalInspection> inspections = dao.inspections();
+        for (int i = 0; i < inspections.size(); i++) {
+            System.out.println("Inspection ID " + inspections.get(i).getId());
+            System.out.println("Inspection state " + inspections.get(i).getInspectionType());
+            System.out.println("Inspection kind " + inspections.get(i).getWarrantState());
+            System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
+            System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
+        }
     }
 
 
