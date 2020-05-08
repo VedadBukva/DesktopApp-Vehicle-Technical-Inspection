@@ -1,6 +1,7 @@
 package TechnicalInspection;
 
 import java.time.LocalDate;
+import Enum.RoleType;
 
 public class User {
     private int id;
@@ -14,9 +15,9 @@ public class User {
     private String phoneNumber;
     private String userName;
     private String password;
-    private String role;
+    private RoleType role;
 
-    public User(String name, String surname, String jmbg, LocalDate birthDate, String address, String postalNumber, String mail, String phoneNumber, String userName, String password, String role) {
+    public User(String name, String surname, String jmbg, LocalDate birthDate, String address, String postalNumber, String mail, String phoneNumber, String userName, String password, RoleType role) {
         this.name = name;
         this.surname = surname;
         this.jmbg = jmbg;
@@ -30,7 +31,7 @@ public class User {
         this.role = role;
     }
 
-    public User(int id, String name, String surname, String jmbg, LocalDate birthDate, String address, String postalNumber, String mail, String phoneNumber, String userName, String password, String role) {
+    public User(int id, String name, String surname, String jmbg, LocalDate birthDate, String address, String postalNumber, String mail, String phoneNumber, String userName, String password, RoleType role) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -137,11 +138,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public RoleType getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleType role) {
         this.role = role;
     }
 }
