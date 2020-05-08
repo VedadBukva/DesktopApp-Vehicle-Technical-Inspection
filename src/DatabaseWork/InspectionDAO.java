@@ -240,6 +240,7 @@ public class InspectionDAO {
         } catch (IOException e) {
             new NoInternetException();
         }
+        return inspections;
     }
 
         // POST request methods
