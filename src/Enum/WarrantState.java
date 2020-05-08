@@ -15,7 +15,7 @@ public enum WarrantState {
             case "ON_HOLD": return ON_HOLD;
             case "IN PROGRESS": return IN_PROGRESS;
             case "DONE": return DONE;
-            case "IN_ARCHIVE": return IN_ARCHIVE;
+            case "IN ARCHIVE": return IN_ARCHIVE;
         }
         return null;
     }

@@ -58,11 +58,11 @@ public class InspectionDAO {
     }
 
     // GET request methods
-    public ArrayList<Vehicle> vehicles() {
-        ArrayList<Vehicle> result = new ArrayList<>();
+    private JSONArray connectToURL(String path) {
         URL url = null;
+        JSONArray jsonArray = null;
         try {
-            url = new URL("http://localhost:8080/api/vehicle");
+            url = new URL("http://localhost:8080/api/" + path);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -72,173 +72,102 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                String date = jo.getString("date_of_use");
-                LocalDate releaseDate = LocalDate.parse(date, formatter);
-                String previousInspectionDate = jo.getString("previous_inspection");
-                LocalDate previousInspection = LocalDate.parse(previousInspectionDate, formatter);
-                int id = jo.getInt("id");
-                ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
-                VehicleType type = VehicleType.getVehicleType(jo.getString("type"));
-                Vehicle vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), type,
-                        jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previousInspection, malfunctions);
-                result.add(vehicle);
-            }
+            jsonArray = new JSONArray(json);
         } catch (IOException e) {
-            new NoInternetException();
+            e.printStackTrace();
+        }
+        return jsonArray;
+    }
+
+    public ArrayList<Vehicle> vehicles() {
+        ArrayList<Vehicle> result = new ArrayList<>();
+        JSONArray jsonArray = connectToURL("vehicle");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            String date = jo.getString("date_of_use");
+            LocalDate releaseDate = LocalDate.parse(date, formatter);
+            String previousInspectionDate = jo.getString("previous_inspection");
+            LocalDate previousInspection = LocalDate.parse(previousInspectionDate, formatter);
+            int id = jo.getInt("id");
+            ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
+            VehicleType type = VehicleType.getVehicleType(jo.getString("type"));
+            Vehicle vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), type,
+                    jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previousInspection, malfunctions);
+            result.add(vehicle);
         }
         return result;
     }
 
     public ArrayList<Malfunction> malfunctions() {
         ArrayList<Malfunction> result = new ArrayList<>();
-        URL url = null;
-        try {
-            url = new URL("http://localhost:8080/api/failure");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                String date = jo.getString("accurrence_date");
-                LocalDate emergenceDate = LocalDate.parse(date, formatter);
+        JSONArray jsonArray = connectToURL("failure");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            String date = jo.getString("accurrence_date");
+            LocalDate emergenceDate = LocalDate.parse(date, formatter);
 
-                LocalDate repairDate;
-                if (!jo.isNull("repair_date")) {
-                    String rDate = jo.getString("repair_date");
-                    repairDate = LocalDate.parse(rDate, formatter);
-                } else repairDate = null;
+            LocalDate repairDate;
+            if (!jo.isNull("repair_date")) {
+                String rDate = jo.getString("repair_date");
+                repairDate = LocalDate.parse(rDate, formatter);
+            } else repairDate = null;
 
-                Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
-                result.add(malfunction);
-            }
-        } catch (IOException e) {
-            new NoInternetException();
+            Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
+            result.add(malfunction);
         }
         return result;
     }
 
     private ArrayList<Malfunction> getVehicleMalfunctions(int id) {
         ArrayList<Malfunction> result = new ArrayList<>();
-        URL url = null;
-
-        try {
-            url = new URL("http://localhost:8080/api/failure");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
+        JSONArray jsonArray = connectToURL("failure");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            int idCheck = jo.getInt("vehicle");
+            if (idCheck == id) {
+                String date = jo.getString("accurrence_date");
+                LocalDate emergenceDate = LocalDate.parse(date, formatter);
+                LocalDate repairDate;
+                if (!jo.isNull("repair_date")) {
+                    String date2 = jo.getString("repair_date");
+                    repairDate = LocalDate.parse(date2, formatter);
+                } else repairDate = null;
+                Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
+                result.add(malfunction);
             }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                int idCheck = jo.getInt("vehicle");
-                if (idCheck == id) {
-                    String date = jo.getString("accurrence_date");
-                    LocalDate emergenceDate = LocalDate.parse(date, formatter);
-                    LocalDate repairDate;
-                    if (!jo.isNull("repair_date")) {
-                        String date2 = jo.getString("repair_date");
-                        repairDate = LocalDate.parse(date2, formatter);
-                    } else repairDate = null;
-                    Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
-                    result.add(malfunction);
-                }
-            }
-        } catch (IOException e) {
-            new NoInternetException();
         }
         return result;
     }
 
     public ArrayList<Equipment> equipment() {
         ArrayList<Equipment> equipment = new ArrayList<>();
-        URL url = null;
-        try {
-            url = new URL("http://localhost:8080/api/part");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
-                equipment.add(eq);
-            }
-        } catch (IOException e) {
-            new NoInternetException();
+        JSONArray jsonArray = connectToURL("part");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
+            equipment.add(eq);
         }
         return equipment;
     }
 
     public ArrayList<User> users() {
         ArrayList<User> users = new ArrayList<>();
-        URL url = null;
-        try {
-            url = new URL("http://localhost:8080/api/user");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jo = jsonArray.getJSONObject(i);
-                String date = jo.getString("birth_date");
-                LocalDate birthDate = LocalDate.parse(date, formatter);
-                User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
-                users.add(user);
-            }
-        } catch (IOException e) {
-            new NoInternetException();
+        JSONArray jsonArray = connectToURL("user");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            String date = jo.getString("birth_date");
+            LocalDate birthDate = LocalDate.parse(date, formatter);
+            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), jo.getString("position"));
+            users.add(user);
         }
         return users;
     }
 
     public ArrayList<TechnicalInspection> inspections() {
         ArrayList<TechnicalInspection> inspections = new ArrayList<>();
-        URL url = null;
-        try {
-            url = new URL("http://localhost:8080/api/review");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
-            String json = "", line = "";
-            while ((line = entry.readLine()) != null) {
-                json = json + line;
-            }
-            JSONArray jsonArray = new JSONArray(json);
-            for (int i = 0; i < jsonArray.length(); i++) {
-
-            }
-            return inspections;
-        } catch (IOException e) {
-            new NoInternetException();
+        JSONArray jsonArray = connectToURL("review");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
         }
         return inspections;
     }
