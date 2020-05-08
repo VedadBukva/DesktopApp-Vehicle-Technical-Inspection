@@ -39,14 +39,14 @@ public class Main extends Application {
         }
 
         System.out.println("Gotovo dodavanje");*/
-        /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
+        ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");
             System.out.printf("Malfunction date " +  malfunctions.get(i).getEmergenceDate() + "\n");
             System.out.printf("Malfunction repair " + malfunctions.get(i).getRepairDate() + "\n");
 
         }
-        Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
+        /*Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
         dao.addVehicle(vehicle);
         Malfunction malfunction = new Malfunction("dizne", vehicle.getId(), LocalDate.now(), LocalDate.now());
         dao.addMalfunction(malfunction);*/
@@ -84,9 +84,7 @@ public class Main extends Application {
         /*User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "neki", RoleType.ADMIN);
         dao.addUser(user);
         System.out.println("Gotovo");*/
-        Equipment equipment = new Equipment("Volan", true);
-        dao.addEquipment(equipment);
-        System.out.println("Gotovo");
+
     }
 
 

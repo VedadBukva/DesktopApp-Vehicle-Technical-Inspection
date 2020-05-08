@@ -140,7 +140,8 @@ public class InspectionDAO {
                 repairDate = LocalDate.parse(rDate, formatter);
             } else repairDate = null;
 
-            Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
+            Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
+            Malfunction malfunction = new Malfunction(jo.getString("name"), vehicle, emergenceDate, repairDate);
             result.add(malfunction);
         }
         return result;
@@ -160,7 +161,7 @@ public class InspectionDAO {
                     String date2 = jo.getString("repair_date");
                     repairDate = LocalDate.parse(date2, formatter);
                 } else repairDate = null;
-                Malfunction malfunction = new Malfunction(jo.getString("name"), jo.getInt("vehicle"), emergenceDate, repairDate);
+                Malfunction malfunction = new Malfunction(jo.getString("name"), emergenceDate, repairDate);
                 result.add(malfunction);
             }
         }
@@ -264,7 +265,7 @@ public class InspectionDAO {
         }
         JSONObject jsonMalfunction = new JSONObject();
         jsonMalfunction.put("name", malfunction.getMalfunctionName());
-        jsonMalfunction.put("vehicle", malfunction.getVehicleId());
+        jsonMalfunction.put("vehicle", malfunction.getVehicle().getId());
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
         addViaHttp(jsonMalfunction, url);
