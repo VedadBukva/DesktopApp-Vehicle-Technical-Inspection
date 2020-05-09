@@ -3,6 +3,7 @@ package TechnicalInspection;
 import java.time.LocalDate;
 
 public class Malfunction {
+    private int id;
     private String malfunctionName;
     private LocalDate emergenceDate;
     private LocalDate repairDate;
@@ -18,10 +19,26 @@ public class Malfunction {
         this.repairDate = repairDate;
     }
 
+    public Malfunction(int id, String malfunctionName, Vehicle vehicle, LocalDate emergenceDate, LocalDate repairDate) {
+        this.id = id;
+        this.malfunctionName = malfunctionName;
+        this.vehicle = vehicle;
+        this.emergenceDate = emergenceDate;
+        this.repairDate = repairDate;
+    }
+
     public Malfunction(String name, LocalDate emergenceDate, LocalDate repairDate) {
         this.malfunctionName = malfunctionName;
         this.emergenceDate = emergenceDate;
         this.repairDate = repairDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Vehicle getVehicle() {

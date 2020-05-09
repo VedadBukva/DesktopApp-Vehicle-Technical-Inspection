@@ -39,13 +39,13 @@ public class Main extends Application {
         }
 
         System.out.println("Gotovo dodavanje");*/
-        ArrayList<Malfunction> malfunctions = dao.malfunctions();
+        /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");
             System.out.printf("Malfunction date " +  malfunctions.get(i).getEmergenceDate() + "\n");
             System.out.printf("Malfunction repair " + malfunctions.get(i).getRepairDate() + "\n");
 
-        }
+        }*/
         /*Vehicle vehicle = new Vehicle("Haris Kicin", "Mercedes S63", VehicleType.PASSENGER_VEHICLE, "11223344", 2020, LocalDate.now(), LocalDate.now());
         dao.addVehicle(vehicle);
         Malfunction malfunction = new Malfunction("dizne", vehicle.getId(), LocalDate.now(), LocalDate.now());
@@ -72,19 +72,20 @@ public class Main extends Application {
             System.out.printf("User birth date " + users.get(i).getBirthDate() + "\n");
             System.out.printf("User role " + users.get(i).getRole() + "\n");
         }
-        System.out.println();
-        ArrayList<TechnicalInspection> inspections = dao.inspections();
+        System.out.println();*/
+        /*ArrayList<TechnicalInspection> inspections = dao.inspections();
         for (int i = 0; i < inspections.size(); i++) {
             System.out.println("Inspection ID " + inspections.get(i).getId());
             System.out.println("Inspection state " + inspections.get(i).getInspectionType());
             System.out.println("Inspection kind " + inspections.get(i).getWarrantState());
-            System.out.println("Inspection employee " + inspections.get(i).getEmployeeID());
-            System.out.println("Inspection vehicle " + inspections.get(i).getVehicleID());
+            System.out.println("Inspection employee " + inspections.get(i).getUser().getName());
+            System.out.println("Inspection vehicle " + inspections.get(i).getVehicle().getBrand());
         }*/
         /*User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "neki", RoleType.ADMIN);
         dao.addUser(user);
+        Vehicle vehicle = dao.getVehicle(1);
+        dao.addInspection(new TechnicalInspection(InspectionType.REGULAR, user, vehicle, WarrantState.IN_PROGRESS));
         System.out.println("Gotovo");*/
-
     }
 
 

@@ -12,6 +12,13 @@ public class TechnicalInspection {
     public TechnicalInspection() {
     }
 
+    public TechnicalInspection(InspectionType inspectionType, User user, Vehicle vehicle, WarrantState warrantState) {
+        this.inspectionType = inspectionType;
+        this.user = user;
+        this.vehicle = vehicle;
+        this.warrantState = warrantState;
+    }
+
     public TechnicalInspection(int id, InspectionType inspectionType, User user, Vehicle vehicle, WarrantState warrantState) {
         this.id = id;
         this.inspectionType = inspectionType;

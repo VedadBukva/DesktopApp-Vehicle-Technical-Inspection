@@ -29,7 +29,8 @@ public class Vehicle {
         this.malfunctions = malfunctions;
     }
 
-    public Vehicle(String vehicleOwner, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection) {
+    public Vehicle(int id, String vehicleOwner, String brand, VehicleType type, String serialNumber, Integer productionYear, LocalDate releaseDate, LocalDate previousInspection, ArrayList<Malfunction> malfunctions) {
+        this.id = id;
         this.vehicleOwner = vehicleOwner;
         this.brand = brand;
         this.type = type;
@@ -37,6 +38,7 @@ public class Vehicle {
         this.productionYear = productionYear;
         this.releaseDate = releaseDate;
         this.previousInspection = previousInspection;
+        this.malfunctions = malfunctions;
     }
 
     public String getVehicleOwner() {

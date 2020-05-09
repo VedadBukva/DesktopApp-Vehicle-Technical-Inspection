@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
@@ -119,7 +120,7 @@ public class InspectionDAO {
             String date1 = jo.getString("previous_inspection");
             LocalDate previous = LocalDate.parse(date1, formatter);
             ArrayList<Malfunction> malfunctions = getVehicleMalfunctions(id);
-            vehicle = new Vehicle(jo.getString("owner_name"), jo.getString("brand"), vT, jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previous, malfunctions);
+            vehicle = new Vehicle(id, jo.getString("owner_name"), jo.getString("brand"), vT, jo.getString("serial_number"), jo.getInt("production_year"), releaseDate, previous, malfunctions);
         } catch (IOException e) {
             new NoInternetException();
         }
@@ -141,7 +142,7 @@ public class InspectionDAO {
             } else repairDate = null;
 
             Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
-            Malfunction malfunction = new Malfunction(jo.getString("name"), vehicle, emergenceDate, repairDate);
+            Malfunction malfunction = new Malfunction(jo.getInt("id"), jo.getString("name"), vehicle, emergenceDate, repairDate);
             result.add(malfunction);
         }
         return result;
@@ -226,7 +227,9 @@ public class InspectionDAO {
             JSONObject jo = jsonArray.getJSONObject(i);
             InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
             WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
-            TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, jo.getInt("responsible_person"), jo.getInt("vehicle"), warrantState);
+            User user = getUser(jo.getInt("responsible_person"));
+            Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
+            TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, user, vehicle, warrantState);
             inspections.add(technicalInspection);
         }
         return inspections;
@@ -268,7 +271,8 @@ public class InspectionDAO {
         jsonMalfunction.put("vehicle", malfunction.getVehicle().getId());
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
-        addViaHttp(jsonMalfunction, url);
+        int id = addViaHttp(jsonMalfunction, url);
+        malfunction.setId(id);
     }
 
     public void addUser(User user) {
@@ -310,6 +314,23 @@ public class InspectionDAO {
         equipment.setId(id);
     }
 
+    public void addInspection(TechnicalInspection inspection) {
+        URL url = null;
+        try {
+            url = new URL("http://localhost:8080/api/review");
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonInspection = new JSONObject();
+        jsonInspection.put("id", inspection.getId());
+        jsonInspection.put("state", inspection.getWarrantState());
+        jsonInspection.put("kind", inspection.getInspectionType());
+        jsonInspection.put("responsible_person", inspection.getUser().getId());
+        jsonInspection.put("vehicle", inspection.getVehicle().getId());
+        int id = addViaHttp(jsonInspection, url);
+        inspection.setId(id);
+    }
+
     private int addViaHttp (JSONObject jsonObject, URL url) {
         HttpURLConnection con = null;
         JSONObject jsonObject1 = null;
@@ -343,6 +364,86 @@ public class InspectionDAO {
 
     // DELETE request methods
 
+    public void deleteUser(int id) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/user/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        deleteViaHttp(id, url);
+    }
+
+    public void deleteInspection(int id) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/review/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        deleteViaHttp(id, url);
+    }
+
+    public void deleteEquipment(int id) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/part/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        deleteViaHttp(id, url);
+    }
+
+    public void deleteVehicle(int id) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        deleteViaHttp(id, url);
+    }
+
+    public void deleteMalfunction(int id) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/failure/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        deleteViaHttp(id, url);
+    }
+
+    private void deleteViaHttp (int id, URL url) {
+        HttpURLConnection con = null;
+        try {
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("DELETE");
+            con.setRequestProperty("Content-Type", "application/application/json");
+            con.setDoOutput(true);
+            con.connect();
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.write(id);
+            out.flush();
+            out.close();
+
+            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            entry.close();
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Check if exists in database
 
