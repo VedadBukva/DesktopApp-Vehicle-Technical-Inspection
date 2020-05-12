@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 public class LoginController {
     public Button btnSubmit;
@@ -18,7 +19,8 @@ public class LoginController {
         if(NoInternetException.haveInternetConnectivity()) {
             closeLoginWindow(actionEvent);
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"));
+                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"), bundle);
                 Parent root = fxmlLoader.load();
                 Stage newStage = new Stage();
                 newStage.setTitle("Auto kuća Ada");
