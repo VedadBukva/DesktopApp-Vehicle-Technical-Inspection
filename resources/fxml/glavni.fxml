@@ -25,7 +25,7 @@
    <children>
       <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Završeni pregledi">
+          <Tab text="%completedinspections">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -42,7 +42,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="Završeni pregledi" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                              <Label text="%completedinspections" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets top="10.0" />
                                  </GridPane.margin>
@@ -52,10 +52,10 @@
                               </Label>
                               <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                  <columns>
-                                    <TableColumn prefWidth="134.6666717529297" text="Vlasnik vozila" />
-                                    <TableColumn prefWidth="185.66668701171875" text="Vozilo" />
-                                    <TableColumn prefWidth="187.2000732421875" text="Tip vozila" />
-                                    <TableColumn prefWidth="214.33331298828125" text="Odgovorna osoba" />
+                                    <TableColumn prefWidth="134.6666717529297" text="%vehicleowner" />
+                                    <TableColumn prefWidth="185.66668701171875" text="%vehicle" />
+                                    <TableColumn prefWidth="187.2000732421875" text="%vehicletype" />
+                                    <TableColumn prefWidth="214.33331298828125" text="%responsibleperson" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" />
@@ -71,7 +71,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Arhiviraj nalog" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%archiveaccount" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -86,11 +86,11 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Izvještaji">
+            <Tab text="%reports">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="416.79998779296875" layoutY="10.399999618530273" text="Izvještaji">
+                        <Label layoutX="416.79998779296875" layoutY="10.399999618530273" text="%reports">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -112,22 +112,22 @@
                               <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                            <Button mnemonicParsing="false" text="Arhivirani nalozi" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="Dostupna oprema" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="Završeni pregledi" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="Najčešći kvarovi" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="Broj izvršenih pregleda u zadnjoj godini" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="Broj izvršenih pregleda u zadnjem mjesecu" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="Broj izvršenih pregleda u zadnjem danu" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" text="Procenat prolaska tehničkog pregleda" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="Lista radnika" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="Broj završenih pregleda po radniku" GridPane.rowIndex="4" />
-                              <Label text="Analiza poslovanja" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                            <Button mnemonicParsing="false" text="%archivedaccounts" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" text="%availableequipment" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" text="%completedinspections" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" text="%commonfailures" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastyear" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastmonth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button mnemonicParsing="false" text="%percentageofpassingthetechnicalinspection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" text="%listofworkers" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" text="%numberofcompletedexaminationsperworker" GridPane.rowIndex="4" />
+                              <Label text="%businessanalysis" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label text="Statistika rada" GridPane.halignment="CENTER">
+                              <Label text="%workstatistics" GridPane.halignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -138,7 +138,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab text="Arhiva naloga">
+          <Tab text="%archivedaccounts">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -146,6 +146,7 @@
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+                              <ColumnConstraints />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
@@ -154,7 +155,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Arhiva naloga" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                              <Label text="%archivedaccounts" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets top="10.0" />
                                  </GridPane.margin>
@@ -164,10 +165,10 @@
                               </Label>
                               <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                  <columns>
-                                    <TableColumn prefWidth="237.59998548030853" text="Vlasnik vozila" />
-                                    <TableColumn prefWidth="190.66668701171875" text="Vozilo" />
-                                    <TableColumn prefWidth="161.5999755859375" text="Tip vozila" />
-                                    <TableColumn prefWidth="301.59991455078125" text="Odgovorna osoba" />
+                                    <TableColumn prefWidth="237.59998548030853" text="%vehicleowner" />
+                                    <TableColumn prefWidth="190.66668701171875" text="%vehicle" />
+                                    <TableColumn prefWidth="161.5999755859375" text="%vehicletype" />
+                                    <TableColumn prefWidth="301.59991455078125" text="%responsibleperson" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -178,7 +179,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Pregled opreme">
+            <Tab text="%overviewofequipment">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -195,7 +196,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Pregled opreme i dijelova" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                              <Label text="%overviewofequipmentandparts" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -214,7 +215,7 @@
                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Dodaj predmet" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%additem" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -222,7 +223,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Obriši predmet" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%deleteitem" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -230,7 +231,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Izmjeni predmet" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%edititem" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -242,8 +243,8 @@
                               </GridPane>
                               <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                 <columns>
-                                  <TableColumn prefWidth="497.6000483036041" text="Naziv" />
-                                  <TableColumn prefWidth="235.99999237060547" text="Dostupno" />
+                                  <TableColumn prefWidth="497.6000483036041" text="%name" />
+                                  <TableColumn prefWidth="235.99999237060547" text="%available" />
                                 </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" />
@@ -254,7 +255,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Upravljanje korisnicima">
+            <Tab text="%usermanagement">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -272,7 +273,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Upravljanje korisnicima" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                              <Label text="%usermanagement" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -293,10 +294,10 @@
                                  <children>
                                     <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="3">
                                       <columns>
-                                        <TableColumn prefWidth="191.46668469905853" text="Ime i prezime" />
-                                          <TableColumn prefWidth="154.933349609375" text="Korisničko ime" />
+                                        <TableColumn prefWidth="191.46668469905853" text="%nameandsurname" />
+                                          <TableColumn prefWidth="154.933349609375" text="%username" />
                                         <TableColumn prefWidth="209.8665771484375" text="E-mail" />
-                                          <TableColumn prefWidth="166.933349609375" text="Uloga" />
+                                          <TableColumn prefWidth="166.933349609375" text="%role" />
                                       </columns>
                                        <GridPane.margin>
                                           <Insets left="10.0" />
@@ -314,7 +315,7 @@
                                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Dodaj korisnika" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%adduser" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -322,7 +323,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="Obriši korisnika" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -337,7 +338,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-            <Tab text="Jezik">
+            <Tab text="%language">
               <content>
                 <AnchorPane maxHeight="550.0" maxWidth="900.0" minHeight="0.0" minWidth="0.0" prefHeight="550.0" prefWidth="900.0">
                      <children>
@@ -354,7 +355,7 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <Label text="Izaberite jezik koji ćete koristiti u aplikaciji:" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                              <Label text="%chooselanguage" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -362,7 +363,7 @@
                                     <Insets top="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Odabir jezika:" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Label text="%chooselanguage1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -378,7 +379,7 @@
       </TabPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
          <children>
-            <Label layoutX="14.0" text="Auto kuća Ada">
+            <Label layoutX="14.0" text="%caldealership">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
