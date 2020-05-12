@@ -1,6 +1,7 @@
 package TechnicalInspection;
 
 import DatabaseWork.InspectionDAO;
+import Exceptions.NoInternetException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,12 +17,12 @@ public class Main extends Application {
     private InspectionDAO dao;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
         primaryStage.setTitle("Auto kuća Ada");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.show();*/
-        dao = InspectionDAO.getInstance();
+        primaryStage.show();
+        //dao = InspectionDAO.getInstance();
         /*ArrayList<Vehicle> vehicles = dao.vehicles();
         for (int i = 0; i < vehicles.size(); i++) {
             System.out.printf("Vehicle owner " + vehicles.get(i).getVehicleOwner() + "\n");
