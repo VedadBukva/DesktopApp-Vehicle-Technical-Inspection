@@ -23,14 +23,14 @@ public class MainController {
             if(newLanguage.equals("bs")) {
                 Locale.setDefault(new Locale("bs", "BA"));
                 try {
-                    ucitajScenu();
+                    loadScene();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 Locale.setDefault(new Locale("en", "US"));
                 try {
-                    ucitajScenu();
+                    loadScene();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -39,7 +39,7 @@ public class MainController {
     }
 
 
-    public void ucitajScenu() throws IOException {
+    public void loadScene() throws IOException {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Stage stage = (Stage) tabPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavni.fxml" ), bundle);
