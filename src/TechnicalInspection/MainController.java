@@ -16,8 +16,9 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        choiceBoxLanguage.getItems().add("en");
+        choiceBoxLanguage.getSelectionModel().select(Locale.getDefault().getLanguage());
         choiceBoxLanguage.getItems().add("bs");
+        choiceBoxLanguage.getItems().add("en");
 
         choiceBoxLanguage.getSelectionModel().selectedItemProperty().addListener((observableValue, oldLanguage, newLanguage) -> {
             if(newLanguage.equals("bs")) {
