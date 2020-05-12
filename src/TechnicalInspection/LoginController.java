@@ -16,6 +16,7 @@ public class LoginController {
 
     public void openMainWindow(ActionEvent actionEvent) {
         if(NoInternetException.haveInternetConnectivity()) {
+            closeLoginWindow(actionEvent);
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"));
                 Parent root = fxmlLoader.load();

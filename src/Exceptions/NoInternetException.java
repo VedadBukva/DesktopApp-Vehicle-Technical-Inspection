@@ -7,8 +7,12 @@ import java.net.URLConnection;
 
 public class NoInternetException {
     public static void showAlert() {
+        String warning = "Upozorenje";
+        String headerNoInternet = "Problem sa konekcijom";
         String noInternet = "Uređaj nije povezan sa internetom.";
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(warning);
+        alert.setHeaderText(headerNoInternet);
         alert.setContentText(noInternet);
         alert.showAndWait();
     }
