@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import Enum.*;
 
@@ -17,7 +18,8 @@ public class Main extends Application {
     private InspectionDAO dao;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
         primaryStage.setTitle("Auto kuća Ada");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
