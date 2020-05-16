@@ -44,7 +44,6 @@ public class MainController {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Stage stage = (Stage) tabPane.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavni.fxml" ), bundle);
-        //loader.setController(this);
         stage.setScene(new Scene(loader.load()));
     }
 

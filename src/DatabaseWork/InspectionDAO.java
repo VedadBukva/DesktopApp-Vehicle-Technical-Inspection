@@ -248,7 +248,7 @@ public class InspectionDAO {
 
     // POST request methods
 
-    public void addVehicle(Vehicle vehicle) { // TODO: Add check method
+    public void addVehicle(Vehicle vehicle) {
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/vehicle");
@@ -269,7 +269,7 @@ public class InspectionDAO {
         vehicle.setId(id);
     }
 
-    public void addMalfunction(Malfunction malfunction) { // TODO: Add check method
+    public void addMalfunction(Malfunction malfunction) {
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/failure");
@@ -436,7 +436,7 @@ public class InspectionDAO {
         }
     }
 
-    // DELETE request methods //TODO: Check if exists
+    // DELETE request methods
 
     public void deleteUser(int id) {
         URL url = null;

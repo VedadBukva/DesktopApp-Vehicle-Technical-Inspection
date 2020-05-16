@@ -18,14 +18,14 @@ public class Main extends Application {
     private InspectionDAO dao;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        /*ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
         primaryStage.setTitle("Auto kuća Ada");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.show();*/
+        primaryStage.show();
 
-        dao = InspectionDAO.getInstance();
+        //dao = InspectionDAO.getInstance();
 
 
         /* System.out.println("Gotovo dodavanje");*/

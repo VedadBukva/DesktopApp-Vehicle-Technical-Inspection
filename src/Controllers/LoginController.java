@@ -1,6 +1,8 @@
 package Controllers;
 
+import DatabaseWork.InspectionDAO;
 import Exceptions.NoInternetException;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,16 +10,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -27,19 +33,18 @@ public class LoginController {
     public ImageView flagBiH;
     public ImageView flagUK;
     public GridPane loginGrid;
+    public TextField userName;
+    public PasswordField password;
+    private InspectionDAO dao = null;
 
     @FXML
     public void initialize() {
+        dao = InspectionDAO.getInstance();
         Image flagOfBiH = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/300px-Flag_of_Bosnia_and_Herzegovina.svg.png");
         flagBiH.setImage(flagOfBiH);
         Image flagOfUK = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png");
         flagUK.setImage(flagOfUK);
 
-        if(isEmpty(flagBiH)) {
-            System.out.println("PRAZNOOOOO");
-        } else {
-            System.out.println("TUU JEEEEE");
-        }
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             Locale.setDefault(new Locale("bs", "BA"));
             try {
@@ -57,27 +62,81 @@ public class LoginController {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static boolean isEmpty(ImageView imageView) {
-        Image image = imageView.getImage();
-        return image == null || image.isError();
+        userName.textProperty().addListener(((observableValue, s, t1) -> {
+            if (t1.length() >= 4) {
+                userName.getStyleClass().removeAll("inputNOTOK");
+                userName.getStyleClass().add("inputOK");
+            } else {
+                userName.getStyleClass().removeAll("inputOK");
+                userName.getStyleClass().add("inputNOTOK");
+            }
+        }));
+        password.textProperty().addListener(((observableValue, s, t1) -> {
+            if (t1.length() >= 3) {
+                password.getStyleClass().removeAll("inputNOTOK");
+                password.getStyleClass().add("inputOK");
+            } else {
+                password.getStyleClass().removeAll("inputOK");
+                password.getStyleClass().add("inputNOTOK");
+            }
+        }));
     }
 
     public void openMainWindow(ActionEvent actionEvent) {
         if(NoInternetException.haveInternetConnectivity()) {
-            closeLoginWindow(actionEvent);
-            try {
-                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"), bundle);
-                Parent root = fxmlLoader.load();
-                Stage newStage = new Stage();
-                newStage.setTitle("Auto kuća Ada");
-                newStage.setScene(new Scene(root));
-                newStage.setResizable(false);
-                newStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (userName.getText().isEmpty()) {
+                userName.getStyleClass().removeAll("inputOK");
+                userName.getStyleClass().add("inputNOTOK");
+                if (!password.getText().isEmpty()) {
+                    password.getStyleClass().removeAll("inputNOTOK");
+                    password.getStyleClass().add("inputOK");
+                }
+            } else if (password.getText().isEmpty()) {
+                userName.getStyleClass().removeAll("inputNOTOK");
+                userName.getStyleClass().add("inputOK");
+                password.getStyleClass().removeAll("inputOK");
+                password.getStyleClass().add("inputNOTOK");
+            } else {
+                Thread thread = new Thread(() -> {
+                    if (!dao.loginCheck(userName.getText(), password.getText())) {
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                Alert a = new Alert(Alert.AlertType.NONE);
+                                a.setAlertType(Alert.AlertType.WARNING);
+                                a.setTitle("Warning");
+                                a.setHeaderText("Check your inputs!");
+                                a.setContentText("Input data are not correct or you have no privileges to enter.");
+                                a.show();
+                            }
+                        });
+                        userName.getStyleClass().removeAll("inputOK");
+                        userName.getStyleClass().add("inputNOTOK");
+                        password.getStyleClass().removeAll("inputOK");
+                        password.getStyleClass().add("inputNOTOK");
+                    } else {
+                        userName.getStyleClass().removeAll("inputNOTOK");
+                        userName.getStyleClass().add("inputOK");
+                        password.getStyleClass().removeAll("inputNOTOK");
+                        password.getStyleClass().add("inputOK");
+                        Platform.runLater(() -> {
+                            closeLoginWindow(actionEvent);
+                            try {
+                                ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"), bundle);
+                                Parent root = fxmlLoader.load();
+                                Stage newStage = new Stage();
+                                newStage.setTitle("Auto kuća Ada");
+                                newStage.setScene(new Scene(root));
+                                newStage.setResizable(false);
+                                newStage.show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                });
+                thread.start();
             }
         } else {
             NoInternetException.showAlert();
