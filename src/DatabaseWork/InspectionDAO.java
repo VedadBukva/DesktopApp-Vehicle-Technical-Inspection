@@ -2,6 +2,7 @@ package DatabaseWork;
 
 import Exceptions.NoInternetException;
 import TechnicalInspection.*;
+import com.sun.javafx.collections.MappingChange;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -73,6 +74,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             jsonArray = new JSONArray(json);
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,6 +85,7 @@ public class InspectionDAO {
     public ArrayList<Vehicle> vehicles() {
         ArrayList<Vehicle> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("vehicle");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("date_of_use");
@@ -113,6 +116,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             JSONObject jo = new JSONObject(json);
             VehicleType vT = VehicleType.getVehicleType(jo.getString("type"));
             String date = jo.getString("date_of_use");
@@ -125,11 +129,12 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return vehicle;
-    } //TODO: check if vehicle exists
+    }
 
     public ArrayList<Malfunction> malfunctions() {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("accurrence_date");
@@ -151,6 +156,7 @@ public class InspectionDAO {
     public ArrayList<Malfunction> getVehicleMalfunctions(int id) {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             int idCheck = jo.getInt("vehicle");
@@ -172,6 +178,7 @@ public class InspectionDAO {
     public ArrayList<Equipment> equipment() {
         ArrayList<Equipment> equipment = new ArrayList<>();
         JSONArray jsonArray = connectToURL("part");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
@@ -183,6 +190,7 @@ public class InspectionDAO {
     public ArrayList<User> users() {
         ArrayList<User> users = new ArrayList<>();
         JSONArray jsonArray = connectToURL("user");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("birth_date");
@@ -208,6 +216,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             JSONObject jo = new JSONObject(json);
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
@@ -218,11 +227,12 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return user;
-    } // TODO: check if exists
+    }
 
     public ArrayList<TechnicalInspection> inspections() {
         ArrayList<TechnicalInspection> inspections = new ArrayList<>();
         JSONArray jsonArray = connectToURL("review");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
@@ -363,6 +373,7 @@ public class InspectionDAO {
 
     public void updateVehicle(int vehicleId, String name, String brand, InspectionType type,
                                 String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
+        if (vehicleId > vehicles().size()) return;
         URL url = null;
         HttpURLConnection con = null;
         try {
@@ -383,6 +394,7 @@ public class InspectionDAO {
 
     public void updateInspection(int inspectionId, InspectionType type, User user, Vehicle vehicle,
                               WarrantState state) {
+        if (inspectionId > inspections().size()) return;
         URL url = null;
         HttpURLConnection con = null;
         try {
@@ -434,6 +446,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > users().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -445,6 +458,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > inspections().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -456,6 +470,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > equipment().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -467,6 +482,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > vehicles().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -478,6 +494,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > malfunctions().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -508,15 +525,6 @@ public class InspectionDAO {
     }
 
     // Check if exists in database
-
-    private boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
-        return true;
-    }
-
-    private boolean checkUserExists (User user) {
-
-        return true;
-    }
 
     public boolean loginCheck(String userName, String password) {
         URL url = null;
