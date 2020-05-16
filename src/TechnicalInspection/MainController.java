@@ -43,7 +43,7 @@ public class MainController {
     public void loadScene() throws IOException {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Stage stage = (Stage) tabPane.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavni.fxml" ), bundle);
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/main.fxml"), bundle);
         //loader.setController(this);
         stage.setScene(new Scene(loader.load()));
     }

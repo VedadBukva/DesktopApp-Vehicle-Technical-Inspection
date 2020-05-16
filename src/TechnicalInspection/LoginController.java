@@ -1,9 +1,7 @@
 package TechnicalInspection;
 
 import Exceptions.NoInternetException;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -35,11 +31,6 @@ public class LoginController {
         Image flagOfUK = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png");
         flagUK.setImage(flagOfUK);
 
-        if(isEmpty(flagBiH)) {
-            System.out.println("PRAZNOOOOO");
-        } else {
-            System.out.println("TUU JEEEEE");
-        }
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             Locale.setDefault(new Locale("bs", "BA"));
             try {
@@ -59,17 +50,12 @@ public class LoginController {
         });
     }
 
-    public static boolean isEmpty(ImageView imageView) {
-        Image image = imageView.getImage();
-        return image == null || image.isError();
-    }
-
     public void openMainWindow(ActionEvent actionEvent) {
         if(NoInternetException.haveInternetConnectivity()) {
             closeLoginWindow(actionEvent);
             try {
                 ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"), bundle);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"), bundle);
                 Parent root = fxmlLoader.load();
                 Stage newStage = new Stage();
                 newStage.setTitle("Auto kuća Ada");
