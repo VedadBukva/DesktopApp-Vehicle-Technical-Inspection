@@ -18,14 +18,15 @@ public class Main extends Application {
     private InspectionDAO dao;
     @Override
     public void start(Stage primaryStage) throws Exception{
-        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        /*ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
         primaryStage.setTitle("Auto kuća Ada");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
-        primaryStage.show();
-        //dao = InspectionDAO.getInstance();
-        /*ArrayList<Vehicle> vehicles = dao.vehicles();
+        primaryStage.show();*/
+
+        dao = InspectionDAO.getInstance();
+        ArrayList<Vehicle> vehicles = dao.vehicles();
         for (int i = 0; i < vehicles.size(); i++) {
             System.out.printf("Vehicle owner " + vehicles.get(i).getVehicleOwner() + "\n");
             System.out.printf("Brand " + vehicles.get(i).getBrand()+ "\n");
@@ -40,8 +41,20 @@ public class Main extends Application {
                 System.out.printf("Malfunction repair " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getRepairDate() + "\n");
             }
         }
-
-        System.out.println("Gotovo dodavanje");*/
+        VehicleType type = VehicleType.PASSENGER_VEHICLE;
+        dao.updateVehicle(1, "Haris", "Mercedes GLS 63", type, "00000", 2020, LocalDate.now(), LocalDate.now());
+        System.out.println("\n\nIzmjena izvrsena \n");
+        ArrayList<Vehicle> vehicless = dao.vehicles();
+        for (int i = 0; i < vehicless.size(); i++) {
+            System.out.printf("Vehicle owner " + vehicless.get(i).getVehicleOwner() + "\n");
+            System.out.printf("Brand " + vehicless.get(i).getBrand()+ "\n");
+            System.out.printf("Type " + vehicless.get(i).getType()+ "\n");
+            System.out.printf("Serial number  " + vehicless.get(i).getSerialNumber()+ "\n");
+            System.out.printf("Production year " + vehicless.get(i).getProductionYear()+ "\n");
+            System.out.printf("Release date " + vehicless.get(i).getReleaseDate()+ "\n");
+            System.out.printf("Previous inspection " + vehicless.get(i).getPreviousInspection()+ "\n");
+        }
+        /* System.out.println("Gotovo dodavanje");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");

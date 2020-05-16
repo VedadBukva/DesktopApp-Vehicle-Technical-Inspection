@@ -1,4 +1,4 @@
-package TechnicalInspection;
+package Controllers;
 
 import Exceptions.NoInternetException;
 import javafx.beans.binding.Bindings;

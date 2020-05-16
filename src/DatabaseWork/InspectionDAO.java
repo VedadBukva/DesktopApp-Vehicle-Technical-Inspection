@@ -361,8 +361,52 @@ public class InspectionDAO {
 
     // PUT request methods
 
+    public void updateVehicle(int vehicleId, String name, String brand, VehicleType type,
+                                String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle/" + vehicleId);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject vehicleObj = new JSONObject();
+        vehicleObj.put("owner_name", name);
+        vehicleObj.put("brand", brand);
+        vehicleObj.put("type", type);
+        vehicleObj.put("serial_number", sNumber);
+        vehicleObj.put("production_year", pYear);
+        vehicleObj.put("date_of_use", rDate);
+        vehicleObj.put("previous_inspection", prevInsp);
+        updateViaHttp(vehicleObj, url);
+    }
 
-    // DELETE request methods
+    private void updateViaHttp (JSONObject jo, URL url) {
+        HttpURLConnection con = null;
+        try {
+            byte[] data = jo.toString().getBytes();
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("PUT");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+            con.connect();
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.write(data);
+            out.flush();
+            out.close();
+
+            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            entry.close();
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+    }
+
+    // DELETE request methods //TODO: Check if exists
 
     public void deleteUser(int id) {
         URL url = null;

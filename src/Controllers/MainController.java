@@ -1,4 +1,4 @@
-package TechnicalInspection;
+package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
