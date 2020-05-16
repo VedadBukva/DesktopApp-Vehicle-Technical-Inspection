@@ -361,7 +361,7 @@ public class InspectionDAO {
 
     // PUT request methods
 
-    public void updateVehicle(int vehicleId, String name, String brand, VehicleType type,
+    public void updateVehicle(int vehicleId, String name, String brand, InspectionType type,
                                 String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
         URL url = null;
         HttpURLConnection con = null;
@@ -380,6 +380,24 @@ public class InspectionDAO {
         vehicleObj.put("previous_inspection", prevInsp);
         updateViaHttp(vehicleObj, url);
     }
+
+    public void updateInspection(int inspectionId, InspectionType type, User user, Vehicle vehicle,
+                              WarrantState state) {
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/review/" + inspectionId);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonInspection = new JSONObject();
+        jsonInspection.put("state", state);
+        jsonInspection.put("kind", type);
+        jsonInspection.put("responsible_person", user.getId());
+        jsonInspection.put("vehicle", vehicle.getId());
+        updateViaHttp(jsonInspection, url);
+    }
+
 
     private void updateViaHttp (JSONObject jo, URL url) {
         HttpURLConnection con = null;

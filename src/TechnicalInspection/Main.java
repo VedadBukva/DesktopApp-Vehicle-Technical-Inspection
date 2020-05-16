@@ -26,34 +26,12 @@ public class Main extends Application {
         primaryStage.show();*/
 
         dao = InspectionDAO.getInstance();
-        ArrayList<Vehicle> vehicles = dao.vehicles();
-        for (int i = 0; i < vehicles.size(); i++) {
-            System.out.printf("Vehicle owner " + vehicles.get(i).getVehicleOwner() + "\n");
-            System.out.printf("Brand " + vehicles.get(i).getBrand()+ "\n");
-            System.out.printf("Type " + vehicles.get(i).getType()+ "\n");
-            System.out.printf("Serial number  " + vehicles.get(i).getSerialNumber()+ "\n");
-            System.out.printf("Production year " + vehicles.get(i).getProductionYear()+ "\n");
-            System.out.printf("Release date " + vehicles.get(i).getReleaseDate()+ "\n");
-            System.out.printf("Previous inspection " + vehicles.get(i).getPreviousInspection()+ "\n");
-            for (int j = 0; j < vehicles.get(i).getMalfunctions().size(); j++) {
-                System.out.printf("Malfunction " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getMalfunctionName() + "\n");
-                System.out.printf("Malfunction date " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getEmergenceDate() + "\n");
-                System.out.printf("Malfunction repair " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getRepairDate() + "\n");
-            }
-        }
-        VehicleType type = VehicleType.PASSENGER_VEHICLE;
-        dao.updateVehicle(1, "Haris", "Mercedes GLS 63", type, "00000", 2020, LocalDate.now(), LocalDate.now());
-        System.out.println("\n\nIzmjena izvrsena \n");
-        ArrayList<Vehicle> vehicless = dao.vehicles();
-        for (int i = 0; i < vehicless.size(); i++) {
-            System.out.printf("Vehicle owner " + vehicless.get(i).getVehicleOwner() + "\n");
-            System.out.printf("Brand " + vehicless.get(i).getBrand()+ "\n");
-            System.out.printf("Type " + vehicless.get(i).getType()+ "\n");
-            System.out.printf("Serial number  " + vehicless.get(i).getSerialNumber()+ "\n");
-            System.out.printf("Production year " + vehicless.get(i).getProductionYear()+ "\n");
-            System.out.printf("Release date " + vehicless.get(i).getReleaseDate()+ "\n");
-            System.out.printf("Previous inspection " + vehicless.get(i).getPreviousInspection()+ "\n");
-        }
+
+        User user = dao.getUser(2);
+        Vehicle vehicle = dao.getVehicle(2);
+
+        dao.updateInspection(1,InspectionType.REGULAR, user, vehicle, WarrantState.IN_ARCHIVE );
+
         /* System.out.println("Gotovo dodavanje");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
