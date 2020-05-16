@@ -22,7 +22,7 @@ import Enum.*;
 
 public class InspectionDAO {
     private static InspectionDAO instance;
-    private Connection conn;
+    private static Connection conn;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
 
 
@@ -31,7 +31,7 @@ public class InspectionDAO {
         return instance;
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return conn;
     }
 

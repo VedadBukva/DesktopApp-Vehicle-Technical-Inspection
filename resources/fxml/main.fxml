@@ -112,16 +112,16 @@
                               <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                            <Button mnemonicParsing="false" text="%archivedaccounts" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="%availableequipment" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="%completedinspections" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="%commonfailures" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastyear" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastmonth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" text="%percentageofpassingthetechnicalinspection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="%listofworkers" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="%numberofcompletedexaminationsperworker" GridPane.rowIndex="4" />
+                            <Button mnemonicParsing="false" text="%archivedaccounts" onAction="#showArchivedAccounts" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" text="%availableequipment" onAction="#showAvailableEquipment" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" text="%completedinspections" onAction="#showCompletedInspections" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" text="%commonfailures" onAction="#showCommonFailures" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastyear" onAction="#showLastYearExaminations" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastmonth" onAction="#showLastMonthExaminations" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" text="%examinationsinlastday" onAction="#showLastDayExaminations" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button mnemonicParsing="false" text="%percentageofpassingthetechnicalinspection" onAction="#showPercentageOfPassingInspection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" text="%listofworkers" onAction="#showListOfWorker" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" text="%numberofcompletedexaminationsperworker" onAction="#showCompletedExaminationsPerWorker" GridPane.rowIndex="4" />
                               <Label text="%businessanalysis" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                  <font>
                                     <Font size="16.0" />

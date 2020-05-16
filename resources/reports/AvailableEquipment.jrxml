@@ -42,10 +42,10 @@
 	</style>
 	<subDataset name="tableDataset" uuid="346abffa-c27a-44df-9d67-12f9048c3b09">
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DBInspection.xml"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<queryString language="SQL">
 			<![CDATA[SELECT id, name, availability
-FROM parts
-WHERE availability="TRUE"]]>
+FROM parts]]>
 		</queryString>
 		<field name="id" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.label" value="id"/>
@@ -119,26 +119,16 @@ WHERE availability="TRUE"]]>
 					</datasetRun>
 					<jr:column width="90" uuid="2a522080-b60f-4aec-8a0e-fe72d2b06503">
 						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="ed61de60-59a7-4bc6-bf2e-f0139f5f07c8"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="60c4a208-8bbd-49e1-a8bc-a8c8444b74d0"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[id]]></text>
+								<text><![CDATA[ID]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
 								<reportElement key="" x="0" y="0" width="90" height="30" uuid="34304075-f111-44fc-b30c-269f0a4a1e6f"/>
 								<box leftPadding="2"/>
@@ -147,30 +137,22 @@ WHERE availability="TRUE"]]>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
 					<jr:column width="90" uuid="ab8d4079-0f77-4b14-8d78-8023b6955b5b">
 						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="4ee00dea-1fc4-4589-a1a3-6b762c949dc2"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="60985232-1945-4c2d-9bd5-646ab0fdc726"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[name]]></text>
+								<text><![CDATA[Name]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
 								<reportElement key="" x="0" y="0" width="90" height="30" uuid="cb23b74e-0767-4902-8373-0a23788ca973"/>
 								<box leftPadding="2"/>
@@ -179,30 +161,22 @@ WHERE availability="TRUE"]]>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
 					<jr:column width="90" uuid="2ae86bdf-4fd1-4197-a076-357ce28adce7">
 						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="5e14ee5d-8640-4874-967a-6bf8bbdd1e6f"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
 							<staticText>
 								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="a9d1dfc5-70c4-4e20-82c3-f53bd287e566"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[availability]]></text>
+								<text><![CDATA[Availability]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
 								<reportElement key="" x="0" y="0" width="90" height="30" uuid="bcb1b6ce-de81-455a-8d67-35895a90d7ce"/>
 								<box leftPadding="2"/>
@@ -211,7 +185,9 @@ WHERE availability="TRUE"]]>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{availability}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
 				</jr:table>
 			</componentElement>

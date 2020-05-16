@@ -76,18 +76,18 @@ WHERE state="DONE" OR state="ZAVRSEN"]]>
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="6321f5e3-86eb-444f-acc1-8daaaa0d6c60"/>
 				<staticText>
-					<reportElement x="20" y="20" width="234" height="43" forecolor="#FFFFFF" uuid="9e48917a-7b59-4ffd-baad-725f45563194"/>
+					<reportElement x="20" y="20" width="300" height="43" forecolor="#FFFFFF" uuid="9e48917a-7b59-4ffd-baad-725f45563194"/>
 					<textElement>
-						<font size="34" isBold="true"/>
+						<font size="22" isBold="true"/>
 					</textElement>
-					<text><![CDATA[TITLE]]></text>
+					<text><![CDATA[Completed inspections]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="395" y="43" width="180" height="20" forecolor="#FFFFFF" uuid="0a399baa-bad3-4b1a-9fe3-bb1c563e6a27"/>
 					<textElement textAlignment="Right">
 						<font size="14" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Add a description here]]></text>
+					<text><![CDATA[Car dealership Ada]]></text>
 				</staticText>
 			</frame>
 		</band>
@@ -125,60 +125,42 @@ WHERE state="DONE" OR state="ZAVRSEN"]]>
 					<datasetRun subDataset="tableDataset" uuid="2645f361-b9f0-451d-a251-5a385ef5149e">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="90" uuid="1275c6c4-080c-448d-a35c-0d2862a9708e">
-						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="9584e21c-1afa-432d-9d8c-bb39dfe66ebb"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
+					<jr:column width="60" uuid="1275c6c4-080c-448d-a35c-0d2862a9708e">
+						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="d46d7b91-6835-49c6-ad45-98cc32b48464"/>
+								<reportElement mode="Transparent" x="0" y="0" width="60" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="d46d7b91-6835-49c6-ad45-98cc32b48464"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[id]]></text>
+								<text><![CDATA[ID]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="90" height="30" uuid="471e24ac-1b97-4d4d-8122-797f3b901aa6"/>
+								<reportElement key="" x="0" y="0" width="60" height="30" uuid="471e24ac-1b97-4d4d-8122-797f3b901aa6"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
 					<jr:column width="90" uuid="b9f5a2c2-0240-4ced-b2d9-2ee133f8578b">
-						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="87364768-29ca-4057-84f2-19def695e726"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
+						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="8a3c5b4a-6112-4363-adcd-e82507342aff"/>
+								<reportElement mode="Transparent" x="0" y="0" width="90" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="8a3c5b4a-6112-4363-adcd-e82507342aff"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[state]]></text>
+								<text><![CDATA[State]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
 								<reportElement key="" x="0" y="0" width="90" height="30" uuid="e0c1fe36-8c11-4bae-b097-2a7d6a6430aa"/>
 								<box leftPadding="2"/>
@@ -187,103 +169,81 @@ WHERE state="DONE" OR state="ZAVRSEN"]]>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{state}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="90" uuid="fc729fdc-6dc5-438c-af4c-bce15763ff95">
-						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="63725f0f-f54c-4bef-b80c-f9128643372c"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
+					<jr:column width="110" uuid="fc729fdc-6dc5-438c-af4c-bce15763ff95">
+						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="6f2c6357-07c9-47a7-9ebb-fe7003cb6c91"/>
+								<reportElement mode="Transparent" x="0" y="0" width="110" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="6f2c6357-07c9-47a7-9ebb-fe7003cb6c91"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[kind]]></text>
+								<text><![CDATA[Kind]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="90" height="30" uuid="f2e818ae-7b40-4f91-be6f-d7ca767dd6e9"/>
+								<reportElement key="" x="0" y="0" width="110" height="30" uuid="f2e818ae-7b40-4f91-be6f-d7ca767dd6e9"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{kind}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="90" uuid="9b6a3de8-71cd-44b6-a064-0d0182333f65">
-						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="fbd3e530-dbfe-41fb-8673-32590ee57ccc"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
+					<jr:column width="140" uuid="9b6a3de8-71cd-44b6-a064-0d0182333f65">
+						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="9ef06c18-c99f-4d49-a220-20f693ab5a98"/>
+								<reportElement mode="Transparent" x="0" y="0" width="140" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="9ef06c18-c99f-4d49-a220-20f693ab5a98"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[responsible_person]]></text>
+								<text><![CDATA[Responsible person]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="90" height="30" uuid="0881b1f4-5312-4128-b26e-9a30f71a2729"/>
+								<reportElement key="" x="0" y="0" width="140" height="30" uuid="0881b1f4-5312-4128-b26e-9a30f71a2729"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{responsible_person}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="90" uuid="1ba8ad3b-5167-4d5c-b6f1-a59b9f0dabe1">
-						<jr:tableHeader style="Table_TH" height="30">
-							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="60ee1259-abf1-4e9e-b741-f10472775ee2"/>
-								<textElement>
-									<font size="19" isBold="true"/>
-								</textElement>
-								<textFieldExpression><![CDATA["Header"]]></textFieldExpression>
-							</textField>
-						</jr:tableHeader>
-						<jr:tableFooter style="Table_TH" height="30"/>
-						<jr:columnHeader style="Table_CH" height="30">
+					<jr:column width="145" uuid="1ba8ad3b-5167-4d5c-b6f1-a59b9f0dabe1">
+						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="90" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="3bc01061-5dad-42f7-a05e-f79b105591c2"/>
+								<reportElement mode="Transparent" x="0" y="0" width="145" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="3bc01061-5dad-42f7-a05e-f79b105591c2"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[vehicle]]></text>
+								<text><![CDATA[Vehicle]]></text>
 							</staticText>
-						</jr:columnHeader>
-						<jr:columnFooter style="Table_CH" height="30"/>
-						<jr:detailCell style="Table_TD" height="30">
+						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30"/>
+						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="90" height="30" uuid="52b99a62-0634-440d-9a9b-09330743067e"/>
+								<reportElement key="" x="0" y="0" width="145" height="30" uuid="52b99a62-0634-440d-9a9b-09330743067e"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{vehicle}]]></textFieldExpression>
 							</textField>
-						</jr:detailCell>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30"/>
+						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
 				</jr:table>
 			</componentElement>

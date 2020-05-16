@@ -1,5 +1,7 @@
 package Controllers;
 
+import DatabaseWork.InspectionDAO;
+import Reports.PrintReports;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
 
 import java.io.IOException;
 import java.util.*;
@@ -65,5 +68,87 @@ public class MainController {
             e.printStackTrace();
         }
     }
+
+    public void showArchivedAccounts(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportArchivedAccounts(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showAvailableEquipment(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportAvailableEquipment(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showCommonFailures(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportCommonFailures(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showCompletedExaminationsPerWorker(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportCompletedExaminationsPerWorker(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showCompletedInspections(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportCompletedInspections(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showLastDayExaminations(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportLastDayExaminations(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showLastMonthExaminations(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportLastMonthExaminations(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showLastYearExaminations(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportLastYearExaminations(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showListOfWorker(ActionEvent actionEvent) {
+        try {
+            new PrintReports().showReportListOfWorker(InspectionDAO.getConnection());
+        } catch (JRException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    public void showPercentageOfPassingInspection(ActionEvent actionEvent) {
+            try {
+                new PrintReports().showReportPercentageOfPassingInspection(InspectionDAO.getConnection());
+            } catch (JRException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+
 
 }
