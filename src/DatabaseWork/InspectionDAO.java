@@ -518,5 +518,27 @@ public class InspectionDAO {
         return true;
     }
 
-
+    public boolean loginCheck(String userName, String password) {
+        URL url = null;
+        JSONObject object = null;
+        try {
+            url = new URL("http://localhost:8080/api/user/" + userName + "/" + password);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            if (json.isEmpty()) return false;
+            JSONObject jo = new JSONObject(json);
+            RoleType type = RoleType.getRoleType(jo.getString("position"));
+            if (type != null && type.equals(RoleType.EMPLOYEE)) return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }

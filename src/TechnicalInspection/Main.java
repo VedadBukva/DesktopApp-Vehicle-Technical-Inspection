@@ -27,10 +27,6 @@ public class Main extends Application {
 
         dao = InspectionDAO.getInstance();
 
-        User user = dao.getUser(2);
-        Vehicle vehicle = dao.getVehicle(2);
-
-        dao.updateInspection(1,InspectionType.REGULAR, user, vehicle, WarrantState.IN_ARCHIVE );
 
         /* System.out.println("Gotovo dodavanje");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
