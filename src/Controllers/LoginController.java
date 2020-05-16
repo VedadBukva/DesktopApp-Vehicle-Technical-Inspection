@@ -36,6 +36,7 @@ public class LoginController {
     public TextField userName;
     public PasswordField password;
     private InspectionDAO dao = null;
+    private static boolean bosnianPicked = false;
 
     @FXML
     public void initialize() {
@@ -46,6 +47,7 @@ public class LoginController {
         flagUK.setImage(flagOfUK);
 
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            bosnianPicked = true;
             Locale.setDefault(new Locale("bs", "BA"));
             try {
                 loadScene();
@@ -57,6 +59,7 @@ public class LoginController {
         flagUK.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             Locale.setDefault(new Locale("en", "US"));
             try {
+                bosnianPicked = false;
                 loadScene();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -104,9 +107,15 @@ public class LoginController {
                             public void run() {
                                 Alert a = new Alert(Alert.AlertType.NONE);
                                 a.setAlertType(Alert.AlertType.WARNING);
-                                a.setTitle("Warning");
-                                a.setHeaderText("Check your inputs!");
-                                a.setContentText("Input data are not correct or you have no privileges to enter.");
+                                if (bosnianPicked) {
+                                    a.setTitle("Upozorenje");
+                                    a.setHeaderText("Provjerite Vaše podatke!");
+                                    a.setContentText("Unešeni podaci su neispravni ili nemate privilegije pristupa sistemu!");
+                                } else {
+                                    a.setTitle("Warning");
+                                    a.setHeaderText("Check your inputs!");
+                                    a.setContentText("Input data are not correct or you have no privileges to enter.");
+                                }
                                 a.show();
                             }
                         });
