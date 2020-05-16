@@ -1,4 +1,4 @@
-package TechnicalInspection;
+package Controllers;
 
 public class UserController {
 }

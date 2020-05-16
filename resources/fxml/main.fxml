@@ -315,7 +315,7 @@
                                   <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%adduser" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#openWindowAddUser" prefWidth="130.0" text="%adduser" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -323,7 +323,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="btnDeleteUser" mnemonicParsing="false" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

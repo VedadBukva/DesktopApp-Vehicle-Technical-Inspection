@@ -132,7 +132,7 @@ public class LoginController {
                             closeLoginWindow(actionEvent);
                             try {
                                 ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/glavni.fxml"), bundle);
+                                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"), bundle);
                                 Parent root = fxmlLoader.load();
                                 Stage newStage = new Stage();
                                 newStage.setTitle("Auto kuća Ada");
