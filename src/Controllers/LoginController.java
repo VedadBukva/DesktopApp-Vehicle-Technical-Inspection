@@ -135,7 +135,7 @@ public class LoginController {
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"), bundle);
                                 Parent root = fxmlLoader.load();
                                 Stage newStage = new Stage();
-                                newStage.setTitle("Auto kuća Ada");
+                                newStage.setTitle(ResourceBundle.getBundle("Translation").getString("caldealership"));
                                 newStage.setScene(new Scene(root));
                                 newStage.setResizable(false);
                                 newStage.show();
