@@ -2,6 +2,7 @@ package DatabaseWork;
 
 import Exceptions.NoInternetException;
 import TechnicalInspection.*;
+import com.sun.javafx.collections.MappingChange;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -73,6 +74,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             jsonArray = new JSONArray(json);
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,6 +85,7 @@ public class InspectionDAO {
     public ArrayList<Vehicle> vehicles() {
         ArrayList<Vehicle> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("vehicle");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("date_of_use");
@@ -113,6 +116,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             JSONObject jo = new JSONObject(json);
             VehicleType vT = VehicleType.getVehicleType(jo.getString("type"));
             String date = jo.getString("date_of_use");
@@ -125,11 +129,12 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return vehicle;
-    } //TODO: check if vehicle exists
+    }
 
     public ArrayList<Malfunction> malfunctions() {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("accurrence_date");
@@ -151,6 +156,7 @@ public class InspectionDAO {
     public ArrayList<Malfunction> getVehicleMalfunctions(int id) {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             int idCheck = jo.getInt("vehicle");
@@ -172,6 +178,7 @@ public class InspectionDAO {
     public ArrayList<Equipment> equipment() {
         ArrayList<Equipment> equipment = new ArrayList<>();
         JSONArray jsonArray = connectToURL("part");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
@@ -183,6 +190,7 @@ public class InspectionDAO {
     public ArrayList<User> users() {
         ArrayList<User> users = new ArrayList<>();
         JSONArray jsonArray = connectToURL("user");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             String date = jo.getString("birth_date");
@@ -208,6 +216,7 @@ public class InspectionDAO {
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
+            if (json.isEmpty()) return null;
             JSONObject jo = new JSONObject(json);
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
@@ -218,11 +227,12 @@ public class InspectionDAO {
             new NoInternetException();
         }
         return user;
-    } // TODO: check if exists
+    }
 
     public ArrayList<TechnicalInspection> inspections() {
         ArrayList<TechnicalInspection> inspections = new ArrayList<>();
         JSONArray jsonArray = connectToURL("review");
+        if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
             InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
@@ -238,7 +248,7 @@ public class InspectionDAO {
 
     // POST request methods
 
-    public void addVehicle(Vehicle vehicle) { // TODO: Add check method
+    public void addVehicle(Vehicle vehicle) {
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/vehicle");
@@ -259,7 +269,7 @@ public class InspectionDAO {
         vehicle.setId(id);
     }
 
-    public void addMalfunction(Malfunction malfunction) { // TODO: Add check method
+    public void addMalfunction(Malfunction malfunction) {
         URL url = null;
         try {
             url = new URL("http://localhost:8080/api/failure");
@@ -361,6 +371,70 @@ public class InspectionDAO {
 
     // PUT request methods
 
+    public void updateVehicle(int vehicleId, String name, String brand, InspectionType type,
+                                String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
+        if (vehicleId > vehicles().size()) return;
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/vehicle/" + vehicleId);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject vehicleObj = new JSONObject();
+        vehicleObj.put("owner_name", name);
+        vehicleObj.put("brand", brand);
+        vehicleObj.put("type", type);
+        vehicleObj.put("serial_number", sNumber);
+        vehicleObj.put("production_year", pYear);
+        vehicleObj.put("date_of_use", rDate);
+        vehicleObj.put("previous_inspection", prevInsp);
+        updateViaHttp(vehicleObj, url);
+    }
+
+    public void updateInspection(int inspectionId, InspectionType type, User user, Vehicle vehicle,
+                              WarrantState state) {
+        if (inspectionId > inspections().size()) return;
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/review/" + inspectionId);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonInspection = new JSONObject();
+        jsonInspection.put("state", state);
+        jsonInspection.put("kind", type);
+        jsonInspection.put("responsible_person", user.getId());
+        jsonInspection.put("vehicle", vehicle.getId());
+        updateViaHttp(jsonInspection, url);
+    }
+
+
+    private void updateViaHttp (JSONObject jo, URL url) {
+        HttpURLConnection con = null;
+        try {
+            byte[] data = jo.toString().getBytes();
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("PUT");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+            con.connect();
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.write(data);
+            out.flush();
+            out.close();
+
+            BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            entry.close();
+        } catch (IOException e) {
+            new NoInternetException();
+        }
+    }
 
     // DELETE request methods
 
@@ -372,6 +446,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > users().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -383,6 +458,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > inspections().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -394,6 +470,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > equipment().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -405,6 +482,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > vehicles().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -416,6 +494,7 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        if (id > malfunctions().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -447,14 +526,27 @@ public class InspectionDAO {
 
     // Check if exists in database
 
-    private boolean checkVehicleExists(Vehicle vehicle) {  // TODO: implement method
+    public boolean loginCheck(String userName, String password) {
+        URL url = null;
+        JSONObject object = null;
+        try {
+            url = new URL("http://localhost:8080/api/user/" + userName + "/" + password);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            BufferedReader entry = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String json = "", line = "";
+            while ((line = entry.readLine()) != null) {
+                json = json + line;
+            }
+            if (json.isEmpty()) return false;
+            JSONObject jo = new JSONObject(json);
+            RoleType type = RoleType.getRoleType(jo.getString("position"));
+            if (type != null && type.equals(RoleType.EMPLOYEE)) return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return true;
     }
-
-    private boolean checkUserExists (User user) {
-
-        return true;
-    }
-
-
 }

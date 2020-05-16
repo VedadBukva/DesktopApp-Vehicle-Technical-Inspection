@@ -24,24 +24,11 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-        //dao = InspectionDAO.getInstance();
-        /*ArrayList<Vehicle> vehicles = dao.vehicles();
-        for (int i = 0; i < vehicles.size(); i++) {
-            System.out.printf("Vehicle owner " + vehicles.get(i).getVehicleOwner() + "\n");
-            System.out.printf("Brand " + vehicles.get(i).getBrand()+ "\n");
-            System.out.printf("Type " + vehicles.get(i).getType()+ "\n");
-            System.out.printf("Serial number  " + vehicles.get(i).getSerialNumber()+ "\n");
-            System.out.printf("Production year " + vehicles.get(i).getProductionYear()+ "\n");
-            System.out.printf("Release date " + vehicles.get(i).getReleaseDate()+ "\n");
-            System.out.printf("Previous inspection " + vehicles.get(i).getPreviousInspection()+ "\n");
-            for (int j = 0; j < vehicles.get(i).getMalfunctions().size(); j++) {
-                System.out.printf("Malfunction " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getMalfunctionName() + "\n");
-                System.out.printf("Malfunction date " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getEmergenceDate() + "\n");
-                System.out.printf("Malfunction repair " + (j + 1) + vehicles.get(i).getMalfunctions().get(j).getRepairDate() + "\n");
-            }
-        }
 
-        System.out.println("Gotovo dodavanje");*/
+        //dao = InspectionDAO.getInstance();
+
+
+        /* System.out.println("Gotovo dodavanje");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");

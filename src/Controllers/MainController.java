@@ -1,4 +1,4 @@
-package TechnicalInspection;
+package Controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,8 +43,7 @@ public class MainController {
     public void loadScene() throws IOException {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Stage stage = (Stage) tabPane.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/main.fxml"), bundle);
-        //loader.setController(this);
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("/fxml/glavni.fxml" ), bundle);
         stage.setScene(new Scene(loader.load()));
     }
 

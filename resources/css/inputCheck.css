@@ -1,0 +1,6 @@
+.inputOK {
+    -fx-control-inner-background: greenyellow;
+}
+.inputNOTOK {
+    -fx-control-inner-background: lightpink;
+}
