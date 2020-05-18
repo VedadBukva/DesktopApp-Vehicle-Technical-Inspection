@@ -24,7 +24,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="Table_CH" mode="Transparent" forecolor="#B89F7D" backcolor="#70A9C6">
+	<style name="Table_TD" mode="Transparent" backcolor="#FFFFFF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -33,7 +33,7 @@
 			<rightPen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<style name="Table_TD" mode="Transparent" backcolor="#FFFFFF">
+	<style name="Table_CH" mode="Transparent" forecolor="#B89F7D" backcolor="#70A9C6">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
 			<topPen lineWidth="0.5" lineColor="#000000"/>
@@ -143,19 +143,19 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement x="0" y="0" width="555" height="200" uuid="f9c795c1-9d02-4aa8-9b56-75a8673763fd">
+				<reportElement x="0" y="0" width="555" height="200" uuid="a44d0834-e525-4091-a484-f4df5455e814">
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="tableDataset" uuid="c4b5e257-9315-49ff-9f28-1a7d2fe67872">
+					<datasetRun subDataset="tableDataset" uuid="ec61b92b-e2c7-45b7-9fee-912d655ba239">
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="39" uuid="871123bd-4bd6-42fd-820b-abbff612f4c4">
+					<jr:column width="39" uuid="2d71e37c-f66c-44ba-87c0-2385692a5d65">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="39" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="eb3e3bc4-f56c-4cfc-804d-2672ecb0d9e7"/>
+								<reportElement mode="Transparent" x="0" y="0" width="39" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="605b358a-2288-45f0-89f0-9a930ae6cbd6"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -165,7 +165,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="39" height="30" uuid="3b6b2d84-d3bb-457f-b671-d4b1bcb1a0bc"/>
+								<reportElement key="" x="0" y="0" width="39" height="30" uuid="a57e041c-3b79-49b6-af82-08d8166f3813"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -176,10 +176,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="81" uuid="24ee1427-fb5c-48b4-b0fd-e3492f0b6d0d">
+					<jr:column width="81" uuid="752fea43-27b2-4dee-9fa7-cb173936cd1a">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="81" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="8fe96181-e447-45e6-8ff7-6b374efde93f"/>
+								<reportElement mode="Transparent" x="0" y="0" width="81" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="5dd99eb7-8d1c-47e9-93ac-a87b0d2a673f"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -189,7 +189,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="81" height="30" uuid="8b9cf33a-060b-4b19-a623-f71fa8161603"/>
+								<reportElement key="" x="0" y="0" width="81" height="30" uuid="5842bdf5-a50f-480d-beb9-56dc7ab1fa2d"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -200,10 +200,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="69" uuid="630df501-ebfd-4e64-8e42-a23137898b62">
+					<jr:column width="69" uuid="b3d4c0b3-1b02-46cd-bba6-d0ed7f570404">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="394cb0ab-cf12-4621-9428-4526775186dc"/>
+								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="92545122-6731-401d-8026-3a5464abbcf5"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -213,7 +213,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="69" height="30" uuid="fb279cb5-923b-4fde-a69a-7a8672e5738f"/>
+								<reportElement key="" x="0" y="0" width="69" height="30" uuid="7b225b6c-8772-4f69-a5bc-9377e13c1228"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -224,10 +224,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="69" uuid="053cc545-de3e-47b5-9dc0-e0a922f19f22">
+					<jr:column width="69" uuid="ef566dbd-5680-4d72-9076-deb026076872">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="ab2c5d29-45af-414f-bfbe-742612986384"/>
+								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="ec80336e-caec-4534-8861-30facd5662ab"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -237,7 +237,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="69" height="30" uuid="69b9ae1c-68f6-45c8-a5f2-e1ca3d072afd"/>
+								<reportElement key="" x="0" y="0" width="69" height="30" uuid="4b4d0492-2f85-4ebc-9465-777701983e30"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -248,10 +248,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="71" uuid="3ac90ef1-6adb-4818-9b04-a8ee35c4cc0f">
+					<jr:column width="71" uuid="22f324ea-03d5-45ff-b9f7-826354e5b7f3">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="71" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="e7f8ecae-38eb-41c1-89eb-0a4aa4ea4bae"/>
+								<reportElement mode="Transparent" x="0" y="0" width="71" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="5095a582-db2b-4cad-ac86-fa90f188b9e8"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -261,7 +261,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="71" height="30" uuid="9738cc3c-3876-4ac1-85bb-9f1515be4831"/>
+								<reportElement key="" x="0" y="0" width="71" height="30" uuid="a9f642e6-f0db-48f5-b287-0621cdf4dfb3"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -272,10 +272,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="83" uuid="45108b60-2b2b-4d51-b489-d9120990781d">
+					<jr:column width="83" uuid="2a5d766c-a016-43ff-9f44-1ea69cbd4f67">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="83" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="3a105413-004c-4a97-a745-8f23cc18398b"/>
+								<reportElement mode="Transparent" x="0" y="0" width="83" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="9e38bfec-37d3-4f1f-ba14-0e7cc66d9d3f"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -285,7 +285,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="83" height="30" uuid="83d7d91b-bfed-4008-b29b-c1c175c530d3"/>
+								<reportElement key="" x="0" y="0" width="83" height="30" uuid="75af6dc9-76c8-4521-a730-6e073447e74a"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -296,10 +296,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="69" uuid="eb8b59b2-38a7-4188-871c-55bbd1e3fee1">
+					<jr:column width="69" uuid="95fa97af-3ee0-42aa-ba44-6103e9c534c4">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="80209c8f-c5a9-4f17-9b2a-5e3068a9c3d6"/>
+								<reportElement mode="Transparent" x="0" y="0" width="69" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="b25bd516-eba6-4991-bd57-2f64432d9fd9"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -309,7 +309,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="69" height="30" uuid="c0b53d53-8ba3-4756-b421-9fba70de2f89"/>
+								<reportElement key="" x="0" y="0" width="69" height="30" uuid="d8482fa2-548b-4976-aa58-71d6a58bf133"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
@@ -320,10 +320,10 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="73" uuid="27e1de68-cf4f-4850-badd-91163ad233d4">
+					<jr:column width="73" uuid="a120077f-d936-49ed-aec2-b6c69756a32d">
 						<jr:tableHeader style="Table_TH" height="40">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="73" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="ca7dab3e-68b8-41c5-91e1-0ba2ca300d68"/>
+								<reportElement mode="Transparent" x="0" y="0" width="73" height="40" forecolor="#006699" backcolor="#E6E6E6" uuid="892b7ddf-1c33-48b4-b1c4-6169f1d81d8b"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
@@ -333,7 +333,7 @@ AND MONTH(previous_inspection) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)]]>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="73" height="30" uuid="fcfd18a8-570c-4404-a526-984f6e973f2d"/>
+								<reportElement key="" x="0" y="0" width="73" height="30" uuid="08f92c27-2860-41c5-b0ab-9ab501938329"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
