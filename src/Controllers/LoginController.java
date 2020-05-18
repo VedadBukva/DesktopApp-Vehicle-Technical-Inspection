@@ -37,6 +37,7 @@ public class LoginController {
     public PasswordField password;
     private InspectionDAO dao = null;
     private static boolean bosnianPicked = false;
+    private boolean choosenLanguage = false;
 
     @FXML
     public void initialize() {
@@ -48,6 +49,7 @@ public class LoginController {
 
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             bosnianPicked = true;
+            choosenLanguage = true;
             Locale.setDefault(new Locale("bs", "BA"));
             try {
                 loadScene();
@@ -60,6 +62,7 @@ public class LoginController {
             Locale.setDefault(new Locale("en", "US"));
             try {
                 bosnianPicked = false;
+                choosenLanguage = true;
                 loadScene();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -131,6 +134,7 @@ public class LoginController {
                         Platform.runLater(() -> {
                             closeLoginWindow(actionEvent);
                             try {
+                                if(!choosenLanguage) Locale.setDefault(new Locale("bs","BA"));
                                 ResourceBundle bundle = ResourceBundle.getBundle("Translation");
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"), bundle);
                                 Parent root = fxmlLoader.load();
