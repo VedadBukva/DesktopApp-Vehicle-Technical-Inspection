@@ -194,20 +194,20 @@ Per Worker]]></text>
 						<jr:columnFooter style="Table_CH" height="30"/>
 						<jr:detailCell style="Table_TD" height="30"/>
 					</jr:column>
-					<jr:column width="119" uuid="a6ca9fb0-b47e-4d92-9ad3-0585f08d053e">
+					<jr:column width="180" uuid="a6ca9fb0-b47e-4d92-9ad3-0585f08d053e">
 						<jr:tableHeader style="Table_TH" height="30">
 							<staticText>
-								<reportElement mode="Transparent" x="0" y="0" width="119" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="c0e2e1eb-ce34-46eb-8b22-a3811397ea37"/>
+								<reportElement mode="Transparent" x="0" y="0" width="180" height="30" forecolor="#006699" backcolor="#E6E6E6" uuid="c0e2e1eb-ce34-46eb-8b22-a3811397ea37"/>
 								<textElement textAlignment="Center">
 									<font size="14" isBold="true"/>
 								</textElement>
-								<text><![CDATA[Broj pregleda]]></text>
+								<text><![CDATA[Number of examinations]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:tableFooter style="Table_TH" height="30"/>
 						<jr:columnHeader style="Table_CH" height="30">
 							<textField>
-								<reportElement key="" x="0" y="0" width="119" height="30" uuid="0b866d1f-0d21-404b-83c2-5ca8598182e7"/>
+								<reportElement key="" x="0" y="0" width="180" height="30" uuid="0b866d1f-0d21-404b-83c2-5ca8598182e7"/>
 								<box leftPadding="2"/>
 								<textElement>
 									<font fontName="Arial" size="14"/>
