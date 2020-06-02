@@ -47,7 +47,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button mnemonicParsing="false" onAction="#confirmEditEquipment" text="%confirmAddingEquipment" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button mnemonicParsing="false" onAction="#confirmEditEquipment" text="%edit" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
         <Button fx:id="cancelBtnEdit" mnemonicParsing="false" onAction="#cancelEditEquipment" text="%cancelAddingEq" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
     </children>
 </GridPane>

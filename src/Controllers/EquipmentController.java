@@ -18,11 +18,12 @@ public class EquipmentController {
     public TextField equipmentNameEdit;
     public ChoiceBox<String> spinnerAvailableEq;
     public ChoiceBox<String> spinnerAvailableEqEdit;
-    private Equipment equipment = null;
+    private Equipment equipment;
     public Button cancelBtn;
     public Button cancelBtnEdit;
 
     public EquipmentController() {
+        equipment = null;
     }
 
     public EquipmentController(Equipment equipment) {
@@ -31,26 +32,33 @@ public class EquipmentController {
 
     @FXML
     public void initialize() {
-        if (equipment != null) {
-            equipmentNameEdit.setText(equipment.getName());
-        }
         ArrayList<String> onBosnian = new ArrayList<>();
         ArrayList<String> onEnglish = new ArrayList<>();
-        if (LoginController.languageChoosen()) {
-            Locale.setDefault(new Locale("bs", "BA"));
-            onBosnian.add("DOSTUPAN");
-            onBosnian.add("NEDOSTUPAN");
-            ObservableList<String> list = FXCollections.observableArrayList(onBosnian);
-            spinnerAvailableEq.setItems(list);
-            spinnerAvailableEqEdit.setItems(list);
+        onBosnian.add("DOSTUPAN");
+        onBosnian.add("NEDOSTUPAN");
+        onEnglish.add("AVAILABLE");
+        onEnglish.add("UNAVAILABLE");
+        ObservableList<String> listEnglish = FXCollections.observableArrayList(onEnglish);
+        ObservableList<String> listBosnian = FXCollections.observableArrayList(onBosnian);
+
+        if (equipment != null) {
+            equipmentNameEdit.setText(equipment.getName());
+            if (LoginController.languageChoosen()) {
+                Locale.setDefault(new Locale("bs", "BA"));
+                spinnerAvailableEqEdit.setItems(listBosnian);
+            } else {
+                Locale.setDefault(Locale.ENGLISH);
+                spinnerAvailableEqEdit.setItems(listEnglish);
+            }
         }
         else {
-            Locale.setDefault(Locale.ENGLISH);
-            onEnglish.add("AVAILABLE");
-            onEnglish.add("UNAVAILABLE");
-            ObservableList<String> list = FXCollections.observableArrayList(onEnglish);
-            spinnerAvailableEq.setItems(list);
-            spinnerAvailableEqEdit.setItems(list);
+            if (LoginController.languageChoosen()) {
+                Locale.setDefault(new Locale("bs", "BA"));
+                spinnerAvailableEq.setItems(listBosnian);
+            } else {
+                Locale.setDefault(Locale.ENGLISH);
+                spinnerAvailableEq.setItems(listEnglish);
+            }
         }
     }
 
@@ -99,6 +107,8 @@ public class EquipmentController {
             available = true;
         }
         equipment = new Equipment(equipmentNameEdit.getText(), available);
+        Stage stage = (Stage) equipmentNameEdit.getScene().getWindow();
+        stage.close();
     }
 
     public void cancelEditEquipment (ActionEvent actionEvent) {

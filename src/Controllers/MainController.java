@@ -159,7 +159,28 @@ public class MainController {
     }
 
     public void editEquipmentAction (ActionEvent actionEvent) {
-
+        Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/editEquipment.fxml"), bundle);
+            EquipmentController controller = new EquipmentController(equipment);
+            fxmlLoader.setController(controller);
+            Parent root = fxmlLoader.load();
+            Stage newStage = new Stage();
+            newStage.setTitle(ResourceBundle.getBundle("Translation").getString("editEquipment"));
+            newStage.setScene(new Scene(root));
+            newStage.setResizable(false);
+            newStage.show();
+            newStage.setOnHiding( event -> {
+                Equipment newEquipment = controller.getEquipment();
+                if (newEquipment != null) {
+                    dao.updateEquipment(equipment.getId(), newEquipment.getName(), newEquipment.getAvailability());
+                    listOfEquipment.setAll(dao.equipment());
+                }
+            } );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void archiveInspection(ActionEvent actionEvent) {

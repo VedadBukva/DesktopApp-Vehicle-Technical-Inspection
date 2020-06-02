@@ -451,6 +451,23 @@ public class InspectionDAO {
         updateViaHttp(jsonInspection, url);
     }
 
+    public void updateEquipment(int id, String name, Boolean available) {
+        if (id > equipment().size()) return;
+        URL url = null;
+        HttpURLConnection con = null;
+        try {
+            url = new URL("http://localhost:8080/api/part/" + id);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        JSONObject jsonEquipment = new JSONObject();
+        jsonEquipment.put("name", name);
+        String isAvailable;
+        if (available) isAvailable = "DOSTUPAN";
+        else isAvailable = "NEDOSTUPAN";
+        jsonEquipment.put("availability", isAvailable);
+        updateViaHttp(jsonEquipment, url);
+    }
 
     private void updateViaHttp (JSONObject jo, URL url) {
         HttpURLConnection con = null;
