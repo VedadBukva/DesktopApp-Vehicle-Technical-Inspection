@@ -152,7 +152,7 @@ public class LoginController {
     }
 
     public static boolean languageChoosen() {
-        if (choosenLanguage && bosnianPicked) return true;
+        if (bosnianPicked) return true;
         return false;
     }
 

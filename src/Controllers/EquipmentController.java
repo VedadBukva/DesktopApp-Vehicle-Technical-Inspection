@@ -15,11 +15,17 @@ import java.util.Locale;
 
 public class EquipmentController {
     public TextField equipmentName;
+    public TextField equipmentNameEdit;
     public ChoiceBox<String> spinnerAvailableEq;
+    public ChoiceBox<String> spinnerAvailableEqEdit;
     private Equipment equipment;
     public Button cancelBtn;
 
     public EquipmentController() {
+    }
+
+    public EquipmentController(Equipment equipment) {
+        this.equipment = equipment;
     }
 
     @FXML
@@ -32,6 +38,7 @@ public class EquipmentController {
             onBosnian.add("NEDOSTUPAN");
             ObservableList<String> list = FXCollections.observableArrayList(onBosnian);
             spinnerAvailableEq.setItems(list);
+            spinnerAvailableEqEdit.setItems(list);
         }
         else {
             Locale.setDefault(Locale.ENGLISH);
@@ -39,21 +46,8 @@ public class EquipmentController {
             onEnglish.add("UNAVAILABLE");
             ObservableList<String> list = FXCollections.observableArrayList(onEnglish);
             spinnerAvailableEq.setItems(list);
+            spinnerAvailableEqEdit.setItems(list);
         }
-        /*choiceDrzava.setItems(listDrzave);
-        if (grad != null) {
-            fieldNaziv.setText(grad.getNaziv());
-            fieldBrojStanovnika.setText(Integer.toString(grad.getBrojStanovnika()));
-            postanskiBroj.setText(Integer.toString(grad.getPostanskiBroj()));
-            // choiceDrzava.getSelectionModel().select(grad.getDrzava());
-            // ovo ne radi jer grad.getDrzava() nije identički jednak objekat kao član listDrzave
-            for (Drzava drzava : listDrzave)
-                if (drzava.getId() == grad.getDrzava().getId())
-                    choiceDrzava.getSelectionModel().select(drzava);
-        } else {
-            choiceDrzava.getSelectionModel().selectFirst();
-        }
-        listViewZnamenitosti.setItems(znamenitosti);*/
     }
 
     public void confirmAddingEquipment (ActionEvent actionEvent) {
@@ -81,6 +75,14 @@ public class EquipmentController {
     public void cancelAddingEquipment (ActionEvent actionEvent) {
         Stage stage = (Stage) cancelBtn.getScene().getWindow();
         stage.close();
+    }
+
+    public void confirmEditEquipment (ActionEvent actionEvent) {
+
+    }
+
+    public void cancelEditEquipment (ActionEvent actionEvent) {
+
     }
 
     public Equipment getEquipment() {

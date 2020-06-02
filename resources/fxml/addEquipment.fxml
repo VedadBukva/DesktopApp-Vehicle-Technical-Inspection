@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="444.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="228.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
   <stylesheets><URL value="@/css/inputCheck.css" /></stylesheets>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -48,6 +48,6 @@
          </font>
       </Label>
       <Button mnemonicParsing="false" onAction="#confirmAddingEquipment" text="%confirmAddingEquipment" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-      <Button fx:id="cancelBtn" mnemonicParsing="false" text="%cancelAddingEq" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+      <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelAddingEquipment" text="%cancelAddingEq" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
    </children>
 </GridPane>

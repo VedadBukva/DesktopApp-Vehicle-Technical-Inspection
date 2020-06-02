@@ -23,9 +23,6 @@ import java.util.*;
 import TechnicalInspection.*;
 import Enum.*;
 
-import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
-
-
 public class MainController {
     // Inspections done
     public TableView<TechnicalInspection> completedInspections;
