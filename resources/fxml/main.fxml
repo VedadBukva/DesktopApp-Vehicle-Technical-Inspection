@@ -155,12 +155,13 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                              <TableView fx:id="tableInspectionsInArchive" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                  <columns>
-                                    <TableColumn fx:id="colOwner" prefWidth="237.59998548030853" text="%vehicleowner" />
-                                    <TableColumn fx:id="colVehicle" prefWidth="190.66668701171875" text="%vehicle" />
-                                    <TableColumn fx:id="colType" prefWidth="161.5999755859375" text="%vehicletype" />
-                                    <TableColumn fx:id="colPerson" prefWidth="301.59991455078125" text="%responsibleperson" />
+                                    <TableColumn fx:id="colOwner" prefWidth="173.0" text="%vehicleowner" />
+                                    <TableColumn fx:id="colVehicle" prefWidth="187.0" text="%vehicle" />
+                                    <TableColumn fx:id="colType" prefWidth="193.0" text="%vehicletype" />
+                                     <TableColumn fx:id="colInspectionType" minWidth="0.0" prefWidth="170.0" text="%colInspectionType" />
+                                    <TableColumn fx:id="colPerson" prefWidth="156.0" text="%responsibleperson" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
@@ -207,7 +208,7 @@
                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%additem" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button fx:id="addEquipment" mnemonicParsing="false" prefWidth="130.0" text="%additem" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -215,7 +216,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%deleteitem" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="deleteEquipment" mnemonicParsing="false" prefWidth="130.0" text="%deleteitem" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -223,7 +224,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%edititem" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                    <Button fx:id="editEquipment" mnemonicParsing="false" prefWidth="130.0" text="%edititem" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -233,10 +234,10 @@
                                     </Button>
                                  </children>
                               </GridPane>
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                              <TableView fx:id="equipmentTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                 <columns>
-                                  <TableColumn prefWidth="497.6000483036041" text="%name" />
-                                  <TableColumn prefWidth="235.99999237060547" text="%available" />
+                                  <TableColumn fx:id="colEquipmentName" prefWidth="497.6000483036041" text="%name" />
+                                  <TableColumn fx:id="colEquipmentAvailable" prefWidth="235.99999237060547" text="%available" />
                                 </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" />

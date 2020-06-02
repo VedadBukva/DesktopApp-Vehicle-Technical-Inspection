@@ -181,7 +181,10 @@ public class InspectionDAO {
         if (jsonArray == null) return null;
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jo = jsonArray.getJSONObject(i);
-            Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), jo.getBoolean("availability"));
+            String available = jo.getString("availability");
+            boolean isAvailable = false;
+            if (available.equals("DOSTUPAN")) isAvailable = true;
+            Equipment eq = new Equipment(jo.getInt("id"), jo.getString("name"), isAvailable);
             equipment.add(eq);
         }
         return equipment;
