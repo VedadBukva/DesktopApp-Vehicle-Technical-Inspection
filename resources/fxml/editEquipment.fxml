@@ -48,6 +48,6 @@
             </font>
         </Label>
         <Button mnemonicParsing="false" onAction="#confirmEditEquipment" text="%confirmAddingEquipment" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-        <Button fx:id="cancelBtn" mnemonicParsing="false" onAction="#cancelEditEquipment" text="%cancelAddingEq" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+        <Button fx:id="cancelBtnEdit" mnemonicParsing="false" onAction="#cancelEditEquipment" text="%cancelAddingEq" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
     </children>
 </GridPane>

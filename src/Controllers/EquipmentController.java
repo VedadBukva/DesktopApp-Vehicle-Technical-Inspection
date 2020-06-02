@@ -18,8 +18,9 @@ public class EquipmentController {
     public TextField equipmentNameEdit;
     public ChoiceBox<String> spinnerAvailableEq;
     public ChoiceBox<String> spinnerAvailableEqEdit;
-    private Equipment equipment;
+    private Equipment equipment = null;
     public Button cancelBtn;
+    public Button cancelBtnEdit;
 
     public EquipmentController() {
     }
@@ -30,6 +31,9 @@ public class EquipmentController {
 
     @FXML
     public void initialize() {
+        if (equipment != null) {
+            equipmentNameEdit.setText(equipment.getName());
+        }
         ArrayList<String> onBosnian = new ArrayList<>();
         ArrayList<String> onEnglish = new ArrayList<>();
         if (LoginController.languageChoosen()) {
@@ -51,16 +55,16 @@ public class EquipmentController {
     }
 
     public void confirmAddingEquipment (ActionEvent actionEvent) {
-        boolean sveOk = true;
+        boolean allRight = true;
         if (equipmentName.getText().trim().isEmpty()) {
             equipmentName.getStyleClass().removeAll("inputOK");
             equipmentName.getStyleClass().add("inputNOTOK");
-            sveOk = false;
+            allRight = false;
         } else {
             equipmentName.getStyleClass().removeAll("inputNOTOK");
             equipmentName.getStyleClass().add("inputOK");
         }
-        if (!sveOk) return;
+        if (!allRight) return;
 
         String s = spinnerAvailableEq.getSelectionModel().getSelectedItem();
         boolean available = false;
@@ -78,11 +82,28 @@ public class EquipmentController {
     }
 
     public void confirmEditEquipment (ActionEvent actionEvent) {
+        boolean allRight = true;
+        if (equipmentNameEdit.getText().trim().isEmpty()) {
+            equipmentNameEdit.getStyleClass().removeAll("inputOK");
+            equipmentNameEdit.getStyleClass().add("inputNOTOK");
+            allRight = false;
+        } else {
+            equipmentNameEdit.getStyleClass().removeAll("inputNOTOK");
+            equipmentNameEdit.getStyleClass().add("inputOK");
+        }
+        if (!allRight) return;
 
+        String s = spinnerAvailableEqEdit.getSelectionModel().getSelectedItem();
+        boolean available = false;
+        if (s.equals("DOSTUPAN") || s.equals("AVAILABLE")) {
+            available = true;
+        }
+        equipment = new Equipment(equipmentNameEdit.getText(), available);
     }
 
     public void cancelEditEquipment (ActionEvent actionEvent) {
-
+        Stage stage = (Stage) cancelBtnEdit.getScene().getWindow();
+        stage.close();
     }
 
     public Equipment getEquipment() {
