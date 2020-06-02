@@ -26,18 +26,26 @@ import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
 
 
 public class MainController {
+    // Inspections done
     public TableView<TechnicalInspection> completedInspections;
     public TableColumn<TechnicalInspection, String> vehicleOwnerCol;
     public TableColumn<TechnicalInspection, String> vehicleCol;
     public TableColumn vehicleTypeCol;
     public TableColumn<TechnicalInspection, String> responsiblePersonCol;
     private ObservableList<TechnicalInspection> listOfTechnicalInspections;
+    // ----------------
     public TabPane tabPane;
     public ChoiceBox<String> choiceBoxLanguage;
     public Button btnAddUser;
     public Button btnDeleteUser;
     public Button archiveAccountButton;
     public Tab archiveAccounts;
+    // Inspections in archive
+    public TableColumn colOwner;
+    public TableColumn colVehicle;
+    public TableColumn colType;
+    public TableColumn colPerson;
+    // ---------------------
 
     private InspectionDAO dao = null;
 

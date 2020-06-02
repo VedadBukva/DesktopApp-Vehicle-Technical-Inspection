@@ -263,6 +263,24 @@ public class InspectionDAO {
         return inspections;
     }
 
+    public List<TechnicalInspection> inspectionsInArchive () {
+        List<TechnicalInspection> inspections = new ArrayList<>();
+        JSONArray jsonArray = connectToURL("review");
+        if (jsonArray == null) return null;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
+            WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
+            if (warrantState == WarrantState.IN_ARCHIVE) {
+                User user = getUser(jo.getInt("responsible_person"));
+                Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
+                TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, user, vehicle, warrantState);
+                inspections.add(technicalInspection);
+            }
+        }
+        return inspections;
+    }
+
     // POST request methods
 
     public void addVehicle(Vehicle vehicle) {
