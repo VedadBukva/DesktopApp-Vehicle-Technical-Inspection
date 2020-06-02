@@ -3,9 +3,7 @@ package Controllers;
 import DatabaseWork.InspectionDAO;
 import Reports.PrintReports;
 import TechnicalInspection.TechnicalInspection;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,7 +71,8 @@ public class MainController {
         initializeInspectionsTable();
         initializeInspectionsInArchiveTable();
         initializeEquipmentTable();
-        choiceBoxLanguage.getSelectionModel().select(Locale.getDefault().getLanguage());
+        if (LoginController.languageChoosen()) choiceBoxLanguage.getSelectionModel().select(Locale.getDefault().getLanguage());
+        else Locale.setDefault(Locale.ENGLISH);
         choiceBoxLanguage.getItems().add("Bosanski");
         choiceBoxLanguage.getItems().add("Engleski");
         if (dao.checkIfLoggedUserIsAdmin()) {
@@ -86,6 +85,7 @@ public class MainController {
                 Locale.setDefault(new Locale("bs", "BA"));
                 try {
                     loadScene();
+                    LoginController.setLanguage("Bosanski");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -93,6 +93,7 @@ public class MainController {
                 Locale.setDefault(new Locale("en", "US"));
                 try {
                     loadScene();
+                    LoginController.setLanguage("Engleski");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -130,7 +131,27 @@ public class MainController {
     }
 
     public void addEquipmentAction(ActionEvent actionEvent) {
-
+        try {
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/addEquipment.fxml"), bundle);
+            EquipmentController controller = new EquipmentController();
+            fxmlLoader.setController(controller);
+            Parent root = fxmlLoader.load();
+            Stage newStage = new Stage();
+            newStage.setTitle(ResourceBundle.getBundle("Translation").getString("addEquipment"));
+            newStage.setScene(new Scene(root));
+            newStage.setResizable(false);
+            newStage.show();
+            newStage.setOnHiding( event -> {
+                Equipment newEquipment = controller.getEquipment();
+                if (newEquipment != null) {
+                    dao.addEquipment(newEquipment);
+                    listOfEquipment.setAll(dao.equipment());
+                }
+            } );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteEquipmentAction(ActionEvent actionEvent) {

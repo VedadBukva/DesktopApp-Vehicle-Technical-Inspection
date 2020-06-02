@@ -32,7 +32,7 @@ public class LoginController {
     public PasswordField password;
     private InspectionDAO dao = null;
     private static boolean bosnianPicked = false;
-    private boolean choosenLanguage = false;
+    private static boolean choosenLanguage = false;
 
     @FXML
     public void initialize() {
@@ -148,6 +148,20 @@ public class LoginController {
             }
         } else {
             NoInternetException.showAlert();
+        }
+    }
+
+    public static boolean languageChoosen() {
+        if (choosenLanguage && bosnianPicked) return true;
+        return false;
+    }
+
+    public static void setLanguage (String language) {
+        if (language.equals("Bosanski")) {
+            choosenLanguage = true;
+            bosnianPicked = true;
+        } else {
+            bosnianPicked = false;
         }
     }
 
