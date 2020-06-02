@@ -245,7 +245,7 @@ public class InspectionDAO {
         return inspections;
     }
 
-    public List<TechnicalInspection> inspectionsNotIncludingArchive () {
+    public List<TechnicalInspection> inspectionsDone () {
         List<TechnicalInspection> inspections = new ArrayList<>();
         JSONArray jsonArray = connectToURL("review");
         if (jsonArray == null) return null;
@@ -253,7 +253,7 @@ public class InspectionDAO {
             JSONObject jo = jsonArray.getJSONObject(i);
             InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
             WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
-            if (warrantState != WarrantState.IN_ARCHIVE) {
+            if (warrantState == WarrantState.DONE) {
                 User user = getUser(jo.getInt("responsible_person"));
                 Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
                 TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, user, vehicle, warrantState);

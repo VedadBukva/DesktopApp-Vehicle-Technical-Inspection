@@ -43,7 +43,7 @@ public class MainController {
 
     public MainController() {
         dao = InspectionDAO.getInstance();
-        listOfTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsNotIncludingArchive());
+        listOfTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsDone());
     }
 
     @FXML
@@ -88,7 +88,7 @@ public class MainController {
         TechnicalInspection inspection = completedInspections.getSelectionModel().getSelectedItem();
         if (inspection == null) return;
         dao.updateInspection(inspection.getId(), inspection.getInspectionType(), inspection.getUser(), inspection.getVehicle(), WarrantState.IN_ARCHIVE);
-        listOfTechnicalInspections.setAll(FXCollections.observableArrayList(dao.inspectionsNotIncludingArchive()));
+        listOfTechnicalInspections.setAll(FXCollections.observableArrayList(dao.inspectionsDone()));
         completedInspections.setItems(listOfTechnicalInspections);
     }
 
