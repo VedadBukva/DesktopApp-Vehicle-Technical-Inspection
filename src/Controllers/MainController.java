@@ -134,7 +134,10 @@ public class MainController {
     }
 
     public void deleteEquipmentAction(ActionEvent actionEvent) {
-
+        Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
+        dao.deleteEquipment(equipment.getId());
+        listOfEquipment.setAll(FXCollections.observableArrayList(dao.equipment()));
+        equipmentTable.setItems(listOfEquipment);
     }
 
     public void editEquipmentAction (ActionEvent actionEvent) {
