@@ -357,7 +357,10 @@ public class InspectionDAO {
         JSONObject jsonEq = new JSONObject();
         jsonEq.put("id", equipment.getId());
         jsonEq.put("name", equipment.getName());
-        jsonEq.put("availability", equipment.getAvailability());
+        String available;
+        if (equipment.getAvailability()) available = "DOSTUPAN";
+        else available = "NEDOSTUPAN";
+        jsonEq.put("availability", available);
         int id = addViaHttp(jsonEq, url);
         equipment.setId(id);
     }

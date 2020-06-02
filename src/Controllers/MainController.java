@@ -129,6 +129,18 @@ public class MainController {
         vehicleTypeCol.setCellValueFactory(new PropertyValueFactory("inspectionType"));
     }
 
+    public void addEquipmentAction(ActionEvent actionEvent) {
+
+    }
+
+    public void deleteEquipmentAction(ActionEvent actionEvent) {
+
+    }
+
+    public void editEquipmentAction (ActionEvent actionEvent) {
+
+    }
+
     public void archiveInspection(ActionEvent actionEvent) {
         TechnicalInspection inspection = completedInspections.getSelectionModel().getSelectedItem();
         if (inspection == null) return;

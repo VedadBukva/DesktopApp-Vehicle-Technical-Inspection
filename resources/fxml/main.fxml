@@ -208,7 +208,7 @@
                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="addEquipment" mnemonicParsing="false" prefWidth="130.0" text="%additem" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button fx:id="addEquipment" mnemonicParsing="false" onAction="#addEquipmentAction" prefWidth="130.0" text="%additem" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -216,7 +216,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="deleteEquipment" mnemonicParsing="false" prefWidth="130.0" text="%deleteitem" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="deleteEquipment" mnemonicParsing="false" onAction="#deleteEquipmentAction" prefWidth="130.0" text="%deleteitem" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -224,7 +224,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="editEquipment" mnemonicParsing="false" prefWidth="130.0" text="%edititem" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                    <Button fx:id="editEquipment" mnemonicParsing="false" onAction="#editEquipmentAction" prefWidth="130.0" text="%edititem" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
