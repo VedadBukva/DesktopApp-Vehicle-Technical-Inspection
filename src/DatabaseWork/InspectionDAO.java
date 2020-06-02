@@ -2,7 +2,6 @@ package DatabaseWork;
 
 import Exceptions.NoInternetException;
 import TechnicalInspection.*;
-import com.sun.javafx.collections.MappingChange;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -16,6 +15,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import Enum.*;
@@ -24,7 +24,7 @@ public class InspectionDAO {
     private static InspectionDAO instance;
     private static Connection conn;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-
+    private static RoleType usersRole;
 
     public static InspectionDAO getInstance() {
         if (instance == null) instance = new InspectionDAO();
@@ -245,6 +245,23 @@ public class InspectionDAO {
         return inspections;
     }
 
+    public List<TechnicalInspection> inspectionsNotIncludingArchive () {
+        List<TechnicalInspection> inspections = new ArrayList<>();
+        JSONArray jsonArray = connectToURL("review");
+        if (jsonArray == null) return null;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
+            WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
+            if (warrantState != WarrantState.IN_ARCHIVE) {
+                User user = getUser(jo.getInt("responsible_person"));
+                Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
+                TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, user, vehicle, warrantState);
+                inspections.add(technicalInspection);
+            }
+        }
+        return inspections;
+    }
 
     // POST request methods
 
@@ -544,9 +561,18 @@ public class InspectionDAO {
             JSONObject jo = new JSONObject(json);
             RoleType type = RoleType.getRoleType(jo.getString("position"));
             if (type != null && type.equals(RoleType.EMPLOYEE)) return false;
+            setLoggedUserRole(type);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static void setLoggedUserRole (RoleType type) {
+        usersRole = type;
+    }
+
+    public static boolean checkIfLoggedUserIsAdmin () {
+        return usersRole.toString().equals("ADMIN");
     }
 }

@@ -3,9 +3,7 @@ package Controllers;
 import DatabaseWork.InspectionDAO;
 import Exceptions.NoInternetException;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,9 +19,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -46,7 +41,7 @@ public class LoginController {
         flagBiH.setImage(flagOfBiH);
         Image flagOfUK = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png");
         flagUK.setImage(flagOfUK);
-
+        btnSubmit.setDefaultButton(true);
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             bosnianPicked = true;
             choosenLanguage = true;

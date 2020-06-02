@@ -16,19 +16,19 @@ import Enum.*;
 
 public class Main extends Application {
     private InspectionDAO dao;
+
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
         primaryStage.setTitle("Auto kuća Ada");
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-
-        //dao = InspectionDAO.getInstance();
-
-
-        /* System.out.println("Gotovo dodavanje");*/
+        /*dao = InspectionDAO.getInstance();
+        User user = new User("Haris", "Kicinnn", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "nekipass", RoleType.ADMIN);
+        dao.addUser(user);
+        System.out.println("gotovo");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();
         for (int i = 0; i < malfunctions.size(); i++) {
             System.out.printf("Malfunction " + malfunctions.get(i).getMalfunctionName() + "\n");
@@ -77,7 +77,6 @@ public class Main extends Application {
         dao.addInspection(new TechnicalInspection(InspectionType.REGULAR, user, vehicle, WarrantState.IN_PROGRESS));
         System.out.println("Gotovo");*/
     }
-
 
     public static void main(String[] args) {
         launch(args);

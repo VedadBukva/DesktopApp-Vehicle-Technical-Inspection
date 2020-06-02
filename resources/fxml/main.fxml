@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<GridPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
+<GridPane prefWidth="900.0" vgap="10.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MainController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="572.3333129882812" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="600.0" minHeight="10.0" prefHeight="559.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
         <tabs>
           <Tab text="%completedinspections">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="537.0" prefWidth="900.0">
                      <children>
                         <GridPane prefHeight="540.0" prefWidth="900.0">
                            <columnConstraints>
@@ -50,12 +42,12 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+                              <TableView fx:id="completedInspections" prefHeight="180.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
                                  <columns>
-                                    <TableColumn prefWidth="134.6666717529297" text="%vehicleowner" />
-                                    <TableColumn prefWidth="185.66668701171875" text="%vehicle" />
-                                    <TableColumn prefWidth="187.2000732421875" text="%vehicletype" />
-                                    <TableColumn prefWidth="214.33331298828125" text="%responsibleperson" />
+                                    <TableColumn fx:id="vehicleOwnerCol" prefWidth="134.6666717529297" text="%vehicleowner" />
+                                    <TableColumn fx:id="vehicleCol" prefWidth="185.66668701171875" text="%vehicle" />
+                                    <TableColumn fx:id="vehicleTypeCol" prefWidth="187.2000732421875" text="%inspectiontype" />
+                                    <TableColumn fx:id="responsiblePersonCol" prefWidth="214.33331298828125" text="%responsibleperson" />
                                  </columns>
                                  <GridPane.margin>
                                     <Insets left="10.0" />
@@ -71,7 +63,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button mnemonicParsing="false" prefWidth="130.0" text="%archiveaccount" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+                                    <Button fx:id="archiveAccountButton" mnemonicParsing="false" onAction="#archiveInspection" prefWidth="130.0" text="%archiveaccount" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets right="10.0" />
                                        </GridPane.margin>
@@ -112,16 +104,16 @@
                               <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                            <Button mnemonicParsing="false" text="%archivedaccounts" onAction="#showArchivedAccounts" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="%availableequipment" onAction="#showAvailableEquipment" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="%completedinspections" onAction="#showCompletedInspections" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="%commonfailures" onAction="#showCommonFailures" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastyear" onAction="#showLastYearExaminations" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastmonth" onAction="#showLastMonthExaminations" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="%examinationsinlastday" onAction="#showLastDayExaminations" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <Button mnemonicParsing="false" text="%percentageofpassingthetechnicalinspection" onAction="#showPercentageOfPassingInspection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="%listofworkers" onAction="#showListOfWorker" GridPane.rowIndex="5" />
-                              <Button mnemonicParsing="false" text="%numberofcompletedexaminationsperworker" onAction="#showCompletedExaminationsPerWorker" GridPane.rowIndex="4" />
+                            <Button mnemonicParsing="false" onAction="#showArchivedAccounts" text="%archivedaccounts" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#showAvailableEquipment" text="%availableequipment" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" onAction="#showCompletedInspections" text="%completedinspections" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#showCommonFailures" text="%commonfailures" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#showLastYearExaminations" text="%examinationsinlastyear" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#showLastMonthExaminations" text="%examinationsinlastmonth" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Button mnemonicParsing="false" onAction="#showLastDayExaminations" text="%examinationsinlastday" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button mnemonicParsing="false" onAction="#showPercentageOfPassingInspection" text="%percentageofpassingthetechnicalinspection" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" onAction="#showListOfWorker" text="%listofworkers" GridPane.rowIndex="5" />
+                              <Button mnemonicParsing="false" onAction="#showCompletedExaminationsPerWorker" text="%numberofcompletedexaminationsperworker" GridPane.rowIndex="4" />
                               <Label text="%businessanalysis" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
@@ -138,7 +130,7 @@
                   </AnchorPane>
               </content>
             </Tab>
-          <Tab text="%archivedaccounts">
+          <Tab fx:id="archiveAccounts" text="%archivedaccounts">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -376,15 +368,32 @@
               </content>
             </Tab>
         </tabs>
+         <GridPane.margin>
+            <Insets bottom="20.0" />
+         </GridPane.margin>
       </TabPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-         <children>
-            <Label layoutX="14.0" text="%caldealership">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+       <Button onAction="#logOut" prefHeight="25.0" prefWidth="89.0" text="%Log_out" underline="true" GridPane.halignment="RIGHT">
+         <GridPane.margin>
+            <Insets bottom="10.0" right="30.0" />
+         </GridPane.margin>
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label text="%caldealership">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets bottom="10.0" />
+         </GridPane.margin>
+      </Label>
    </children>
 </GridPane>
