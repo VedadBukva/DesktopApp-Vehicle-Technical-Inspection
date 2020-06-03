@@ -199,8 +199,42 @@ public class InspectionDAO {
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
             RoleType role = RoleType.getRoleType(jo.getString("position"));
-            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), role);
+            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
             users.add(user);
+        }
+        return users;
+    }
+
+    public ArrayList<User> getUsersForMenager() {
+        ArrayList<User> users = new ArrayList<>();
+        JSONArray jsonArray = connectToURL("user");
+        if (jsonArray == null) return null;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            String date = jo.getString("birth_date");
+            LocalDate birthDate = LocalDate.parse(date, formatter);
+            RoleType role = RoleType.getRoleType(jo.getString("position"));
+            if (!role.toString().equals("MENAGER")) {
+                User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"), jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
+                users.add(user);
+            }
+        }
+        return users;
+    }
+
+    public ArrayList<User> getUsersForAdmin() {
+        ArrayList<User> users = new ArrayList<>();
+        JSONArray jsonArray = connectToURL("user");
+        if (jsonArray == null) return null;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject jo = jsonArray.getJSONObject(i);
+            String date = jo.getString("birth_date");
+            LocalDate birthDate = LocalDate.parse(date, formatter);
+            RoleType role = RoleType.getRoleType(jo.getString("position"));
+            if (!role.toString().equals("MENAGER") && !role.toString().equals("ADMIN")) {
+                User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"), jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
+                users.add(user);
+            }
         }
         return users;
     }
@@ -225,7 +259,7 @@ public class InspectionDAO {
             LocalDate birthDate = LocalDate.parse(date, formatter);
             RoleType role = RoleType.getRoleType(jo.getString("position"));
 
-            user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), jo.getString("password"), role);
+            user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
         } catch (IOException e) {
             new NoInternetException();
         }

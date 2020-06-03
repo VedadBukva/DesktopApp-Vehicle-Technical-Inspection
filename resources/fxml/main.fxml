@@ -285,12 +285,12 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="3">
+                                    <TableView fx:id="tableOfUsers" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowSpan="3">
                                       <columns>
-                                        <TableColumn prefWidth="191.46668469905853" text="%nameandsurname" />
-                                          <TableColumn prefWidth="154.933349609375" text="%username" />
-                                        <TableColumn prefWidth="209.8665771484375" text="E-mail" />
-                                          <TableColumn prefWidth="166.933349609375" text="%role" />
+                                        <TableColumn fx:id="colUserNameSurname" prefWidth="191.46668469905853" text="%nameandsurname" />
+                                          <TableColumn fx:id="colUsername" prefWidth="154.933349609375" text="%username" />
+                                        <TableColumn fx:id="colUserMail" prefWidth="209.8665771484375" text="E-mail" />
+                                          <TableColumn fx:id="colUserRole" prefWidth="166.933349609375" text="%role" />
                                       </columns>
                                        <GridPane.margin>
                                           <Insets left="10.0" />
@@ -316,7 +316,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="btnDeleteUser" mnemonicParsing="false" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="btnDeleteUser" mnemonicParsing="false" onAction="#deleteUser" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
