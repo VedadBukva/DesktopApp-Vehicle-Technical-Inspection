@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
@@ -68,7 +69,7 @@ public class MainController {
         listOfTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsDone());
         listOfArchivedTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsInArchive());
         listOfEquipment = FXCollections.observableArrayList(dao.equipment());
-        if (dao.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
+        if (InspectionDAO.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
         else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
     }
 
@@ -82,7 +83,7 @@ public class MainController {
         else Locale.setDefault(Locale.ENGLISH);
         choiceBoxLanguage.getItems().add("Bosanski");
         choiceBoxLanguage.getItems().add("Engleski");
-        if (dao.checkIfLoggedUserIsAdmin()) {
+        if (InspectionDAO.checkIfLoggedUserIsAdmin()) {
             archiveAccounts.setDisable(true);
             archiveAccountButton.setDisable(true);
         } else {
@@ -238,9 +239,11 @@ public class MainController {
                 User newUser = controller.getUser();
                 if (newUser != null) {
                     dao.addUser(newUser);
-                    if (dao.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
+                    if (InspectionDAO.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
                     else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
+                    tableOfUsers.refresh();
                     tableOfUsers.setItems(listOfUsers);
+                    tableOfUsers.refresh();
                 }
             } );
         } catch (IOException e) {
@@ -252,7 +255,7 @@ public class MainController {
         User user = tableOfUsers.getSelectionModel().getSelectedItem();
         if (user != null) {
             dao.deleteUser(user.getId());
-            if (dao.checkIfLoggedUserIsAdmin()) listOfUsers.setAll(FXCollections.observableArrayList(dao.getUsersForAdmin()));
+            if (InspectionDAO.checkIfLoggedUserIsAdmin()) listOfUsers.setAll(FXCollections.observableArrayList(dao.getUsersForAdmin()));
             else listOfUsers.setAll(FXCollections.observableArrayList(dao.getUsersForMenager()));
             tableOfUsers.setItems(listOfUsers);
         }
@@ -268,6 +271,8 @@ public class MainController {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
+        Image icon = new Image("TechnicalInspection/favicon.ico");
+        primaryStage.getIcons().add(icon);
     }
 
     public void showArchivedAccounts(ActionEvent actionEvent) {

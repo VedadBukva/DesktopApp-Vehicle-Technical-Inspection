@@ -1,24 +1,22 @@
 package TechnicalInspection;
 
 import DatabaseWork.InspectionDAO;
-import Exceptions.NoInternetException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import Enum.*;
 
 public class Main extends Application {
     private InspectionDAO dao;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        Image icon = new Image("TechnicalInspection/favicon.ico");
+        primaryStage.getIcons().add(icon);
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
         primaryStage.setTitle("Auto kuća Ada");

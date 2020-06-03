@@ -130,7 +130,7 @@ public class UserController {
             phoneNumber.getStyleClass().removeAll("inputNOTOK");
             phoneNumber.getStyleClass().add("inputOK");
         }
-        if (password.getText().trim().isEmpty() || !validatePassword(password.getText().trim())) {
+        if (password.getText().trim().isEmpty() /*|| !validatePassword(password.getText().trim())*/) {
             password.getStyleClass().removeAll("inputOK");
             password.getStyleClass().add("inputNOTOK");
             return;

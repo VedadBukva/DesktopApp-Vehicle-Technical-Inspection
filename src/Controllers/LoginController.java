@@ -138,6 +138,8 @@ public class LoginController {
                                 newStage.setScene(new Scene(root));
                                 newStage.setResizable(false);
                                 newStage.show();
+                                Image icon = new Image("TechnicalInspection/favicon.ico");
+                                newStage.getIcons().add(icon);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
