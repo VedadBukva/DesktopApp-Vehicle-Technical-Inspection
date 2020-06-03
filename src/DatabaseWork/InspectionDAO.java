@@ -368,7 +368,7 @@ public class InspectionDAO {
     public void addInspection(TechnicalInspection inspection) {
         URL url = null;
         try {
-            url = new URL("http://ada-backend.herokuapp.com//api/review");
+            url = new URL("http://ada-backend.herokuapp.com/api/review");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
