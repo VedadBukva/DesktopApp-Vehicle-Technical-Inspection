@@ -85,8 +85,10 @@ public class MainController {
         if (dao.checkIfLoggedUserIsAdmin()) {
             archiveAccounts.setDisable(true);
             archiveAccountButton.setDisable(true);
+        } else {
+            btnAddUser.setDisable(true);
+            btnDeleteUser.setDisable(true);
         }
-
         choiceBoxLanguage.getSelectionModel().selectedItemProperty().addListener((observableValue, oldLanguage, newLanguage) -> {
             if(newLanguage.equals("Bosanski")) {
                 Locale.setDefault(new Locale("bs", "BA"));
