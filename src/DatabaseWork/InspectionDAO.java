@@ -52,7 +52,7 @@ public class InspectionDAO {
     private InspectionDAO() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/dbinspection", "root", "root");
+            conn = DriverManager.getConnection("jdbc:mysql://eu-cdbr-west-03.cleardb.net/heroku_b38a2a2d3a463a5", "b404a5123eb3a1", "43419ff8");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
@@ -64,7 +64,7 @@ public class InspectionDAO {
         URL url = null;
         JSONArray jsonArray = null;
         try {
-            url = new URL("http://localhost:8080/api/" + path);
+            url = new URL("http://ada-backend.herokuapp.com/api/" + path);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -106,7 +106,7 @@ public class InspectionDAO {
         URL url = null;
         Vehicle vehicle = null;
         try {
-            url = new URL("http://localhost:8080/api/vehicle/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/vehicle/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -209,7 +209,7 @@ public class InspectionDAO {
         URL url = null;
         User user = null;
         try {
-            url = new URL("http://localhost:8080/api/user/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/user/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -289,7 +289,7 @@ public class InspectionDAO {
     public void addVehicle(Vehicle vehicle) {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/api/vehicle");
+            url = new URL("http://ada-backend.herokuapp.com/api/vehicle");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -310,7 +310,7 @@ public class InspectionDAO {
     public void addMalfunction(Malfunction malfunction) {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/api/failure");
+            url = new URL("http://ada-backend.herokuapp.com/api/failure");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -326,7 +326,7 @@ public class InspectionDAO {
     public void addUser(User user) {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/api/user");
+            url = new URL("http://ada-backend.herokuapp.com/api/user");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -350,7 +350,7 @@ public class InspectionDAO {
     public void addEquipment(Equipment equipment) {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/api/part");
+            url = new URL("http://ada-backend.herokuapp.com//api/part");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -368,7 +368,7 @@ public class InspectionDAO {
     public void addInspection(TechnicalInspection inspection) {
         URL url = null;
         try {
-            url = new URL("http://localhost:8080/api/review");
+            url = new URL("http://ada-backend.herokuapp.com//api/review");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -418,7 +418,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/vehicle/" + vehicleId);
+            url = new URL("http://ada-backend.herokuapp.com/api/vehicle/" + vehicleId);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -439,7 +439,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/review/" + inspectionId);
+            url = new URL("http://ada-backend.herokuapp.com/api/review/" + inspectionId);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -500,7 +500,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/user/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/user/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -512,7 +512,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/review/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/review/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -524,7 +524,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/part/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/part/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -536,7 +536,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/vehicle/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/vehicle/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -548,7 +548,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/failure/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/failure/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -588,7 +588,7 @@ public class InspectionDAO {
         URL url = null;
         JSONObject object = null;
         try {
-            url = new URL("http://localhost:8080/api/user/" + userName + "/" + password);
+            url = new URL("http://ada-backend.herokuapp.com/api/user/" + userName + "/" + password);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
