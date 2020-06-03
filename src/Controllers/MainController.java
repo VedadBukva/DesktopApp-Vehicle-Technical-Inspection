@@ -15,6 +15,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
@@ -31,6 +33,8 @@ public class MainController {
     public TableColumn<TechnicalInspection, String> vehicleCol;
     public TableColumn vehicleTypeCol;
     public TableColumn<TechnicalInspection, String> responsiblePersonCol;
+    public ImageView langBiHflag;
+    public ImageView langUKflag;
     private ObservableList<TechnicalInspection> listOfTechnicalInspections;
     // ----------------
     // Inspections in archive
@@ -57,7 +61,6 @@ public class MainController {
     public TableColumn colUserRole;
     // ---------------------
     public TabPane tabPane;
-    public ChoiceBox<String> choiceBoxLanguage;
     public Button btnAddUser;
     public Button btnDeleteUser;
     public Button archiveAccountButton;
@@ -81,8 +84,6 @@ public class MainController {
         initializeUserTable();
         if (LoginController.languageChoosen()) Locale.setDefault(new Locale("bs", "BA"));
         else Locale.setDefault(Locale.ENGLISH);
-        choiceBoxLanguage.getItems().add("Bosanski");
-        choiceBoxLanguage.getItems().add("Engleski");
         if (InspectionDAO.checkIfLoggedUserIsAdmin()) {
             archiveAccounts.setDisable(true);
             archiveAccountButton.setDisable(true);
@@ -90,23 +91,31 @@ public class MainController {
             btnAddUser.setDisable(true);
             btnDeleteUser.setDisable(true);
         }
-        choiceBoxLanguage.getSelectionModel().selectedItemProperty().addListener((observableValue, oldLanguage, newLanguage) -> {
-            if(newLanguage.equals("Bosanski")) {
-                Locale.setDefault(new Locale("bs", "BA"));
-                try {
-                    loadScene();
-                    LoginController.setLanguage("Bosanski");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Locale.setDefault(new Locale("en", "US"));
-                try {
-                    loadScene();
-                    LoginController.setLanguage("Engleski");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        langBiHflag.minHeight(50);
+        langBiHflag.minWidth(200);
+        langUKflag.minHeight(50);
+        langUKflag.minWidth(200);
+        Image flagOfBiH = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Flag_of_Bosnia_and_Herzegovina.svg/300px-Flag_of_Bosnia_and_Herzegovina.svg.png");
+        langBiHflag.setImage(flagOfBiH);
+        Image flagOfUK = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png");
+        langUKflag.setImage(flagOfUK);
+        langBiHflag.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            Locale.setDefault(new Locale("bs", "BA"));
+            try {
+                loadScene();
+                LoginController.setLanguage("Bosanski");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        langUKflag.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+            Locale.setDefault(new Locale("en", "US"));
+            try {
+                loadScene();
+                LoginController.setLanguage("Engleski");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         });
     }

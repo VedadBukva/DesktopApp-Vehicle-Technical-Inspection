@@ -41,6 +41,7 @@ public class LoginController {
         flagBiH.setImage(flagOfBiH);
         Image flagOfUK = new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg/1280px-Flag_of_the_United_Kingdom_%283-5%29.svg.png");
         flagUK.setImage(flagOfUK);
+
         btnSubmit.setDefaultButton(true);
         flagBiH.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
             bosnianPicked = true;
