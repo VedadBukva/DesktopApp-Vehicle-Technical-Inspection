@@ -485,7 +485,7 @@ public class InspectionDAO {
         URL url = null;
         HttpURLConnection con = null;
         try {
-            url = new URL("http://localhost:8080/api/part/" + id);
+            url = new URL("http://ada-backend.herokuapp.com/api/part/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
