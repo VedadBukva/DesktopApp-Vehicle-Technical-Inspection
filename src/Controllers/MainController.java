@@ -32,12 +32,6 @@ public class MainController {
     public TableColumn<TechnicalInspection, String> responsiblePersonCol;
     private ObservableList<TechnicalInspection> listOfTechnicalInspections;
     // ----------------
-    public TabPane tabPane;
-    public ChoiceBox<String> choiceBoxLanguage;
-    public Button btnAddUser;
-    public Button btnDeleteUser;
-    public Button archiveAccountButton;
-    public Tab archiveAccounts;
     // Inspections in archive
     public TableView<TechnicalInspection> tableInspectionsInArchive;
     public TableColumn<TechnicalInspection, String> colOwner;
@@ -53,7 +47,20 @@ public class MainController {
     public TableColumn<Equipment, String> colEquipmentAvailable;
     private ObservableList<Equipment> listOfEquipment;
     // ---------------------
-
+    // Users
+    private ObservableList<User> listOfUsers;
+    public TableView<User> tableOfUsers;
+    public TableColumn<User, String> colUserNameSurname;
+    public TableColumn colUsername;
+    public TableColumn colUserMail;
+    public TableColumn colUserRole;
+    // ---------------------
+    public TabPane tabPane;
+    public ChoiceBox<String> choiceBoxLanguage;
+    public Button btnAddUser;
+    public Button btnDeleteUser;
+    public Button archiveAccountButton;
+    public Tab archiveAccounts;
     private InspectionDAO dao = null;
 
     public MainController() {
@@ -61,6 +68,8 @@ public class MainController {
         listOfTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsDone());
         listOfArchivedTechnicalInspections = FXCollections.observableArrayList(dao.inspectionsInArchive());
         listOfEquipment = FXCollections.observableArrayList(dao.equipment());
+        if (dao.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
+        else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
     }
 
     @FXML
@@ -68,7 +77,8 @@ public class MainController {
         initializeInspectionsTable();
         initializeInspectionsInArchiveTable();
         initializeEquipmentTable();
-        if (LoginController.languageChoosen()) choiceBoxLanguage.getSelectionModel().select(Locale.getDefault().getLanguage());
+        initializeUserTable();
+        if (LoginController.languageChoosen()) Locale.setDefault(new Locale("bs", "BA"));
         else Locale.setDefault(Locale.ENGLISH);
         choiceBoxLanguage.getItems().add("Bosanski");
         choiceBoxLanguage.getItems().add("Engleski");
@@ -98,6 +108,14 @@ public class MainController {
         });
     }
 
+    private void initializeUserTable() {
+        tableOfUsers.setItems(listOfUsers);
+        colUserMail.setCellValueFactory(new PropertyValueFactory("mail"));
+        colUsername.setCellValueFactory(new PropertyValueFactory("userName"));
+        colUserNameSurname.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName() + " " + data.getValue().getSurname()));
+        colUserRole.setCellValueFactory(new PropertyValueFactory("role"));
+    }
+
     private void initializeEquipmentTable() {
         equipmentTable.setItems(listOfEquipment);
         colEquipmentName.setCellValueFactory(new PropertyValueFactory("name"));
@@ -119,7 +137,7 @@ public class MainController {
         colType.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVehicle().getType().toString()));
     }
 
-    public void initializeInspectionsTable () {
+    private void initializeInspectionsTable () {
         completedInspections.setItems(listOfTechnicalInspections);
         vehicleOwnerCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVehicle().getVehicleOwner()));
         vehicleCol.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVehicle().getBrand()));
