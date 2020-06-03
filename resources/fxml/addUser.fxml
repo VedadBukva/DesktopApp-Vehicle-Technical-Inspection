@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="349.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.5999755859375" minWidth="10.0" prefWidth="185.39996337890625" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.60003662109375" minWidth="10.0" prefWidth="211.60003662109375" />
@@ -27,32 +21,32 @@
    <children>
       <Label text="%firstname">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <Label text="%lastname" GridPane.rowIndex="1">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <Label text="%position" GridPane.rowIndex="2">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <Label text="%jmbg" GridPane.rowIndex="3">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <Label text="%dateofbirth" GridPane.rowIndex="4">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <Label text="%address" GridPane.rowIndex="5">
          <GridPane.margin>
-            <Insets left="5.0" />
+            <Insets left="15.0" />
          </GridPane.margin>
       </Label>
       <TextField GridPane.columnIndex="1">

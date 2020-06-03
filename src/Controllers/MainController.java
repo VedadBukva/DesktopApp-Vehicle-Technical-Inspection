@@ -222,15 +222,29 @@ public class MainController {
         try {
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/addUser.fxml"), bundle);
+            UserController controller = new UserController();
+            fxmlLoader.setController(controller);
             Parent root = fxmlLoader.load();
             Stage newStage = new Stage();
             newStage.setTitle(ResourceBundle.getBundle("Translation").getString("adduser"));
             newStage.setScene(new Scene(root));
             newStage.setResizable(false);
             newStage.show();
+            /*newStage.setOnHiding( event -> {
+                User newUser = controller.getUser();
+                if (newUser != null) {
+                    dao.addUser(---);
+                    if (dao.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
+                    else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
+                }
+            } );*/
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void deleteUser() {
+
     }
 
     public void logOut (ActionEvent actionEvent) throws IOException {

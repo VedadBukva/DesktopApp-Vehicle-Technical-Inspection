@@ -316,7 +316,7 @@
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="btnDeleteUser" mnemonicParsing="false" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Button fx:id="btnDeleteUser" mnemonicParsing="false" onAction="#deleteUser" prefWidth="130.0" text="%deleteuser" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
