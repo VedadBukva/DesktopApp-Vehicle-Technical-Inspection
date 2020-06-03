@@ -337,8 +337,7 @@ public class InspectionDAO {
         vehicleObj.put("production_year", vehicle.getProductionYear());
         vehicleObj.put("date_of_use", vehicle.getReleaseDate());
         vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
-        int id = addViaHttp(vehicleObj, url);
-        vehicle.setId(id);
+        addViaHttp(vehicleObj, url);
     }
 
     public void addMalfunction(Malfunction malfunction) {
@@ -353,14 +352,13 @@ public class InspectionDAO {
         jsonMalfunction.put("vehicle", malfunction.getVehicle().getId());
         jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
         jsonMalfunction.put("repair_date", malfunction.getRepairDate());
-        int id = addViaHttp(jsonMalfunction, url);
-        malfunction.setId(id);
+        addViaHttp(jsonMalfunction, url);
     }
 
     public void addUser(User user) {
         URL url = null;
         try {
-            url = new URL("http://ada-backend.herokuapp.com/api/user");
+            url = new URL("http://ada-backend.herokuapp.com/api/register");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -377,14 +375,13 @@ public class InspectionDAO {
         jsonUser.put("phone_number", user.getPhoneNumber());
         jsonUser.put("user_name", user.getUserName());
         jsonUser.put("password", user.getPassword());
-        int id = addViaHttp(jsonUser, url);
-        user.setId(id);
+        addViaHttp(jsonUser, url);
     }
 
     public void addEquipment(Equipment equipment) {
         URL url = null;
         try {
-            url = new URL("http://ada-backend.herokuapp.com//api/part");
+            url = new URL("http://ada-backend.herokuapp.com/api/part");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -395,14 +392,13 @@ public class InspectionDAO {
         if (equipment.getAvailability()) available = "DOSTUPAN";
         else available = "NEDOSTUPAN";
         jsonEq.put("availability", available);
-        int id = addViaHttp(jsonEq, url);
-        equipment.setId(id);
+        addViaHttp(jsonEq, url);
     }
 
     public void addInspection(TechnicalInspection inspection) {
         URL url = null;
         try {
-            url = new URL("http://ada-backend.herokuapp.com//api/review");
+            url = new URL("http://ada-backend.herokuapp.com/api/review");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -412,11 +408,10 @@ public class InspectionDAO {
         jsonInspection.put("kind", inspection.getInspectionType());
         jsonInspection.put("responsible_person", inspection.getUser().getId());
         jsonInspection.put("vehicle", inspection.getVehicle().getId());
-        int id = addViaHttp(jsonInspection, url);
-        inspection.setId(id);
+        addViaHttp(jsonInspection, url);
     }
 
-    private int addViaHttp (JSONObject jsonObject, URL url) {
+    private void addViaHttp (JSONObject jsonObject, URL url) {
         HttpURLConnection con = null;
         JSONObject jsonObject1 = null;
         try {
@@ -431,16 +426,16 @@ public class InspectionDAO {
             out.close();
 
             BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String json = "", line = "";
+            String json = "{", line = "";
             while ((line = entry.readLine()) != null) {
                 json = json + line;
             }
-            jsonObject1 = new JSONObject(json);
+            json = json + "}";
             entry.close();
+
         } catch (IOException e) {
             new NoInternetException();
         }
-        return jsonObject1.getInt("id");
     }
 
 

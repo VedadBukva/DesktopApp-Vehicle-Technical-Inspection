@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.css.Match;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -38,7 +35,8 @@ public class UserController {
     public PasswordField repeatPassword;
     public TextField postalNumber;
     public TextField phoneNumber;
-
+    public Button cancelAdding;
+    public TextField userName;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     public static final Pattern VALID_PASSWORD =
@@ -99,6 +97,7 @@ public class UserController {
             birthDate.getStyleClass().removeAll("inputNOTOK");
             birthDate.getStyleClass().add("inputOK");
         }
+
         if (!validateEmail(mail.getText().trim())) {
             mail.getStyleClass().removeAll("inputOK");
             mail.getStyleClass().add("inputNOTOK");
@@ -106,6 +105,14 @@ public class UserController {
         } else {
             mail.getStyleClass().removeAll("inputNOTOK");
             mail.getStyleClass().add("inputOK");
+        }
+        if (userName.getText().trim().isEmpty()) {
+            userName.getStyleClass().removeAll("inputOK");
+            userName.getStyleClass().add("inputNOTOK");
+            return;
+        } else {
+            userName.getStyleClass().removeAll("inputNOTOK");
+            userName.getStyleClass().add("inputOK");
         }
         if (address.getText().trim().length() < 5 || address.getText().trim().isEmpty()) {
             address.getStyleClass().removeAll("inputOK");
@@ -131,7 +138,7 @@ public class UserController {
             password.getStyleClass().removeAll("inputNOTOK");
             password.getStyleClass().add("inputOK");
         }
-        if (!repeatPassword.getText().trim().equals(password)) {
+        if (!repeatPassword.getText().trim().equals(password.getText().trim())) {
             repeatPassword.getStyleClass().removeAll("inputOK");
             repeatPassword.getStyleClass().add("inputNOTOK");
             return;
@@ -140,6 +147,11 @@ public class UserController {
             repeatPassword.getStyleClass().add("inputOK");
         }
         checkPostalNumber(date);
+    }
+
+    public void cancelAddingUser(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelAdding.getScene().getWindow();
+        stage.close();
     }
 
     private void checkPostalNumber(LocalDate date) {
@@ -175,8 +187,9 @@ public class UserController {
                         user.setMail(mail.getText());
                         user.setPostalNumber(postalNumber.getText());
                         user.setPhoneNumber(phoneNumber.getText());
+                        user.setUserName(userName.getText());
 
-                        Stage stage = (Stage) firstName.getScene().getWindow();
+                        Stage stage = (Stage) phoneNumber.getScene().getWindow();
                         stage.close();
                     });
                 }
@@ -192,18 +205,18 @@ public class UserController {
 
     private static boolean validateEmail(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.find();
+        return matcher.matches();
     }
 
     private static boolean validatePassword (String password) {
         Matcher matcher = VALID_PASSWORD.matcher(password);
-        return matcher.find();
+        return matcher.matches();
     }
 
 
     private boolean validatePhoneNumber(String text) {
         Matcher matcher = VALID_PHONE_NUMBER.matcher(text);
-        return matcher.find();
+        return matcher.matches();
     }
 
     public User getUser() {

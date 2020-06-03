@@ -173,9 +173,11 @@ public class MainController {
 
     public void deleteEquipmentAction(ActionEvent actionEvent) {
         Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
-        dao.deleteEquipment(equipment.getId());
-        listOfEquipment.setAll(FXCollections.observableArrayList(dao.equipment()));
-        equipmentTable.setItems(listOfEquipment);
+        if (equipment != null) {
+            dao.deleteEquipment(equipment.getId());
+            listOfEquipment.setAll(FXCollections.observableArrayList(dao.equipment()));
+            equipmentTable.setItems(listOfEquipment);
+        }
     }
 
     public void editEquipmentAction (ActionEvent actionEvent) {
@@ -232,21 +234,28 @@ public class MainController {
             newStage.setScene(new Scene(root));
             newStage.setResizable(false);
             newStage.show();
-            /*newStage.setOnHiding( event -> {
+            newStage.setOnHiding( event -> {
                 User newUser = controller.getUser();
                 if (newUser != null) {
-                    dao.addUser(---);
+                    dao.addUser(newUser);
                     if (dao.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
                     else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
+                    tableOfUsers.setItems(listOfUsers);
                 }
-            } );*/
+            } );
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void deleteUser() {
-
+    public void deleteUser(ActionEvent actionEvent) {
+        User user = tableOfUsers.getSelectionModel().getSelectedItem();
+        if (user != null) {
+            dao.deleteUser(user.getId());
+            if (dao.checkIfLoggedUserIsAdmin()) listOfUsers.setAll(FXCollections.observableArrayList(dao.getUsersForAdmin()));
+            else listOfUsers.setAll(FXCollections.observableArrayList(dao.getUsersForMenager()));
+            tableOfUsers.setItems(listOfUsers);
+        }
     }
 
     public void logOut (ActionEvent actionEvent) throws IOException {
