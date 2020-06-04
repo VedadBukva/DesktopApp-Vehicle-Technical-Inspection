@@ -177,7 +177,7 @@ public class InspectionDAO {
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
             RoleType role = RoleType.getRoleType(jo.getString("position"));
-            if (!role.toString().equals("MENAGER")) {
+            if (!role.toString().equals("MENADZER")) {
                 User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"), jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
                 users.add(user);
             }
@@ -194,7 +194,7 @@ public class InspectionDAO {
             String date = jo.getString("birth_date");
             LocalDate birthDate = LocalDate.parse(date, formatter);
             RoleType role = RoleType.getRoleType(jo.getString("position"));
-            if (!role.toString().equals("MENAGER") && !role.toString().equals("ADMIN")) {
+            if (!role.toString().equals("MENADZER") && !role.toString().equals("ADMINISTRATOR")) {
                 User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"), jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
                 users.add(user);
             }
@@ -463,7 +463,7 @@ public class InspectionDAO {
             if (json.isEmpty()) return false;
             JSONObject jo = new JSONObject(json);
             RoleType type = RoleType.getRoleType(jo.getString("position"));
-            if (type != null && type.equals(RoleType.EMPLOYEE)) return false;
+            if (type != null && type.equals(RoleType.RADNIK)) return false;
             setLoggedUserRole(type);
         } catch (IOException e) {
             e.printStackTrace();
@@ -476,6 +476,6 @@ public class InspectionDAO {
     }
 
     public static boolean checkIfLoggedUserIsAdmin () {
-        return usersRole.toString().equals("ADMIN");
+        return usersRole.toString().equals("ADMINISTRATOR");
     }
 }

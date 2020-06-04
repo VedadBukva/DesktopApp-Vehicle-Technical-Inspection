@@ -283,7 +283,7 @@ public class MainController {
         Stage primaryStage = new Stage();
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
-        primaryStage.setTitle("Auto kuća Ada");
+        primaryStage.setTitle(ResourceBundle.getBundle("Translation").getString("caldealership"));
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
