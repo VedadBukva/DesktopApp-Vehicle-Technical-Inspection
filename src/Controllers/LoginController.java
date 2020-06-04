@@ -130,7 +130,7 @@ public class LoginController {
                         Platform.runLater(() -> {
                             closeLoginWindow(actionEvent);
                             try {
-                                if(!choosenLanguage) Locale.setDefault(new Locale("bs","BA"));
+                                if(bosnianPicked) Locale.setDefault(new Locale("bs","BA"));
                                 ResourceBundle bundle = ResourceBundle.getBundle("Translation");
                                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/main.fxml"), bundle);
                                 Parent root = fxmlLoader.load();
@@ -139,7 +139,7 @@ public class LoginController {
                                 newStage.setScene(new Scene(root));
                                 newStage.setResizable(false);
                                 newStage.show();
-                                Image icon = new Image("TechnicalInspection/favicon.ico");
+                                Image icon = new Image("/images/favicon.ico");
                                 newStage.getIcons().add(icon);
                             } catch (IOException e) {
                                 e.printStackTrace();

@@ -280,7 +280,7 @@ public class MainController {
         primaryStage.setScene(new Scene(root));
         primaryStage.setResizable(false);
         primaryStage.show();
-        Image icon = new Image("TechnicalInspection/favicon.ico");
+        Image icon = new Image("/images/favicon.ico");
         primaryStage.getIcons().add(icon);
     }
 

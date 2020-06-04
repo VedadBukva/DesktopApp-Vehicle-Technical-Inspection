@@ -70,7 +70,6 @@ public class UserController {
     }
 
     public void addUser(ActionEvent actionEvent) {
-        boolean allRight = true;
         if (firstName.getText().trim().isEmpty()) {
             firstName.getStyleClass().removeAll("inputOK");
             firstName.getStyleClass().add("inputNOTOK");
@@ -137,7 +136,7 @@ public class UserController {
             phoneNumber.getStyleClass().removeAll("inputNOTOK");
             phoneNumber.getStyleClass().add("inputOK");
         }
-        if (password.getText().trim().isEmpty() /*|| !validatePassword(password.getText().trim())*/) {
+        if (password.getText().trim().isEmpty() || !validatePassword(password.getText().trim())) {
             password.getStyleClass().removeAll("inputOK");
             password.getStyleClass().add("inputNOTOK");
             return;

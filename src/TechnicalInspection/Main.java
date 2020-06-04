@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Image icon = new Image("TechnicalInspection/favicon.ico");
+        Image icon = new Image("/images/favicon.ico");
         primaryStage.getIcons().add(icon);
         ResourceBundle bundle = ResourceBundle.getBundle("Translation");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/login.fxml"), bundle);
