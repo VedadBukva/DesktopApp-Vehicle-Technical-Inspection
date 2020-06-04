@@ -65,6 +65,7 @@ public class MainController {
     public Button btnDeleteUser;
     public Button archiveAccountButton;
     public Tab archiveAccounts;
+    public Button buttonArchiveReport;
     private InspectionDAO dao = null;
 
     public MainController() {
@@ -85,6 +86,7 @@ public class MainController {
         if (LoginController.languageChoosen()) Locale.setDefault(new Locale("bs", "BA"));
         else Locale.setDefault(Locale.ENGLISH);
         if (InspectionDAO.checkIfLoggedUserIsAdmin()) {
+            buttonArchiveReport.setDisable(true);
             archiveAccounts.setDisable(true);
             archiveAccountButton.setDisable(true);
         } else {
