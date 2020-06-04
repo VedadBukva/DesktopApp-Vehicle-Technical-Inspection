@@ -131,28 +131,6 @@ public class InspectionDAO {
         return vehicle;
     }
 
-    public ArrayList<Malfunction> malfunctions() {
-        ArrayList<Malfunction> result = new ArrayList<>();
-        JSONArray jsonArray = connectToURL("failure");
-        if (jsonArray == null) return null;
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jo = jsonArray.getJSONObject(i);
-            String date = jo.getString("accurrence_date");
-            LocalDate emergenceDate = LocalDate.parse(date, formatter);
-
-            LocalDate repairDate;
-            if (!jo.isNull("repair_date")) {
-                String rDate = jo.getString("repair_date");
-                repairDate = LocalDate.parse(rDate, formatter);
-            } else repairDate = null;
-
-            Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
-            Malfunction malfunction = new Malfunction(jo.getInt("id"), jo.getString("name"), vehicle, emergenceDate, repairDate);
-            result.add(malfunction);
-        }
-        return result;
-    }
-
     public ArrayList<Malfunction> getVehicleMalfunctions(int id) {
         ArrayList<Malfunction> result = new ArrayList<>();
         JSONArray jsonArray = connectToURL("failure");
@@ -188,21 +166,6 @@ public class InspectionDAO {
             equipment.add(eq);
         }
         return equipment;
-    }
-
-    public ArrayList<User> users() {
-        ArrayList<User> users = new ArrayList<>();
-        JSONArray jsonArray = connectToURL("user");
-        if (jsonArray == null) return null;
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jo = jsonArray.getJSONObject(i);
-            String date = jo.getString("birth_date");
-            LocalDate birthDate = LocalDate.parse(date, formatter);
-            RoleType role = RoleType.getRoleType(jo.getString("position"));
-            User user = new User(jo.getInt("id"), jo.getString("first_name"), jo.getString("last_name"), jo.getString("jmbg"), birthDate, jo.getString("adress"),jo.getString("zip_code"), jo.getString("mail"), jo.getString("phone_number"), jo.getString("user_name"), role);
-            users.add(user);
-        }
-        return users;
     }
 
     public ArrayList<User> getUsersForMenager() {
@@ -266,22 +229,6 @@ public class InspectionDAO {
         return user;
     }
 
-    public ArrayList<TechnicalInspection> inspections() {
-        ArrayList<TechnicalInspection> inspections = new ArrayList<>();
-        JSONArray jsonArray = connectToURL("review");
-        if (jsonArray == null) return null;
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jo = jsonArray.getJSONObject(i);
-            InspectionType inspectionType = InspectionType.getInspectionType(jo.getString("kind"));
-            WarrantState warrantState = WarrantState.getWarrantState(jo.getString("state"));
-            User user = getUser(jo.getInt("responsible_person"));
-            Vehicle vehicle = getVehicle(jo.getInt("vehicle"));
-            TechnicalInspection technicalInspection = new TechnicalInspection(jo.getInt("id"), inspectionType, user, vehicle, warrantState);
-            inspections.add(technicalInspection);
-        }
-        return inspections;
-    }
-
     public List<TechnicalInspection> inspectionsDone () {
         List<TechnicalInspection> inspections = new ArrayList<>();
         JSONArray jsonArray = connectToURL("review");
@@ -319,41 +266,6 @@ public class InspectionDAO {
     }
 
     // POST request methods
-
-    public void addVehicle(Vehicle vehicle) {
-        URL url = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/vehicle");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject vehicleObj = new JSONObject();
-        vehicleObj.put("id", vehicle.getId());
-        vehicleObj.put("owner_name", vehicle.getVehicleOwner());
-        vehicleObj.put("brand", vehicle.getBrand());
-        vehicleObj.put("type", vehicle.getType());
-        vehicleObj.put("serial_number", vehicle.getSerialNumber());
-        vehicleObj.put("production_year", vehicle.getProductionYear());
-        vehicleObj.put("date_of_use", vehicle.getReleaseDate());
-        vehicleObj.put("previous_inspection", vehicle.getPreviousInspection());
-        addViaHttp(vehicleObj, url);
-    }
-
-    public void addMalfunction(Malfunction malfunction) {
-        URL url = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/failure");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonMalfunction = new JSONObject();
-        jsonMalfunction.put("name", malfunction.getMalfunctionName());
-        jsonMalfunction.put("vehicle", malfunction.getVehicle().getId());
-        jsonMalfunction.put("accurrence_date", malfunction.getEmergenceDate());
-        jsonMalfunction.put("repair_date", malfunction.getRepairDate());
-        addViaHttp(jsonMalfunction, url);
-    }
 
     public void addUser(User user) {
         URL url = null;
@@ -395,22 +307,6 @@ public class InspectionDAO {
         addViaHttp(jsonEq, url);
     }
 
-    public void addInspection(TechnicalInspection inspection) {
-        URL url = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/review");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonInspection = new JSONObject();
-        jsonInspection.put("id", inspection.getId());
-        jsonInspection.put("state", inspection.getWarrantState());
-        jsonInspection.put("kind", inspection.getInspectionType());
-        jsonInspection.put("responsible_person", inspection.getUser().getId());
-        jsonInspection.put("vehicle", inspection.getVehicle().getId());
-        addViaHttp(jsonInspection, url);
-    }
-
     private void addViaHttp (JSONObject jsonObject, URL url) {
         HttpURLConnection con = null;
         JSONObject jsonObject1 = null;
@@ -438,28 +334,7 @@ public class InspectionDAO {
         }
     }
 
-
     // PUT request methods
-
-    public void updateVehicle(int vehicleId, String name, String brand, InspectionType type,
-                                String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
-        URL url = null;
-        HttpURLConnection con = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/vehicle/" + vehicleId);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        JSONObject vehicleObj = new JSONObject();
-        vehicleObj.put("owner_name", name);
-        vehicleObj.put("brand", brand);
-        vehicleObj.put("type", type);
-        vehicleObj.put("serial_number", sNumber);
-        vehicleObj.put("production_year", pYear);
-        vehicleObj.put("date_of_use", rDate);
-        vehicleObj.put("previous_inspection", prevInsp);
-        updateViaHttp(vehicleObj, url);
-    }
 
     public void updateInspection(int inspectionId, InspectionType type, User user, Vehicle vehicle,
                               WarrantState state) {
@@ -533,44 +408,11 @@ public class InspectionDAO {
         deleteViaHttp(id, url);
     }
 
-    public void deleteInspection(int id) {
-        URL url = null;
-        HttpURLConnection con = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/review/" + id);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        deleteViaHttp(id, url);
-    }
-
     public void deleteEquipment(int id) {
         URL url = null;
         HttpURLConnection con = null;
         try {
             url = new URL("http://ada-backend.herokuapp.com/api/part/" + id);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        deleteViaHttp(id, url);
-    }
-
-    public void deleteVehicle(int id) {
-        URL url = null;
-        HttpURLConnection con = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/vehicle/" + id);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        deleteViaHttp(id, url);
-    }
-
-    public void deleteMalfunction(int id) {
-        URL url = null;
-        HttpURLConnection con = null;
-        try {
-            url = new URL("http://ada-backend.herokuapp.com/api/failure/" + id);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
