@@ -191,6 +191,7 @@ public class MainController {
     }
 
     public void editEquipmentAction (ActionEvent actionEvent) {
+        if (equipmentTable.getSelectionModel().isEmpty()) return;
         Equipment equipment = equipmentTable.getSelectionModel().getSelectedItem();
         try {
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");

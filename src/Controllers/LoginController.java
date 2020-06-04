@@ -155,8 +155,7 @@ public class LoginController {
     }
 
     public static boolean languageChoosen() {
-        if (bosnianPicked) return true;
-        return false;
+        return bosnianPicked;
     }
 
     public static void setLanguage (String language) {

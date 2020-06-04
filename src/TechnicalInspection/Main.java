@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ResourceBundle;
+import Enum.*;
 
 public class Main extends Application {
     private InspectionDAO dao;
@@ -24,7 +26,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
         /*dao = InspectionDAO.getInstance();
-        User user = new User("Haris", "Kicinnn", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "nekipass", RoleType.ADMIN);
+        User user = new User("Haris", "Kicin", "0701000163307", LocalDate.of(2000, 1, 7), "Isaka Samokovlije", "71000", "haris.kicin20@gmail.com", "061277327", "hkicin1", "haris123", RoleType.ADMIN);
         dao.addUser(user);
         System.out.println("gotovo");*/
         /*ArrayList<Malfunction> malfunctions = dao.malfunctions();

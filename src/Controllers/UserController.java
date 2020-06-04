@@ -219,7 +219,6 @@ public class UserController {
         return matcher.matches();
     }
 
-
     private boolean validatePhoneNumber(String text) {
         Matcher matcher = VALID_PHONE_NUMBER.matcher(text);
         return matcher.matches();
