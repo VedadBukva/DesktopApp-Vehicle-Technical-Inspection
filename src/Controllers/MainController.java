@@ -257,9 +257,7 @@ public class MainController {
                     dao.addUser(newUser);
                     if (InspectionDAO.checkIfLoggedUserIsAdmin()) listOfUsers = FXCollections.observableArrayList(dao.getUsersForAdmin());
                     else listOfUsers = FXCollections.observableArrayList(dao.getUsersForMenager());
-                    tableOfUsers.refresh();
                     tableOfUsers.setItems(listOfUsers);
-                    tableOfUsers.refresh();
                 }
             } );
         } catch (IOException e) {
