@@ -168,6 +168,8 @@ public class MainController {
             newStage.setTitle(ResourceBundle.getBundle("Translation").getString("addEquipment"));
             newStage.setScene(new Scene(root));
             newStage.setResizable(false);
+            Image icon = new Image("/images/favicon.ico");
+            newStage.getIcons().add(icon);
             newStage.show();
             newStage.setOnHiding( event -> {
                 Equipment newEquipment = controller.getEquipment();
@@ -204,6 +206,8 @@ public class MainController {
             newStage.setScene(new Scene(root));
             newStage.setResizable(false);
             newStage.show();
+            Image icon = new Image("/images/favicon.ico");
+            newStage.getIcons().add(icon);
             newStage.setOnHiding( event -> {
                 Equipment newEquipment = controller.getEquipment();
                 if (newEquipment != null) {
@@ -244,6 +248,8 @@ public class MainController {
             newStage.setTitle(ResourceBundle.getBundle("Translation").getString("adduser"));
             newStage.setScene(new Scene(root));
             newStage.setResizable(false);
+            Image icon = new Image("/images/favicon.ico");
+            newStage.getIcons().add(icon);
             newStage.show();
             newStage.setOnHiding( event -> {
                 User newUser = controller.getUser();
