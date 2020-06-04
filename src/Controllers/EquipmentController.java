@@ -46,18 +46,24 @@ public class EquipmentController {
             if (LoginController.languageChoosen()) {
                 Locale.setDefault(new Locale("bs", "BA"));
                 spinnerAvailableEqEdit.setItems(listBosnian);
+                if (equipment.getAvailability()) spinnerAvailableEqEdit.getSelectionModel().selectFirst();
+                else spinnerAvailableEqEdit.getSelectionModel().selectLast();
             } else {
                 Locale.setDefault(Locale.ENGLISH);
                 spinnerAvailableEqEdit.setItems(listEnglish);
+                if (equipment.getAvailability()) spinnerAvailableEqEdit.getSelectionModel().selectFirst();
+                else spinnerAvailableEqEdit.getSelectionModel().selectLast();
             }
         }
         else {
             if (LoginController.languageChoosen()) {
                 Locale.setDefault(new Locale("bs", "BA"));
                 spinnerAvailableEq.setItems(listBosnian);
+                spinnerAvailableEq.getSelectionModel().selectFirst();
             } else {
                 Locale.setDefault(Locale.ENGLISH);
                 spinnerAvailableEq.setItems(listEnglish);
+                spinnerAvailableEq.getSelectionModel().selectFirst();
             }
         }
     }

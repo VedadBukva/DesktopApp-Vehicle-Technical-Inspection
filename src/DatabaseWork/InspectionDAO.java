@@ -443,7 +443,6 @@ public class InspectionDAO {
 
     public void updateVehicle(int vehicleId, String name, String brand, InspectionType type,
                                 String sNumber, int pYear, LocalDate rDate, LocalDate prevInsp) {
-        if (vehicleId > vehicles().size()) return;
         URL url = null;
         HttpURLConnection con = null;
         try {
@@ -464,7 +463,6 @@ public class InspectionDAO {
 
     public void updateInspection(int inspectionId, InspectionType type, User user, Vehicle vehicle,
                               WarrantState state) {
-        if (inspectionId > inspections().size()) return;
         URL url = null;
         HttpURLConnection con = null;
         try {
@@ -481,7 +479,6 @@ public class InspectionDAO {
     }
 
     public void updateEquipment(int id, String name, Boolean available) {
-        if (id > equipment().size()) return;
         URL url = null;
         HttpURLConnection con = null;
         try {
@@ -533,7 +530,6 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if (id > users().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -545,7 +541,6 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if (id > inspections().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -557,7 +552,6 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if (id > equipment().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -569,7 +563,6 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if (id > vehicles().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -581,7 +574,6 @@ public class InspectionDAO {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        if (id > malfunctions().size()) return;
         deleteViaHttp(id, url);
     }
 
@@ -597,7 +589,6 @@ public class InspectionDAO {
             out.write(id);
             out.flush();
             out.close();
-
             BufferedReader entry = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String json = "", line = "";
             while ((line = entry.readLine()) != null) {

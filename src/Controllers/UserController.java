@@ -58,8 +58,15 @@ public class UserController {
         positionsBos.add("ADMINISTRATOR");
         ObservableList<String> posBos = FXCollections.observableArrayList(positionsBos);
         ObservableList<String> posEng = FXCollections.observableArrayList(positionsEng);
-        if (LoginController.languageChoosen()) position.setItems(posBos);
-        else position.setItems(posEng);
+        if (LoginController.languageChoosen())  {
+            position.setItems(posBos);
+            position.getSelectionModel().selectLast();
+        }
+        else {
+            position.setItems(posEng);
+            position.getSelectionModel().selectLast();
+        }
+
     }
 
     public void addUser(ActionEvent actionEvent) {
